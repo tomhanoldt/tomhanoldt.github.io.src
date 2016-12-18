@@ -1,0 +1,74 @@
+development: &default
+  # haml @globals (default)
+  globals:
+    robots:      'index,follow,noodp,noydir'
+    title:       'Tom Hanoldt'
+    canonical:   'https://tomhanoldt.github.io/index.html'
+    language:    'en'
+    description: ''
+    keywords:    ''
+
+    opengraph_metatag_data:
+      title: '@globals.title'
+      type: 'website'
+      url: '@globals.canonical'
+      description: '@globals.description'
+      image: 'https://tomhanoldt.github.io/images/logo.png'
+      site_name: '@globals.canonical'
+
+    twitter_metatag_data:
+      card: 'summary'
+      site: '@CreativeWorkflo'
+      description: '@globals.description'
+      title: '@globals.title'
+      image: 'https://tomhanoldt.github.io/images/logo.png'
+      url: '@globals.canonical'
+
+    share:
+      url:   'https://tomhanoldt.github.io'
+      image: 'https://tomhanoldt.github.io/images/logo.png'
+      title: ''
+      text:  ''
+
+  # browser-sync
+  server:
+    port: 9294
+    open: "external"
+    notify: true
+    startPath: 'index.html'
+    server:
+      baseDir: './dist'
+    ui:
+      port: 8080
+      weinre:
+        port: 9090
+    ghostMode:
+      clicks: true
+      forms: true
+      scroll: true
+
+  # do not change unless you know why ;)
+  generators:
+    folder: './ewg'
+
+  paths:
+    src:
+      base:       './src'
+      images:     'assets/images'
+      scripts:    'assets/scripts'
+      styles:     'assets/styles'
+      public:     'assets/public'
+      views:      'views'
+    dist:
+      base:       './dist'
+      images:     'images'
+      scripts:    'scripts'
+      styles:     'styles'
+      public:     ''
+      views:      ''
+
+test:
+  <<: *default
+
+production:
+  <<: *default

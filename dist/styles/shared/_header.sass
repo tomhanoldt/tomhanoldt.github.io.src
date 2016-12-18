@@ -1,0 +1,45 @@
+.header
+  padding-top: $head-menu-height
+
+  .header-wrapper
+    text-align: center
+    padding: 25px 25px 25px 25px
+    +min-width-sm
+      padding: 65px 35px 25px 35px
+    .logo
+      +inline-block
+      .fixed-on-top
+        max-width: 200px
+        position: relative
+        +inline-block
+        +min-width-sm
+          z-index: 11
+        +max-width-xs
+          text-align: center
+          position: relative !important
+          top: 0 !important
+          left: 0 !important
+
+    .headline-wrapper
+      +inline-block
+      text-align: center
+      .headline
+        color: $page-color-gray-dark
+        +inline-block
+        font-size: 9vw
+        margin: 20px 0 10px 0
+        +min-width-sm
+          margin: 20px 0 50px 0
+          line-height: 1
+          font-size: 40px
+
+        .small
+          +block
+          font-weight: normal
+          font-size: 5vw
+          margin-top: 20px
+          +min-width-sm
+            margin-top: 0
+            padding-left: 10px
+            font-size: 24px
+            text-align: left

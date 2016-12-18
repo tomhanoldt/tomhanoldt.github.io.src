@@ -1,0 +1,56 @@
+@mixin inline-block
+  display: inline-block
+
+@mixin block
+  display: block
+
+@mixin inline
+  display: inline
+
+@mixin absolute
+  position: absolute
+
+@mixin relative
+  position: relative
+
+@mixin fixed
+  position: fixed
+
+@mixin static
+  position: static
+
+@mixin left
+  float: left
+
+@mixin right
+  float: right
+
+@mixin clearfix
+  &:before, &:after
+    content: " "
+    display: table
+  &:after
+    clear: both
+  // &:after
+  //   clear:        both
+  //   content:      ''
+  //   display:      block
+  //   height:       0
+  //   line-height:  0
+  //   visibility:   hidden
+  // html[xmlns] &
+  //   display:  block
+  // * html &
+  //   height: 1%
+
+@mixin hidden-text
+  white-space: nowrap
+  overflow: hidden
+  text-indent: 500%
+
+@mixin headlines
+  h1, h2, h3, h4, h5, h6
+    @content
+
+@mixin bold
+  font-weight: bold

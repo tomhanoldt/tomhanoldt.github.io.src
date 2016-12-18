@@ -1,0 +1,15 @@
+#!/bin/bash
+
+#command-info: deploy the dist folder to github.io
+
+source bootstrap
+
+green 'running checks'
+git_ensure_local_repo_up_to_date
+
+git_ensure_local_repo_clean
+
+newline
+
+green 'starting deploy'
+git_force_push_subtree $GITHUB_IO_ORIGIN $DIST_FOLDER

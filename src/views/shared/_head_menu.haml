@@ -1,0 +1,10 @@
+.socials.fade-in-on-load
+  .help
+    share if you like =)
+  %ul
+    %li
+      = @social_share_button('facebook', 'data-share-facebook': '', 'data-share-url': @globals.share.url, 'data-share-image': @globals.share.image, 'data-share-title': @globals.share.title, 'data-share-text': @globals.share.text)
+    %li
+      = @social_share_button('twitter', 'data-share-twitter': '', 'data-share-url': @globals.share.url, 'data-share-text': @globals.share.text)
+    %li
+      = @social_share_button('googleplus', 'data-share-google-plus': '', 'data-share-url': @globals.share.url)
