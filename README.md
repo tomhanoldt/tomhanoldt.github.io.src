@@ -1,4 +1,4 @@
-# tomhanoldt.github.io Status](https://travis-ci.org/tomhanoldt/tomhanoldt.github.io.svg?branch=master)](https://travis-ci.org/tomhanoldt/tomhanoldt.github.io)
+# source for tomhanoldt.github.io Status](https://travis-ci.org/tomhanoldt/tomhanoldt.github.io.src.svg?branch=master)](https://travis-ci.org/tomhanoldt/tomhanoldt.github.io.src)
 
 ###### Supports:
   * css styling with [sass](http://sass-lang.com/documentation/file.SASS_REFERENCE.html) and pre build helpers
@@ -52,4 +52,4 @@ Available commands:
 
 > "[Easy-Terminal-App](https://github.com/creative-workflow/easy-terminal-app)"
 
-> "[blog.tomhanoldt.info](https://blog.tomhanoldt.info)"
+> "[blog.tomhanoldt.info](http://blog.tomhanoldt.info)"
