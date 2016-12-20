@@ -1,0 +1,41 @@
+!!!
+%html{lang: @globals.language}
+  %head
+    %title
+      = 'sass-mixins'
+
+    = @meta_tag_http 'Content-Type', 'text/html; charset=utf-8'
+
+    = @meta_tag_http 'X-UA-Compatible', 'IE=edge'
+    = @meta_tag 'viewport', 'width=device-width, initial-scale=1.0, maximum-scale=2.0, user-scalable=yes'
+
+    :inline-coffeescript
+      window.head_conf =
+        screens: [
+          300
+          480
+          650
+          768
+          992
+          1200
+        ]
+        screensCss:
+          'gt': true
+          'lt': true
+          'gte': true
+          'lte': true
+          'eq': true
+        
+  %body{class: "#{@body_class}"}
+    %header.header
+      .header-wrapper
+        = @render_partial 'shared/_header'
+
+    .content-wrapper
+      .content-inner-wrapper
+        %main
+          = @body
+
+    %footer.footer
+      .footer-wrapper
+        = @render_partial 'shared/_footer'

@@ -1,0 +1,13 @@
+development: &default
+  enabled: true
+  selector: '**/*'
+  repetitive:
+    -
+      source: 'test/src/assets/images'
+      target: 'test/dist/images'
+
+test:
+  <<: *default
+
+production:
+  <<: *default
