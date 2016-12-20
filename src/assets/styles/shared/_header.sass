@@ -8,17 +8,31 @@
       padding: 65px 35px 25px 35px
     .logo
       +inline-block
+      height: 120px
+      width: 120px
       .fixed-on-top
-        max-width: 200px
         position: relative
         +inline-block
+
         +min-width-sm
           z-index: 11
         +max-width-xs
           text-align: center
           position: relative !important
           top: 0 !important
+
           left: 0 !important
+
+        img
+          +block
+          // +transition(max-width 1.5s, max-height 1.5s)
+          // max-width: 120px
+          // max-height: 120px
+
+        &.fixed
+          img
+            // max-width: 80px
+            // max-height: 80px
 
     .headline-wrapper
       +inline-block

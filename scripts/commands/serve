@@ -4,4 +4,4 @@
 
 source bootstrap
 
-ewg serve --production
+ewg serve

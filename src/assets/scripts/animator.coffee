@@ -4,10 +4,29 @@ class @Animator
     @inView     = new AnimationInView    (@options.inView)
     @fadeIn     = new AnimationFadeIn    (@options.fadeIn)
 
-
-class @AnimationFadeIn
+class @Animation
   constructor: (@options)->
-    $(@options.selector).animate({opacity: 1}, @options.speed)
+    @animatedElements = []
+    # merge data and option values
+    for el in $(@options.selector)
+      $el = $(el)
+      @animatedElements.push $el
+      $el.options = $.extend(true, {}, @options)
+      for data_key, value of $el.data()
+        $el.options[data_key]=value if data_key of @options
+
+class @AnimationFadeIn extends Animation
+  constructor: (@options)->
+    super @options
+    for $el in @animatedElements
+      do ($el) ->
+        setTimeout(
+          ->
+            $el.animate({opacity: 1}, $el.options.speed)
+          ,
+          $el.options.wait
+        )
+
 
 class @AnimationInView
   constructor: (@options)->
@@ -16,11 +35,11 @@ class @AnimationInView
 
   setupAnimations: =>
     @animatedElements.css(@options.css)
-    $(window).bind('scroll', @chackAnimatedElemets)
-    $(window).bind('resize', @chackAnimatedElemets)
-    @chackAnimatedElemets()
+    $(window).bind('scroll', @checkAnimatedElemets)
+    $(window).bind('resize', @checkAnimatedElemets)
+    @checkAnimatedElemets()
 
-  chackAnimatedElemets: =>
+  checkAnimatedElemets: =>
     top = $(window).scrollTop() + $(window).height()
     @animatedElements.each((i, el) =>
       $el = $(el)
@@ -35,9 +54,9 @@ class @AnimationFixedOnTop
     @setupAnimations()
 
   setupAnimations: =>
-    $(window).bind('scroll', @chackAnimatedElemets)
-    $(window).bind('resize', @chackAnimatedElemets)
-    @chackAnimatedElemets()
+    $(window).bind('scroll', @checkAnimatedElemets)
+    $(window).bind('resize', @checkAnimatedElemets)
+    @checkAnimatedElemets()
 
   checkUndoAnimatedElemets: =>
     top = $(window).scrollTop()
@@ -46,12 +65,13 @@ class @AnimationFixedOnTop
     for entry, index in @undoElements
       if top < entry.top
         entry.el.css(entry.css)
+        entry.el.removeClass 'fixed'
         indexToDel.push index
 
     for index in indexToDel
       @undoElements.slice(index, 1)
 
-  chackAnimatedElemets: =>
+  checkAnimatedElemets: =>
     @checkUndoAnimatedElemets()
 
     top = $(window).scrollTop()
@@ -74,4 +94,6 @@ class @AnimationFixedOnTop
           position: 'fixed'
           top: 0
           left: offset.left
+
+        $el.addClass 'fixed'
     )
