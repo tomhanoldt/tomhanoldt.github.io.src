@@ -4,7 +4,12 @@
 
 source bootstrap
 
-npm install -g gulp coffee-script yarn easy-website-generator coffeelint bower
+npm install -g gulp \
+               coffee-script \
+               yarn \
+               easy-website-generator \
+               coffeelint \
+               bower
 
 yarn install
 
