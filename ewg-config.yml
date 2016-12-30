@@ -16,7 +16,7 @@ development: &default
       type: 'website'
       url: '@globals.canonical'
       description: '@globals.description'
-      image: 'https://tomhanoldt.github.io/images/logo.png'
+      image: 'https://tomhanoldt.info/images/logo.png'
       site_name: '@globals.canonical'
 
     twitter_metatag_data:
@@ -24,12 +24,12 @@ development: &default
       site: '@CreativeWorkflo'
       description: '@globals.description'
       title: '@globals.title'
-      image: 'https://tomhanoldt.github.io/images/logo.png'
+      image: 'https://tomhanoldt.info/images/logo.png'
       url: '@globals.canonical'
 
     share:
-      url:   'https://tomhanoldt.github.io'
-      image: 'https://tomhanoldt.github.io/images/logo.png'
+      url:   'https://tomhanoldt.info'
+      image: 'https://tomhanoldt.info/images/logo.png'
       title: ''
       text:  ''
 
