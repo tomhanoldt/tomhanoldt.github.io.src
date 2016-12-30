@@ -1,0 +1,13 @@
+#!/bin/bash
+
+#command-info: build, commit dist folder and deploy to github.io
+
+source bootstrap
+
+tar --exclude "./git" -vczf $DEPLOY_TRANSFER_FILE -C "$DEPLOY_PATH_LOCAL" ./
+
+mkdir -p $(dirname $DEPLOY_TRANSFER_FILE)
+
+ssh_upload $DEPLOY_TRANSFER_FILE $DEPLOY_TRANSFER_FILE
+
+ssh_run "tar -vxzf $DEPLOY_TRANSFER_FILE -C $DEPLOY_PATH_REMOTE"

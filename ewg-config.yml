@@ -3,7 +3,7 @@ development: &default
   globals:
     robots:      'index,follow,noodp,noydir'
     title:       'Tom Hanoldt'
-    canonical:   'https://tomhanoldt.github.io/index.html'
+    canonical:   'https://www.tomhanoldt.info/index.html'
     language:    'en'
     description: ''
     keywords:    ''

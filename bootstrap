@@ -5,6 +5,15 @@ GITHUB_IO_URL='https://tomhanoldt.github.io'
 GITHUB_IO_ORIGIN='git@github.com:tomhanoldt/tomhanoldt.github.io.git'
 DIST_FOLDER='dist'
 
+
+# deploy config
+export SSH_SERVER_LOGIN='TODO: set it in your bootstrap.local file'
+
+export DEPLOY_PATH_LOCAL='dist'
+export DEPLOY_PATH_REMOTE='www.tomhanoldt.info'
+export DEPLOY_TRANSFER_FILE='config/exports/deploy/deploy.transfer.tar'
+
+
 # set config variables
 export TERMINAL_APP_LOG_ENABLED=0
 
@@ -14,6 +23,11 @@ export TERMINAL_APP_LIB_PATH="$TERMINAL_APP_PATH/lib"
 export TERMINAL_APP_TEST_PATH="$TERMINAL_APP_PATH/test"
 export TERMINAL_APP_COMMAND_PATH="$TERMINAL_APP_PATH/commands"
 
+# source local bootstrap file
+if [ -f "bootstrap.local" ];
+then
+  source "bootstrap.local"
+fi
 
 # load lib scripts
 for lib_file in $TERMINAL_APP_LIB_PATH/*

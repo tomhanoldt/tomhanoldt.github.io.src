@@ -1,0 +1,11 @@
+RewriteEngine on
+
+
+RewriteCond %{HTTP_HOST} blog.tomhanoldt.info$
+RewriteCond %{REQUEST_URI} !^/blog.tomhanoldt.info
+RewriteRule ^(.*)$ /blog.tomhanoldt.info/$1 [L]
+
+
+RewriteCond %{HTTP_HOST} www.tomhanoldt.info$
+RewriteCond %{REQUEST_URI} !^/www.tomhanoldt.info
+RewriteRule ^(.*)$ /www.tomhanoldt.info/$1 [L]

@@ -5,20 +5,7 @@
 source bootstrap
 
 ./app build
+./app deploy-github-io
+./app deploy-tomhanoldt-info
 
-newline
-
-green 'pushing dist'
-git add ./dist
-git commit -m 'update dist'
-git ps
-
-#green 'running checks'
-#git_ensure_local_repo_up_to_date
-
-#git_ensure_local_repo_clean
-
-newline
-
-green 'deploying dist'
-git_force_push_subtree $GITHUB_IO_ORIGIN $DIST_FOLDER
+log_info "updating htaccess ...TODO"
