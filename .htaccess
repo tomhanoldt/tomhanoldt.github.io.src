@@ -1,11 +1,18 @@
 RewriteEngine on
 
-
+# blog.tomhanoldt.info
+# intern rewrite
 RewriteCond %{HTTP_HOST} blog.tomhanoldt.info$
 RewriteCond %{REQUEST_URI} !^/blog.tomhanoldt.info
 RewriteRule ^(.*)$ /blog.tomhanoldt.info/$1 [L]
 
 
+# www.tomhanoldt.info
+# force www
+RewriteCond %{HTTP_HOST} ^tomhanoldt\.info [NC]
+RewriteRule ^(.*)$ https://www.tomhanoldt.info/$1 [L,R=301,NC]
+
+# intern rewrite
 RewriteCond %{HTTP_HOST} www.tomhanoldt.info$
 RewriteCond %{REQUEST_URI} !^/www.tomhanoldt.info
 RewriteRule ^(.*)$ /www.tomhanoldt.info/$1 [L]
