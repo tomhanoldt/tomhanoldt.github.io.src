@@ -4,9 +4,9 @@
 
 source bootstrap
 
-# ./app build
-# ./app deploy-github-io
-# ./app deploy-tomhanoldt-info
+./app build
+./app deploy-github-io
+./app deploy-tomhanoldt-info
 
 log_info "updating htaccess"
 ssh_upload '.htaccess' '.htaccess'

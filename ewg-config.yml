@@ -2,14 +2,16 @@ development: &default
   # haml @globals (default)
   globals:
     robots:      'index,follow,noodp,noydir'
-    title:       'Tom Hanoldt'
+    title:       'Tom Hanoldt | creative - developer - human'
     canonical:   'https://www.tomhanoldt.info/index.html'
     language:    'en'
-    description: ''
-    keywords:    ''
+    description: 'I am a full stack developer, web designer and creative from Berlin. I am self deployed and love the idea of open source and collaborations.'
+    keywords:    'tom hanoldt webdesign development self deployed open source berlin'
 
     footer:
       page_size: 'ca. 200kb'
+      pagespeed_score: '99/100'
+      seo_score: '93/100'
 
     opengraph_metatag_data:
       title: '@globals.title'

@@ -21,11 +21,13 @@
 
 .checks
   %span.item
-    page speed: 95/100 ->
+    page speed:
+    = @globals.footer.pagespeed_score + ' -> '
     = @link_to '(check with google insights)', 'https://developers.google.com/speed/pagespeed/insights/?url=https%3A%2F%2Ftomhanoldt.info%2F&tab=desktop', {target: '_blank'}
 
   %span.item
-    seo score: 97/100 ->
+    seo score:
+    = @globals.footer.seo_score + ' -> '
     = @link_to '(check with oneproseo)', 'https://www.advertising.de/sitecheck/?url=https://tomhanoldt.info', {target: '_blank'}
 
 
