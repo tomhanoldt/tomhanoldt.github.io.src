@@ -1,0 +1,74 @@
+follow:
+  facebook:
+    data-follow-facebook: ''
+    data-target: '_blank'
+    data-href: 'https://www.facebook.com/CreativeWorkflow'
+
+  twitter:
+    data-follow-twitter: ''
+    data-target: '_blank'
+    data-href: 'https://twitter.com/CreativeWorkflo'
+
+  googleplus:
+    data-follow-google-plus: ''
+    data-target: '_blank'
+    data-href: 'https://plus.google.com/117657002936707437663'
+
+  pinterest:
+    data-follow-pinterest: ''
+    data-target: '_blank'
+    data-href: 'https://www.pinterest.com/creativeworkflo/'
+
+  youtube:
+    data-follow-linkedin: ''
+    data-target: '_blank'
+    data-href: 'https://www.youtube.com/channel/UCuKXmakMzF-XygpMLdNBSsQ'
+
+  github:
+    data-follow-github: ''
+    data-target: '_blank'
+    data-href: 'https://github.com/creative-workflow'
+
+  xing:
+    data-follow-xing: ''
+    data-target: '_blank'
+    data-href: 'https://www.xing.com/companies/creative-workflow'
+
+  linkedin:
+    data-follow-linkedin: ''
+    data-target: '_blank'
+    data-href: 'https://www.linkedin.com/company/creative-workflow'
+
+share:
+  url:   &social_share_url 'www.creative-workflow.berlin'
+  text:  &social_share_text 'Wir sind ein berliner Startup das auf responsive Webdesign spezialisiert ist.'
+  image: &social_share_image 'www.creative-workflow.berlin/images/logos/gray2x.png'
+  config:
+    facebook:
+      data-share-facebook: ''
+      data-share-url:      *social_share_url
+      data-share-title:   'Creative-Workflow helfen'
+      data-share-caption: 'Wenn dir gefällt was wir tun teile es deinen Freunden mit.'
+      data-share-text :    *social_share_text
+      data-share-image:    *social_share_image
+
+    twitter:
+      data-share-twitter: ''
+      data-share-url:  *social_share_url
+      data-share-text: *social_share_text
+
+    googleplus:
+      data-share-google-plus: ''
+      data-share-url: *social_share_url
+
+    pinterest:
+      data-share-pinterest: ''
+      data-share-url:   *social_share_url
+      data-share-text:  *social_share_text
+      data-share-image: *social_share_image
+
+    linkedin:
+      data-share-linkedin: ''
+      data-share-title: *social_share_url
+      data-share-text:  *social_share_text
+      data-share-image: *social_share_image

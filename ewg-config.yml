@@ -8,6 +8,9 @@ development: &default
     description: ''
     keywords:    ''
 
+    footer:
+      page_size: 'ca. 200kb'
+
     opengraph_metatag_data:
       title: '@globals.title'
       type: 'website'
@@ -29,6 +32,19 @@ development: &default
       image: 'https://tomhanoldt.github.io/images/logo.png'
       title: ''
       text:  ''
+
+    contact:
+      email: 'tom@creative-workflow.berlin'
+      website:
+        name: 'www.creative-workflow.berlin'
+        url: 'https://www.creative-workflow.berlin/company'
+
+    follow:
+      my_blog: 'http://blog.tomhanoldt.info'
+      github: 'https://github.com/creative-workflow'
+      facebook: 'https://https://www.facebook.com/CreativeWorkflow'
+      linkedin: 'https://www.linkedin.com/in/tom-hanoldt-925a44b0'
+      xing: 'https://www.xing.com/profile/Tom_Hanoldt'
 
   # browser-sync
   server:

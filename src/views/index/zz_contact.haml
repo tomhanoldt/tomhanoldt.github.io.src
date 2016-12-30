@@ -1,0 +1,21 @@
+
+%article.article.contact.animate-if-in-view
+  %h2.headline
+    get in contact
+
+  %p
+    Feel free to contact me for commercial or open source projects. i am always
+    interested in cool technologies, projects and people =)
+
+  %ul
+    %li
+      = @link_to @globals.contact.email, "mailto:#{@globals.contact.email}"
+
+    %li
+      = @link_to @globals.contact.website.name, @globals.contact.website.url
+
+  %h3.headline.small follow me on
+  %ul.follow
+    - for follow in ['my_blog', 'github', 'facebook', 'linkedin', 'xing']
+      %li
+        = @social_follow_button(follow, @globals.follow[follow])

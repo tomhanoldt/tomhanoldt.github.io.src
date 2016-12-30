@@ -1,0 +1,95 @@
+html5:
+  title: 'HTML 5'
+  image: 'html5'
+  class: ''
+  link: 'http://www.w3schools.com/html/html_intro.asp'
+
+css3:
+  title: 'Css 3'
+  image: 'css3'
+  class: ''
+  link: 'http://www.w3schools.com/css/css3_intro.asp'
+
+js:
+  title: 'Javascript'
+  image: 'js'
+  class: ''
+  link: 'http://www.w3schools.com/js/'
+
+sass:
+  title: 'Sass'
+  image: 'sass'
+  class: ''
+  link: 'http://sass-lang.com/'
+
+bootstrap:
+  title: 'Twitters Bootsrap'
+  image: 'bootstrap'
+  class: ''
+  link: 'http://getbootstrap.com/'
+
+ruby:
+  title: 'Ruby on Rails'
+  image: 'ruby'
+  class: ''
+  link: 'http://rubyonrails.org/'
+
+php:
+  title: 'PHP'
+  image: 'php'
+  class: ''
+  link: 'http://be2.php.net/'
+
+jquery:
+  title: 'JQuery'
+  image: 'jquery'
+  class: 'small'
+  link: 'https://jquery.com/'
+
+coffee:
+  title: 'CoffeeScript'
+  image: 'coffee'
+  class: 'small'
+  link: 'http://coffeescript.org/'
+
+haml:
+  title: 'Haml'
+  image: 'haml'
+  class: 'small'
+  link: 'http://haml.info/'
+
+wordpress:
+  title: 'Wordpress'
+  image: 'wordpress'
+  class: 'small'
+  link: 'http://wpde.org/'
+
+node-js:
+  title: 'Node.js'
+  image: 'node-js'
+  class: 'small'
+  link: 'https://nodejs.org/en/'
+
+python:
+  title: 'Python'
+  image: 'python'
+  class: 'small'
+  link: 'https://www.python.org/'
+
+chef:
+  title: 'Chef'
+  image: 'chef'
+  class: 'small'
+  link: 'https://www.chef.io/'
+
+docker:
+  title: 'Docker'
+  image: 'docker'
+  class: 'small'
+  link: 'https://www.docker.com/'
+
+amazon:
+  title: 'Amazon AWS'
+  image: 'amazon'
+  class: 'small'
+  link: 'https://aws.amazon.com/'

@@ -1,0 +1,78 @@
+.article
+  opacity: 0
+
+  &.opensource
+    +make-row
+    .icon
+      +opacity(0.3)
+    .item-wrapper
+      max-width: 800px
+      margin: 0 auto
+      .item
+        +make-xs-column(12)
+        +make-sm-column(6)
+
+  &.contact
+    .headline.small
+      margin-top: 50px
+
+    ul.follow
+      +make-row
+      li
+        +make-xs-column(12)
+        +make-sm-column(12/5)
+        > *
+          +inline-block
+        .social-button
+          margin-bottom: 10px
+          +min-width-sm
+            +block
+            margin-top: 10px
+            margin-left: 20px
+        .label
+          min-width: 100px
+          +min-width-sm
+            +inline-block
+            min-width: 130px
+            padding-right: 10px
+  &.work-life
+    .item
+      max-width: 800px
+      margin: 0 auto
+      .headline
+        img
+          +max-width-xs
+            +block
+            padding: 10px 15px
+        .range
+          font-size: 14px
+          font-weight: bold
+          +max-width-xs
+            +block
+      p
+        text-align: justify
+
+
+  &.skills
+    ul
+      +min-width-sm
+        padding: 0 0 20px 50px
+    .technics-wrapper
+      +make-row
+      margin: 0 auto
+      padding-top: 30px
+      .technic
+        +make-xs-column(3)
+        +make-sm-column(1.5)
+        text-align: center
+        padding: 5px
+        height: 70px
+        img
+          +box-shadow(4px, 2px, 25px, -1px, #aaa)
+          max-height: 45px
+          border: 1px solid #bbb
+          background-color: #fff
+      .small
+        .technic
+          img
+            max-height: 30px

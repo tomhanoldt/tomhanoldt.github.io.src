@@ -1,8 +1,30 @@
-.logo
-  .fixed-on-top.fade-in-on-load
-    = @link_to @image_tag('logo.png', alt: 'Logo', title: 'Logo'), '/'
+%article.article.teaser
+  .logo
+    .fixed-on-top
+      = @link_to @image_tag('logo.png', alt: 'Logo', title: 'Logo'), '/'
 
-.headline-wrapper
-  %h1.headline
-    Tom Hanoldt
-    %span.small creative - developer - human
+  .headline-wrapper
+    %h1.headline
+      Tom Hanoldt
+      %span.small creative - developer - human
+
+  %p
+    I am a full stack
+    %b developer, web designer
+    and
+    %b creative
+    from Berlin. I had my first touch with computer
+    %b technology
+    in the late 90s and did a lot things with it.
+
+  %p
+    Finally i became
+    %b self deployed
+    and love the idea of
+    %b open source
+    and
+    %b collaborations.
+    So take a look about what i am doing and drop me a line if you think so =)
+
+  .icon
+    &#8633;

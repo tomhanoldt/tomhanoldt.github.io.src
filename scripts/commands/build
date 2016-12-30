@@ -4,4 +4,6 @@
 
 source bootstrap
 
+bower install
+
 ewg generate-and-exit --production

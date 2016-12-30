@@ -1,0 +1,55 @@
+
+%article.article.work-life.animate-if-in-view.fade-in-on-load{ data: { wait: 3000 } }
+  %h2.headline
+    work life
+
+  %p
+    I worked as web game developer before i startet studying Ba.Sc. Media Informatics
+    at the
+    = @link_to 'Beuth University of Applied Sciences', 'https://www.beuth-hochschule.de', target: '_blank'
+    = '. My graduation work was an'
+    = @link_to 'Node.js server and AdobeAIR client as Dropbox alternative', 'http://nodebox.tomhanoldt.info', target: '_blank'
+    = '.'
+
+  .item
+    - gas_image = @image_tag 'companies/gameartstudio.png', alt: 'GameArt Studio GmbH', title: 'GameArt Studio GmbH'
+    %h3.headline.small
+      = @link_to gas_image + ' GameArt Studio GmbH', 'http://www.gameartstudio.de', title: 'GameArt Studio GmbH', target: '_blank'
+      %span.range
+        (2007 - 2012)
+    %p
+      As full stack developer of the first time i did my first steps with high availability
+      and scaling technologies with game art studio. Our main stack was php, java, apache2 and bash scripts.
+      We were under the first commercial user of mysql-cluster and learned a lot.
+
+
+  .item
+    - kp_image = @image_tag 'companies/kaeuferportal.png', alt: 'Käuferportal GmbH', title: 'Käuferportal GmbH'
+    %h3.headline.small
+      = @link_to kp_image + ' Käuferportal GmbH', 'http://www.kaeuferportal.de', title: 'Käuferportal GmbH', target: '_blank'
+      %span.range
+        (2012 - 2015)
+    %p
+      As part of the frontend team of Käuferportal i had much to do with mobile optimisation, wordpress
+      and ruby on rails. Also with all sorts of modern web technologies, deployment and agile development.
+
+  .item
+    - rab_image = @image_tag 'companies/rankabrand.png', alt: 'Rank a Brand Foundation', title: 'Rank a Brand Foundation'
+    %h3.headline.small
+      = @link_to rab_image + ' Rank a Brand Foundation', 'https://rankabrand.org/home/what-we-do', title: 'Rank a Brand Foundation', target: '_blank'
+      %span.range
+        (2016 - now)
+    %p
+      For Rank a Brand i'm coordinating the development of the website and services relaunch. We are
+      a loose coupled team of volunteers and working on a modern stack with php (yii2), gulp, sass, coffeescript, docker and chef.
+
+  .item
+    - cw_image = @image_tag 'companies/creative-workflow.png', alt: 'Creative Workflow', title: 'Creative Workflow'
+    %h3.headline.small
+      = @link_to cw_image + ' Creative-Workflow', 'https://creative-workflow.berlin/company', title: 'Creative-Workflow', target: '_blank'
+      %span.range
+        (2015 - now)
+    %p
+      With Creative-Workflow i started my self deployment in the beginning of 2015. Since then
+      i did a lot of optimisation for customer projects, build up infrastructure, implementing
+      websites and also consulting. (see more below)

@@ -1,7 +1,7 @@
 class @Application
   constructor: ->
     @options =
-      animator:
+      animations:
         fixedOnTop:
           selector: '.fixed-on-top'
         fadeIn:
@@ -11,14 +11,19 @@ class @Application
         inView:
           selector: '.animate-if-in-view'
           speed:    700
+          wait: 1200
           offsetTop: 100
           css:
             opacity:  0
             position: 'relative'
             top:      '100px'
 
-    @share    = new Share()
-    @animator = new Animator(@options.animator)
+    @animationFixedOnTop = new AnimationFixedOnTop(@options.animations.fixedOnTop)
+    @animationInView     = new AnimationInView    (@options.animations.inView)
+    @animationFadeIn     = new AnimationFadeIn    (@options.animations.fadeIn)
+    @share               = new Share()
+    @fancybox            = new Fancybox()
+    @tooltips            = new Tooltips('.tooltip')
 
 $(document).ready(->
   window.application = new Application()

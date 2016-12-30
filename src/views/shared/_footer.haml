@@ -11,10 +11,12 @@
   = @link_to 'easy-website-generator', 'https://github.com/easy-website-generator/easy-website-generator', {target: '_blank'}
   and brought to you with love by
   = @link_to 'www.creative-workflow.berlin', 'https://www.creative-workflow.berlin/company.html', {target: '_blank'}
-  and loads under 100kb at all =)
+  and loads
+  = @globals.footer.page_size
+  at all =)
 
 .w3c
-  = @link_to @image_tag("html5-badge-h-css3-device-performance-semantics.png", {width: "229", height: "64", alt: "HTML5 Powered with CSS3 / Styling, Device Access, Performance &amp; Integration, and Semantics", title: "HTML5 Powered with CSS3 / Styling, Device Access, Performance &amp; Integration, and Semantics"}), 'https://validator.w3.org/nu/?doc=https%3A%2F%2Ftomhanoldt.github.io.src', target: '_blank'
+  = @link_to @image_tag("technics/html5-badge-h-css3-device-performance-semantics.png", {width: "229", height: "64", alt: "HTML5 Powered with CSS3 / Styling, Device Access, Performance &amp; Integration, and Semantics", title: "HTML5 Powered with CSS3 / Styling, Device Access, Performance &amp; Integration, and Semantics"}), 'https://validator.w3.org/nu/?doc=https%3A%2F%2Ftomhanoldt.github.io.src', target: '_blank'
   = @link_to 'html5 valid', 'https://validator.w3.org/nu/?doc=https%3A%2F%2Ftomhanoldt.github.io', target: '_blank'
 
 .checks
@@ -30,4 +32,4 @@
 .copyright
   = @copyright 'Tom Hanoldt - Creative-Workflow'
 
-  = ' - ' + @link_to 'imprint', 'https://www.creative-workflow.berlin/imprint.html', {target: '_blank'}
+  = ' - ' + @link_to 'imprint', 'https://www.creative-workflow.berlin/imprint.html', {class: 'fancybox', 'data-fancybox-type': 'ajax'}
