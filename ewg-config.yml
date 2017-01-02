@@ -42,7 +42,7 @@ development: &default
         url: 'https://www.creative-workflow.berlin/company'
 
     follow:
-      my_blog: 'http://blog.tomhanoldt.info'
+      my_blog: 'https://www.tomhanoldt.info/blog'
       github: 'https://github.com/creative-workflow'
       facebook: 'https://https://www.facebook.com/CreativeWorkflow'
       linkedin: 'https://www.linkedin.com/in/tom-hanoldt-925a44b0'
@@ -51,7 +51,7 @@ development: &default
   # browser-sync
   server:
     port: 9294
-    open: "external"
+    open: 'external'
     notify: true
     startPath: 'index.html'
     server:
