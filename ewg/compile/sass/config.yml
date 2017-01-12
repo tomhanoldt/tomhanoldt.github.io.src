@@ -12,3 +12,4 @@ test:
 production:
   <<: *default
   minimize: true
+  source_maps:
