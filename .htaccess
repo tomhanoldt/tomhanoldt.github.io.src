@@ -7,7 +7,7 @@ RewriteRule ^(.*)$ https://www.tomhanoldt.info/$1 [L,R=301,NC]
 
 # rewrite all /blog requests
 RewriteCond %{REQUEST_URI} ^/blog
-RewriteRule ^blog/(.*)$ /blog.tomhanoldt.info/$1 [L]
+RewriteRule ^blog(.*)$ /blog.tomhanoldt.info/$1 [L]
 
 # rewrite for main domain
 RewriteCond %{HTTP_HOST} www.tomhanoldt.info$
