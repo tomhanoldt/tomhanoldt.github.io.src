@@ -1,4 +1,4 @@
-# source for tomhanoldt.github.io [![Build Status](https://travis-ci.org/tomhanoldt/tomhanoldt.github.io.src.svg?branch=master)](https://travis-ci.org/tomhanoldt/tomhanoldt.github.io.src)
+# source repo for: tomhanoldt.github.io [![Build Status](https://travis-ci.org/tomhanoldt/tomhanoldt.github.io.src.svg?branch=master)](https://travis-ci.org/tomhanoldt/tomhanoldt.github.io.src)
 
 ###### Supports:
   * css styling with [sass](http://sass-lang.com/documentation/file.SASS_REFERENCE.html) and pre build helpers
