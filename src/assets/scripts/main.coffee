@@ -10,7 +10,7 @@ class @Application
           speed: 1700
         inView:
           selector: '.animate-if-in-view'
-          speed:    700
+          speed:    830
           wait: 1200
           offsetTop: 100
           css:
