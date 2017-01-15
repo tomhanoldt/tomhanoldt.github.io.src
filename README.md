@@ -1,4 +1,4 @@
-# source for tomhanoldt.github.io Status [![Build Status](https://travis-ci.org/tomhanoldt/tomhanoldt.github.io.src.svg?branch=master)](https://travis-ci.org/tomhanoldt/tomhanoldt.github.io.src)
+# source for tomhanoldt.github.io [![Build Status](https://travis-ci.org/tomhanoldt/tomhanoldt.github.io.src.svg?branch=master)](https://travis-ci.org/tomhanoldt/tomhanoldt.github.io.src)
 
 ###### Supports:
   * css styling with [sass](http://sass-lang.com/documentation/file.SASS_REFERENCE.html) and pre build helpers
@@ -18,7 +18,7 @@
 First you need to install [nodeJs](https://nodejs.org/en/download/)
 
 ##### linux/osx instructions
-Just run `./app setup` and `./app serve`
+Just run `./app setup` and `./app serve` to run the site in your webbrowser.
 
 ##### instructions for other plattforms
 ```
