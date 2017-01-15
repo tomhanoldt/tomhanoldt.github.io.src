@@ -2,9 +2,9 @@
   .content-inner-wrapper
     +make-container
     .row
-      padding: 0 0 20px 0
+      padding: 0
       +min-width-sm
-        padding: 0 0 50px 20px
+        padding: 0 0 0 20px
 
 .headline
   font-size: 10vw
@@ -52,7 +52,7 @@
   .button-wrapper
     text-align: center
     margin-top: 10px
-    
+
   .button.cta
     background-color: $page-color-green
     padding: 15px 25px
@@ -71,7 +71,12 @@
       +box-shadow(0, 22px, 16px, rgba(0,0,0,0.1))
       top: -2px
 
-  .icon
-    font-size: 120px
-    color: $page-icon-color
-    text-align: center
+.icon
+  font-size: 120px
+  color: $page-icon-color
+  text-align: center
+  margin-top: 20px
+  img
+    opacity: .3
+  &.skills
+    margin: 0
