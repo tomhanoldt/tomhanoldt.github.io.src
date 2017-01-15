@@ -10,7 +10,7 @@ development: &default
 
     footer:
       page_size: 'ca. 200kb'
-      pagespeed_score: '99/100'
+      pagespeed_score: '100/100'
       seo_score: '97/100'
 
     opengraph_metatag_data:
