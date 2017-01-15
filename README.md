@@ -52,4 +52,4 @@ Available commands:
 
 > "[Easy-Terminal-App](https://github.com/creative-workflow/easy-terminal-app)"
 
-> "[blog.tomhanoldt.info](http://blog.tomhanoldt.info)"
+> "[www.tomhanoldt.info](http://www.tomhanoldt.info)"
