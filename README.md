@@ -41,7 +41,7 @@ Available commands:
  deploy                 deploy the dist folder to github.io
  help                   print help
  lint                   run code linter
- serve                  serve this repo in production mode
+ serve                  serve this repo in development mode
  setup                  setup dependencies for this application
 ```
 
