@@ -2,7 +2,7 @@ development: &default
   # haml @globals (default)
   globals:
     robots:      'index,follow,noodp,noydir'
-    title:       'Tom Hanoldt | creative - developer - human'
+    title:       'Tom Hanoldt | artist - developer - human'
     canonical:   'https://www.tomhanoldt.info/index.html'
     language:    'en'
     description: 'I am a full stack developer, web designer and artist from Berlin. Finally I became self employed and I love the idea of open source and collaborations.'
