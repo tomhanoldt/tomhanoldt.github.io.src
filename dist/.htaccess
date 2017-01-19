@@ -11,7 +11,7 @@ RewriteRule ^(.*)$ https://www.tomhanoldt.info/blog/$1 [L,R=301,NC]
 
 # redirect old '/web' links, 19.1.2017
 RewriteCond %{HTTP_HOST} ^www.tomhanoldt.info [NC]
-RewriteCond %{REQUEST_URI} ^web
+RewriteCond %{REQUEST_URI} /web
 RewriteRule ^/web(.*)$ https://www.tomhanoldt.info/blog/$1 [L,R=301,NC]
 
 <IfModule mod_deflate.c>
