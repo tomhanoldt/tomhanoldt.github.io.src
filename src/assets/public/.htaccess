@@ -2,15 +2,16 @@ RewriteEngine on
 
 # www.tomhanoldt.info
 # force www
-RewriteCond %{HTTP_HOST} ^tomhanoldt\.info [NC]
+RewriteCond %{HTTP_HOST} ^tomhanoldt.info [NC]
 RewriteRule ^(.*)$ https://www.tomhanoldt.info/$1 [L,R=301,NC]
 
 # redirect blog sub domain
-RewriteCond %{HTTP_HOST} ^blog\.tomhanoldt\.info [NC]
+RewriteCond %{HTTP_HOST} ^blog.tomhanoldt.info [NC]
 RewriteRule ^(.*)$ https://www.tomhanoldt.info/blog/$1 [L,R=301,NC]
 
 # redirect old '/web' links, 19.1.2017
-RewriteCond %{HTTP_HOST} ^www\.tomhanoldt\.info/web [NC]
+RewriteCond %{HTTP_HOST} ^www.tomhanoldt.info [NC]
+RewriteCond %{REQUEST_URI} web
 RewriteRule ^/web(.*)$ https://www.tomhanoldt.info/blog/$1 [L,R=301,NC]
 
 <IfModule mod_deflate.c>
