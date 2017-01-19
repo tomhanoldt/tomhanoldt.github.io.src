@@ -9,7 +9,7 @@ development: &default
     keywords:    'tom hanoldt webdesign development self deployed open source berlin'
 
     footer:
-      page_size: 'ca. 200kb'
+      page_size: '200kb'
       pagespeed_score: '100/100'
       seo_score: '97/100'
 

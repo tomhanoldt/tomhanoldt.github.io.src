@@ -7,11 +7,11 @@
     = @link_to travis_image, 'https://travis-ci.org/tomhanoldt/tomhanoldt.github.io.src', {target: '_blank'}
 
 .text
-  This website was hand made with the
+  This website is hand made with the
   = @link_to 'easy-website-generator', 'https://github.com/easy-website-generator/easy-website-generator', {target: '_blank'}
   and brought to you with love by
-  = @link_to 'www.creative-workflow.berlin', 'https://www.creative-workflow.berlin/company.html', {target: '_blank'}
-  and loads
+  = @link_to('www.creative-workflow.berlin', 'https://www.creative-workflow.berlin/company.html', {target: '_blank'}) + '.'
+  The page load is below
   = @globals.footer.page_size
   at all =)
 
