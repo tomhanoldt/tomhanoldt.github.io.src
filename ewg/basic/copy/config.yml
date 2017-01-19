@@ -10,6 +10,7 @@ development: &default
       target: 'dist/scripts'
     -
       source: 'src/assets/public'
+      selector: '**/.*'
       target: 'dist'
     -
       source: 'src/assets/images'
