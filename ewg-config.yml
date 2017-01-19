@@ -5,7 +5,7 @@ development: &default
     title:       'Tom Hanoldt | creative - developer - human'
     canonical:   'https://www.tomhanoldt.info/index.html'
     language:    'en'
-    description: 'I am a full stack developer, web designer and creative from Berlin. I am self deployed and love the idea of open source and collaborations.'
+    description: 'I am a full stack developer, web designer and artist from Berlin. Finally I became self employed and I love the idea of open source and collaborations.'
     keywords:    'tom hanoldt webdesign development self deployed open source berlin'
 
     footer:
