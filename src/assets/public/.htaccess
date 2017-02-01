@@ -1,7 +1,8 @@
 RewriteEngine on
 
 # redirect old '/web' links, 19.1.2017
-RewriteRule ^web/(.*)$ https://www.tomhanoldt.info/blog/$1 [L,NC,R=302]
+RewriteRule ^web/code(.*)$ https://www.tomhanoldt.info/blog/dev$1 [L,R=301,NC]
+RewriteRule ^web/(.*)$ https://www.tomhanoldt.info/blog/$1 [L,R=301,NC]
 
 # force www
 RewriteCond %{HTTP_HOST} ^tomhanoldt\.info [NC]
