@@ -6,7 +6,7 @@ development: &default
     canonical:   'https://www.tomhanoldt.info/index.html'
     language:    'en'
     description: 'I am a full stack developer, web designer and artist from Berlin. Finally I became self employed and I love the idea of open source and collaborations.'
-    keywords:    'tom hanoldt webdesign development self deployed open source berlin'
+    keywords:    'tom hanoldt webdesign development self employed open source berlin'
 
     footer:
       page_size: '200kb'
@@ -39,7 +39,7 @@ development: &default
       email: 'tom@creative-workflow.berlin'
       website:
         name: 'www.creative-workflow.berlin'
-        url: 'https://www.creative-workflow.berlin/company'
+        url: 'https://www.creative-workflow.berlin/company.html'
 
     follow:
       my_blog: 'https://www.tomhanoldt.info/blog/'
