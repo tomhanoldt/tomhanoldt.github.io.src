@@ -19,6 +19,8 @@
 
         %li = @link_to 'jquery.translate', 'https://github.com/creative-workflow/jquery.translate', target: '_blank'
 
+        %li = @link_to 'jquery.tracking', 'https://github.com/creative-workflow/jquery.tracking', target: '_blank'
+
     .item
       %h3.headline.small capistrano deployment
 
@@ -29,7 +31,7 @@
 
         %li = @link_to 'capistrano-container-db', 'https://github.com/creative-workflow/capistrano-container-db', target: '_blank'
 
-
+  .item-wrapper
     .item
       %h3.headline.small web development
 
@@ -44,16 +46,26 @@
 
 
     .item
+      %h3.headline.small wordpress
+
+      %ul
+        %li = @link_to 'wordpress-docker', 'https://github.com/creative-workflow/wordpress-docker', target: '_blank'
+
+        %li = @link_to 'wordpress-divi-child-lib', 'https://github.com/creative-workflow/wordpress-divi-child-lib', target: '_blank'
+
+        %li = @link_to 'wordpress-divi-child-modules', 'https://github.com/creative-workflow/wordpress-divi-child-modules', target: '_blank'
+
+  .item-wrapper
+    .item
       %h3.headline.small misc
 
       %ul
         %li = @link_to 'easy-terminal-app', 'https://github.com/creative-workflow/easy-terminal-app', target: '_blank'
 
-        %li = @link_to 'wordpress-docker', 'https://github.com/creative-workflow/wordpress-docker', target: '_blank'
-
         %li = @link_to 'html-youtube-mixer', 'https://github.com/tomhanoldt/html-youtube-mixer', target: '_blank'
 
         %li = @link_to 'pi-setup', 'https://github.com/creative-workflow/pi-setup', target: '_blank'
+
 
   .button-wrapper
     = @link_to '&raquo; more on github &laquo;', 'https://github.com/creative-workflow', class: "button cta", target: '_blank'

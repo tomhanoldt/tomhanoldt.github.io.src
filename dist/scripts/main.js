@@ -1,1 +1,45 @@
-(function(){this.Application=function(){function i(){this.options={animations:{fixedOnTop:{selector:".fixed-on-top"},fadeIn:{selector:".fade-in-on-load",wait:1200,speed:1700},inView:{selector:".animate-if-in-view",speed:830,wait:1200,offsetTop:100,css:{opacity:0,position:"relative",top:"100px"}}}},this.animationFixedOnTop=new AnimationFixedOnTop(this.options.animations.fixedOnTop),this.animationInView=new AnimationInView(this.options.animations.inView),this.animationFadeIn=new AnimationFadeIn(this.options.animations.fadeIn),this.share=new Share,this.fancybox=new Fancybox,this.tooltips=new Tooltips(".tooltip")}return i}(),$(document).ready(function(){return window.application=new Application})}).call(this);
+(function() {
+  this.Application = (function() {
+    function Application() {
+      this.options = {
+        animations: {
+          fixedOnTop: {
+            selector: '.fixed-on-top'
+          },
+          fadeIn: {
+            selector: '.fade-in-on-load',
+            wait: 1200,
+            speed: 1700
+          },
+          inView: {
+            selector: '.animate-if-in-view',
+            speed: 830,
+            wait: 1200,
+            offsetTop: 100,
+            css: {
+              opacity: 0,
+              position: 'relative',
+              top: '100px'
+            }
+          }
+        }
+      };
+      this.animationFixedOnTop = new AnimationFixedOnTop(this.options.animations.fixedOnTop);
+      this.animationInView = new AnimationInView(this.options.animations.inView);
+      this.animationFadeIn = new AnimationFadeIn(this.options.animations.fadeIn);
+      this.share = new Share();
+      this.fancybox = new Fancybox();
+      this.tooltips = new Tooltips('.tooltip');
+    }
+
+    return Application;
+
+  })();
+
+  (function($) {
+    return window.application = new Application();
+  })(jQuery);
+
+}).call(this);
+
+//# sourceMappingURL=data:application/json;charset=utf8;base64,eyJ2ZXJzaW9uIjozLCJmaWxlIjoibWFpbi5qcyIsInNvdXJjZXMiOlsibWFpbi5jb2ZmZWUiXSwibmFtZXMiOltdLCJtYXBwaW5ncyI6IkFBQUE7RUFBTSxJQUFDLENBQUE7SUFDUSxxQkFBQTtNQUNYLElBQUMsQ0FBQSxPQUFELEdBQ0U7UUFBQSxVQUFBLEVBQ0U7VUFBQSxVQUFBLEVBQ0U7WUFBQSxRQUFBLEVBQVUsZUFBVjtXQURGO1VBRUEsTUFBQSxFQUNFO1lBQUEsUUFBQSxFQUFVLGtCQUFWO1lBQ0EsSUFBQSxFQUFNLElBRE47WUFFQSxLQUFBLEVBQU8sSUFGUDtXQUhGO1VBTUEsTUFBQSxFQUNFO1lBQUEsUUFBQSxFQUFVLHFCQUFWO1lBQ0EsS0FBQSxFQUFVLEdBRFY7WUFFQSxJQUFBLEVBQU0sSUFGTjtZQUdBLFNBQUEsRUFBVyxHQUhYO1lBSUEsR0FBQSxFQUNFO2NBQUEsT0FBQSxFQUFVLENBQVY7Y0FDQSxRQUFBLEVBQVUsVUFEVjtjQUVBLEdBQUEsRUFBVSxPQUZWO2FBTEY7V0FQRjtTQURGOztNQWlCRixJQUFDLENBQUEsbUJBQUQsR0FBMkIsSUFBQSxtQkFBQSxDQUFvQixJQUFDLENBQUEsT0FBTyxDQUFDLFVBQVUsQ0FBQyxVQUF4QztNQUMzQixJQUFDLENBQUEsZUFBRCxHQUEyQixJQUFBLGVBQUEsQ0FBb0IsSUFBQyxDQUFBLE9BQU8sQ0FBQyxVQUFVLENBQUMsTUFBeEM7TUFDM0IsSUFBQyxDQUFBLGVBQUQsR0FBMkIsSUFBQSxlQUFBLENBQW9CLElBQUMsQ0FBQSxPQUFPLENBQUMsVUFBVSxDQUFDLE1BQXhDO01BQzNCLElBQUMsQ0FBQSxLQUFELEdBQTJCLElBQUEsS0FBQSxDQUFBO01BQzNCLElBQUMsQ0FBQSxRQUFELEdBQTJCLElBQUEsUUFBQSxDQUFBO01BQzNCLElBQUMsQ0FBQSxRQUFELEdBQTJCLElBQUEsUUFBQSxDQUFTLFVBQVQ7SUF4QmhCOzs7Ozs7RUEwQmYsQ0FBQyxTQUFDLENBQUQ7V0FFRyxNQUFNLENBQUMsV0FBUCxHQUF5QixJQUFBLFdBQUEsQ0FBQTtFQUY1QixDQUFELENBQUEsQ0FJRSxNQUpGO0FBM0JBIiwic291cmNlc0NvbnRlbnQiOlsiY2xhc3MgQEFwcGxpY2F0aW9uXG4gIGNvbnN0cnVjdG9yOiAtPlxuICAgIEBvcHRpb25zID1cbiAgICAgIGFuaW1hdGlvbnM6XG4gICAgICAgIGZpeGVkT25Ub3A6XG4gICAgICAgICAgc2VsZWN0b3I6ICcuZml4ZWQtb24tdG9wJ1xuICAgICAgICBmYWRlSW46XG4gICAgICAgICAgc2VsZWN0b3I6ICcuZmFkZS1pbi1vbi1sb2FkJ1xuICAgICAgICAgIHdhaXQ6IDEyMDBcbiAgICAgICAgICBzcGVlZDogMTcwMFxuICAgICAgICBpblZpZXc6XG4gICAgICAgICAgc2VsZWN0b3I6ICcuYW5pbWF0ZS1pZi1pbi12aWV3J1xuICAgICAgICAgIHNwZWVkOiAgICA4MzBcbiAgICAgICAgICB3YWl0OiAxMjAwXG4gICAgICAgICAgb2Zmc2V0VG9wOiAxMDBcbiAgICAgICAgICBjc3M6XG4gICAgICAgICAgICBvcGFjaXR5OiAgMFxuICAgICAgICAgICAgcG9zaXRpb246ICdyZWxhdGl2ZSdcbiAgICAgICAgICAgIHRvcDogICAgICAnMTAwcHgnXG5cbiAgICBAYW5pbWF0aW9uRml4ZWRPblRvcCA9IG5ldyBBbmltYXRpb25GaXhlZE9uVG9wKEBvcHRpb25zLmFuaW1hdGlvbnMuZml4ZWRPblRvcClcbiAgICBAYW5pbWF0aW9uSW5WaWV3ICAgICA9IG5ldyBBbmltYXRpb25JblZpZXcgICAgKEBvcHRpb25zLmFuaW1hdGlvbnMuaW5WaWV3KVxuICAgIEBhbmltYXRpb25GYWRlSW4gICAgID0gbmV3IEFuaW1hdGlvbkZhZGVJbiAgICAoQG9wdGlvbnMuYW5pbWF0aW9ucy5mYWRlSW4pXG4gICAgQHNoYXJlICAgICAgICAgICAgICAgPSBuZXcgU2hhcmUoKVxuICAgIEBmYW5jeWJveCAgICAgICAgICAgID0gbmV3IEZhbmN5Ym94KClcbiAgICBAdG9vbHRpcHMgICAgICAgICAgICA9IG5ldyBUb29sdGlwcygnLnRvb2x0aXAnKVxuXG4oKCQpIC0+XG5cbiAgICB3aW5kb3cuYXBwbGljYXRpb24gPSBuZXcgQXBwbGljYXRpb24oKVxuXG4pKGpRdWVyeSlcbiJdfQ==

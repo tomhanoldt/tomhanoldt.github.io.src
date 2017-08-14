@@ -39,8 +39,19 @@
       %span.range
         (2016 - now)
     %p
-      For Rank a Brand I am coordinating the development and relaunch of the website and their services. We are
+      I`m supporting Rank A Brand during the development and relaunch of their website and their services. We are
       a loose coupled team of volunteers and work on a modern stack with php (yii2), gulp, sass, coffeescript, docker and chef.
+
+  .item
+    - eve_image = @image_tag 'companies/evergreen-energy.png', alt: 'Energy One Verwaltung GmbH', title: 'Energy One Verwaltung GmbH'
+    %h3.headline.small
+      = @link_to eve_image + ' Energy One Verwaltung GmbH', 'https://evergreen-energy.de/', title: 'Energy One Verwaltung GmbH', target: '_blank'
+      %span.range
+        (2017 - now)
+    %p
+      I did the frontent development for Evergreen-Energy during her company launch and now we are in the process
+      of fine tuning and optimizing the website.
+
 
   .item
     - cw_image = @image_tag 'companies/creative-workflow.png', alt: 'Creative Workflow', title: 'Creative Workflow'
@@ -52,6 +63,17 @@
       In the beginning of 2015 I got self employed as Creative-Workflow. I did a lot of
       optimisation for customer projects, build up infrastructures, implemented
       websites and did consulting.
+
+
+    %h3.headline.small some customer projects:
+    
+    %ul
+      %li = @link_to 'www.evergreen-energy.de', 'https://evergreen-energy.de/', target: '_blank'
+
+      %li = @link_to 'www.physiologicum-berlin.de', 'http://www.physiologicum-berlin.de/', target: '_blank'
+
+      %li = @link_to 'www.feah.de', 'http://www.feah.de/', target: '_blank'
+
 
     .button-wrapper
       = @link_to '&raquo; more info on webdesign &laquo;', 'https://www.creative-workflow.berlin/', class: "button cta", target: '_blank'
