@@ -54,9 +54,9 @@
     margin-top: 10px
 
   .button.cta
-    background-color: $page-color-green
+    border: 2px solid $page-color-green
     padding: 15px 25px
-    color: white
+    color: $page-color-green
     text-align: center
     min-width: 300px
     +inline-block
@@ -67,9 +67,10 @@
     +transition(all .3s)
     position: relative
     top: 0
-    &:hover
-      +box-shadow(0, 22px, 16px, rgba(0,0,0,0.1))
-      top: -2px
+    +crazy-hover-effect
+
+  a:hover
+    text-decoration: none
 
 .icon
   font-size: 120px

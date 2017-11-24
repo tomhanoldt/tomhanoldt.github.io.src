@@ -39,6 +39,9 @@
             +transition(width 1.5s, height 1.5s)
             width: 120px
             height: 120px
+            border-radius: 50%
+            border: 3px solid $page-color-gray-dark
+            +crazy-hover-effect
 
           &.fixed
             img
@@ -48,23 +51,18 @@
       .headline-wrapper
         +inline-block
         text-align: center
+        vertical-align: top
         .headline
           color: $header-headline-color
           +inline-block
-          font-size: 9vw
-          margin: 20px 0 10px 0
-          +min-width-sm
-            margin: 20px 0 30px 0
-            line-height: 1
-            font-size: 40px
+          margin: 30px 0 30px 20px
+          line-height: 1
+          font-size: 40px
 
           .small
             +block
             font-weight: normal
-            font-size: 5vw
-            margin-top: 20px
-            +min-width-sm
-              margin-top: 0
-              padding-left: 10px
-              font-size: 24px
-              text-align: left
+            margin-top: 0
+            padding-left: 10px
+            font-size: 22px
+            text-align: left

@@ -5,7 +5,9 @@
 
   %body{class: "#{@body_class}"}
     .head-menu
-      = @render_partial 'shared/_head_menu'
+      - @render_partial 'shared/_head_menu'
+      .slogan
+        www.tomhanoldt.info
 
     %header.header
       .header-wrapper

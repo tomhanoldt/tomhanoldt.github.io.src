@@ -19,12 +19,18 @@ a
   text-decoration: none
   &:hover, &:active, &.focus
     color: $page-link-color-hover
-    text-decoration: none
+    text-decoration: underline
 
 +headlines
   color: $page-headline-color
   line-height: 1
   margin: 0
+  a
+    border-bottom: 1px solid $page-headline-color
+    padding: 0 5px
+    &:hover
+      text-decoration: none
+
 
 .fade-in-on-load
   opacity: 0

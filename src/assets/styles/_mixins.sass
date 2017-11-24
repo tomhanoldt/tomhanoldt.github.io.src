@@ -1,0 +1,24 @@
+@mixin crazy-hover-effect
+  +transition(all .2s ease-out)
+  box-shadow: 0 7px 6px -6px #999
+  box-shadow: 0px 0px 25px -7px rgba(0,0,0,0.48)
+  +relative
+  &:hover, &.selected
+    +transform(scale(1.03))
+    box-shadow: 0 20px 15px -15px #bbb
+    z-index: 1
+  &:active, &:focus
+    +transform(scale(0.95))
+    z-index: 1
+
+
+@mixin simple-hover-effect
+  +transition(all .2s ease-out)
+  +relative
+  &:hover, &.selected
+    box-shadow: 0 7px 6px -6px #999
+    box-shadow: 0px 0px 25px -7px rgba(0,0,0,0.48)
+    z-index: 1
+  &:active, &:focus
+    +transform(scale(0.98))
+    z-index: 1
