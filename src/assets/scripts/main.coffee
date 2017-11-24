@@ -25,6 +25,8 @@ class @Application
     @fancybox            = new Fancybox()
     @tooltips            = new Tooltips('.tooltip')
 
-$(document).ready(->
-  window.application = new Application()
-)
+(($) ->
+
+    window.application = new Application()
+
+)(jQuery)
