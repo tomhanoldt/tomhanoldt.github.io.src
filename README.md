@@ -53,3 +53,8 @@ Available commands:
 > "[Easy-Terminal-App](https://github.com/creative-workflow/easy-terminal-app)"
 
 > "[www.tomhanoldt.info](http://www.tomhanoldt.info)"
+
+## Support on Beerpay
+Hey dude! Help me out for a couple of :beers:!
+
+[![Beerpay](https://beerpay.io/tomhanoldt/tomhanoldt.github.io.src/badge.svg?style=beer-square)](https://beerpay.io/tomhanoldt/tomhanoldt.github.io.src)  [![Beerpay](https://beerpay.io/tomhanoldt/tomhanoldt.github.io.src/make-wish.svg?style=flat-square)](https://beerpay.io/tomhanoldt/tomhanoldt.github.io.src?focus=wish)
