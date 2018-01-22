@@ -57,4 +57,4 @@ Available commands:
 ## Support on Beerpay
 Hey dude! Help me out for a couple of :beers:!
 
-[![Beerpay](https://beerpay.io/tomhanoldt/tomhanoldt.github.io.src/badge.svg?style=beer-square)](https://beerpay.io/tomhanoldt/tomhanoldt.github.io.src)  [![Beerpay](https://beerpay.io/tomhanoldt/tomhanoldt.github.io.src/make-wish.svg?style=flat-square)](https://beerpay.io/tomhanoldt/tomhanoldt.github.io.src?focus=wish)
+[![Beerpay](https://beerpay.io/tomhanoldt/tomhanoldt.github.io.src/badge.svg?style=beer)](https://beerpay.io/tomhanoldt/tomhanoldt.github.io.src)  [![Beerpay](https://beerpay.io/tomhanoldt/tomhanoldt.github.io.src/make-wish.svg?style=flat)](https://beerpay.io/tomhanoldt/tomhanoldt.github.io.src?focus=wish)
