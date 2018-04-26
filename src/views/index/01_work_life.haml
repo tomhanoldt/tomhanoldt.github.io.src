@@ -52,6 +52,16 @@
       I did the frontent development for Evergreen-Energy during her company launch and now we are in the process
       of fine tuning and optimizing the website.
 
+  .item
+    - elearnio_image = @image_tag 'companies/elearnio.png', alt: 'elearnio', title: 'elearnio'
+    %h3.headline.small
+      = @link_to elearnio_image, 'https://elearnio.com/', title: 'elearnio', target: '_blank'
+      %span.range
+        (2018 - now)
+    %p
+      I implemented the plattform and deployment on AWS and also built and maintain the eLearning application based on
+      = @link_to('Moodle', 'https://moodle.org', title: 'Moodle', target: '_blank') + '.'
+
 
   .item
     - cw_image = @image_tag 'companies/creative-workflow.png', alt: 'Creative Workflow', title: 'Creative Workflow'
