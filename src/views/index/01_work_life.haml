@@ -8,49 +8,16 @@
     at the
     = @link_to 'Beuth University of Applied Sciences', 'https://www.beuth-hochschule.de', target: '_blank'
     = '. My graduation work was a Node.js server and AdobeAIR client as Dropbox alternative, you can find it '
-    = @link_to('here', 'http://nodebox.tomhanoldt.info', target: '_blank') + '.'
+    = @link_to('here', 'https://blog.tomhanoldt.info/dev/javascript/nodebox/', target: '_blank') + '.'
 
   .item
-    - gas_image = @image_tag 'companies/gameartstudio.png', alt: 'GameArt Studio GmbH', title: 'GameArt Studio GmbH'
+    - slidevision_image = @image_tag 'companies/slidevision.png', alt: 'slidevision', title: 'slidevision'
     %h3.headline.small
-      = @link_to gas_image + ' GameArt Studio GmbH', 'http://www.gameartstudio.de', title: 'GameArt Studio GmbH', target: '_blank'
+      = @link_to slidevision_image, 'https://slidevision.io/', title: 'slidevision', target: '_blank'
       %span.range
-        (2007 - 2012)
+        (2019 - now)
     %p
-      As full stack developer of the first hour I did my first steps with high availability
-      and scaling technologies at GameArt Studio. Our main stack was php, java, apache2 and bash scripts.
-      We were among the first commercial user of mysql-cluster.
-
-
-  .item
-    - kp_image = @image_tag 'companies/kaeuferportal.png', alt: 'Käuferportal GmbH', title: 'Käuferportal GmbH'
-    %h3.headline.small
-      = @link_to kp_image + ' Käuferportal GmbH', 'http://www.kaeuferportal.de', title: 'Käuferportal GmbH', target: '_blank'
-      %span.range
-        (2012 - 2018)
-    %p
-      As part of the frontend team at Käuferportal I had a lot to do with mobile optimisation, wordpress
-      and ruby on rails. Also with all sorts of modern web technologies, deployment and agile development.
-
-  .item
-    - rab_image = @image_tag 'companies/rankabrand.png', alt: 'Rank a Brand Foundation', title: 'Rank a Brand Foundation'
-    %h3.headline.small
-      = @link_to rab_image + ' Rank a Brand Foundation', 'https://rankabrand.org/home/what-we-do', title: 'Rank a Brand Foundation', target: '_blank'
-      %span.range
-        (2016 - 2017)
-    %p
-      I`m supporting Rank A Brand during the development and relaunch of their website and their services. We are
-      a loose coupled team of volunteers and work on a modern stack with php (yii2), gulp, sass, coffeescript, docker and chef.
-
-  .item
-    - eve_image = @image_tag 'companies/enpal.png', alt: 'Enpal', title: 'Enpal'
-    %h3.headline.small
-      = @link_to eve_image + ' Enpal', 'https://enpal.de/', title: 'Enpal', target: '_blank'
-      %span.range
-        (2017 - now)
-    %p
-      I did the frontent development for Enpal during their company launch and now we are in the process
-      of fine tuning and optimizing the website and also running A/B testing.
+      With my two co founders Sabine and Alex we developed a great company around performance marketing and lead generation.
 
   .item
     - elearnio_image = @image_tag 'companies/elearnio.png', alt: 'elearnio', title: 'elearnio'
@@ -59,8 +26,7 @@
       %span.range
         (2018 - now)
     %p
-      I implemented the plattform and deployment on AWS and also built and maintain the eLearning application based on
-      = @link_to('Moodle', 'https://moodle.org', title: 'Moodle', target: '_blank') + '.'
+      I was the first developer at elearnio and plan, manage and run the technical aspects at the moment.
 
 
   .item
@@ -75,14 +41,49 @@
       websites and did consulting.
 
 
-    %h3.headline.small some customer projects:
+  .item
+    - eve_image = @image_tag 'companies/enpal.png', alt: 'Enpal', title: 'Enpal'
+    %h3.headline.small
+      = @link_to eve_image + ' Enpal', 'https://enpal.de/', title: 'Enpal', target: '_blank'
+      %span.range
+        (2017 - 2018)
+    %p
+      I did the frontent development for Enpal during their company launch and now we are in the process
+      of fine tuning and optimizing the website and also running A/B testing.
 
-    %ul
-      %li = @link_to 'www.evergreen-energy.de', 'https://evergreen-energy.de/', target: '_blank'
 
-      %li = @link_to 'www.physiologicum-berlin.de', 'http://www.physiologicum-berlin.de/', target: '_blank'
+  .item
+    - rab_image = @image_tag 'companies/rankabrand.png', alt: 'Rank a Brand Foundation', title: 'Rank a Brand Foundation'
+    %h3.headline.small
+      = @link_to rab_image + ' Rank a Brand Foundation', 'https://rankabrand.org/home/what-we-do', title: 'Rank a Brand Foundation', target: '_blank'
+      %span.range
+        (2016 - 2017)
+    %p
+      I`m supporting Rank A Brand during the development and relaunch of their website and their services. We are
+      a loose coupled team of volunteers and work on a modern stack with php (yii2), gulp, sass, coffeescript, docker and chef.
 
-      %li = @link_to 'www.feah.de', 'http://www.feah.de/', target: '_blank'
+
+  .item
+    - kp_image = @image_tag 'companies/kaeuferportal.png', alt: 'Käuferportal GmbH', title: 'Käuferportal GmbH'
+    %h3.headline.small
+      = @link_to kp_image + ' Käuferportal GmbH', 'http://www.kaeuferportal.de', title: 'Käuferportal GmbH', target: '_blank'
+      %span.range
+        (2012 - 2018)
+    %p
+      As part of the frontend team at Käuferportal I had a lot to do with mobile optimisation, wordpress
+      and ruby on rails. Also with all sorts of modern web technologies, deployment and agile development.
+
+
+  .item
+    - gas_image = @image_tag 'companies/gameartstudio.png', alt: 'GameArt Studio GmbH', title: 'GameArt Studio GmbH'
+    %h3.headline.small
+      = @link_to gas_image + ' GameArt Studio GmbH', 'http://www.gameartstudio.de', title: 'GameArt Studio GmbH', target: '_blank'
+      %span.range
+        (2007 - 2012)
+    %p
+      As full stack developer of the first hour I did my first steps with high availability
+      and scaling technologies at GameArt Studio. Our main stack was php, java, apache2 and bash scripts.
+      We were among the first commercial user of mysql-cluster.
 
 
     .button-wrapper
