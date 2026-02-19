@@ -1,0 +1,157 @@
+---
+excerpt: "MTimeStamp_Index_Controller.php extends M_Controller_Module"
+tags:
+- code
+- php
+---
+
+# Yet another UnixTemstamp
+
+MTimeStamp_Index_Controller.php
+
+M_FrameWork umgesetzt
+
+```php
+class MTimeStamp_Index_Controller extends M_Controller_Modul
+{
+	const TARGET_ID_ACTUAL = 'actualStamp';
+	const TARGET_ID_OLD    = 'oldStamps';
+	const MAX_OLD_ENTRIES  = 20;
+
+	public function initAction()
+	{
+		if(M_Controller_Front::getRequest()->isXmlHttpRequest())
+			M_Controller_Front::setResponse(new M_Response_Adapter_Data());
+		else
+			M_Controller_Front::setResponse(new M_Response_Adapter_Applet());
+
+		M_Date_Helper::loadAdoDb();
+
+		$session = M_Session::getInstance('dateselector');
+		if(!isset($session->oldStamps))
+		{
+			$session->oldStamps = new M_Factory_Data();
+			$session->lastTimestamp = new M_Date(time());
+		}
+	}
+
+	public function indexAction(M_Request_Interface $request,M_Response_Interface $response)
+	{
+		if($request->isXmlHttpRequest())
+			return ;
+
+		$stamp = new M_Date(time());
+
+		$session = M_Session::getInstance('dateselector');
+		$session->lastTimestamp = $stamp;
+
+		$response->addBody(MTimeStamp_Index_View::getIndexPage($stamp,$session->oldStamps));
+		$response->addBody(MTimeStamp_Index_View::getUpdateJsc($stamp));
+	}
+
+	public function add2ActualStampAction(M_Request_Interface $request,M_Response_Interface $response)
+	{
+		$session = M_Session::getInstance('dateselector');
+
+		$stamp = clone $session->lastTimestamp;
+
+		if(isset($request->{'add_year'}))
+			$stamp->addYear($request->{'add_year'});
+
+		if(isset($request->{'add_month'}))
+			$stamp->addMonth($request->{'add_month'});
+
+		if(isset($request->{'add_day'}))
+			$stamp->addDay($request->{'add_day'});
+
+		if(isset($request->{'add_hour'}))
+			$stamp->addHour($request->{'add_hour'});
+
+		if(isset($request->{'add_minute'}))
+			$stamp->addMinute($request->{'add_minute'});
+
+		if(isset($request->{'add_second'}))
+			$stamp->addSecond($request->{'add_second'});
+
+		$session->lastTimestamp = $stamp;
+
+		$response->addBody(MTimeStamp_Index_View::getActualStampInfo($stamp));
+		$response->addBody(MTimeStamp_Index_View::getUpdateJsc($stamp));
+	}
+
+	public function selectDateAction(M_Request_Interface $request,M_Response_Interface $response)
+	{
+		$stamp = new M_Date(time());
+		$stamp->setDay     ($request->{'day_select'});
+		$stamp->setMonth   ($request->{'month_select'});
+		$stamp->setYear    ($request->{'year_select'});
+		$stamp->setHour    ($request->{'hour_select'});
+		$stamp->setMinute  ($request->{'minute_select'});
+		$stamp->setSecond  ($request->{'second_select'});
+		$stamp->setTimeZone($request->{'timezone_select'});
+
+		$session = M_Session::getInstance('dateselector');
+		$session->lastTimestamp = $stamp;
+
+		$response->addBody(MTimeStamp_Index_View::getActualStampInfo($stamp));
+	}
+
+	public function selectInputStampAction(M_Request_Interface $request,M_Response_Interface $response)
+	{
+		$stamp = new M_Date($request->{'stamp'});
+
+		$session = M_Session::getInstance('dateselector');
+		$session->lastTimestamp = $stamp;
+
+		$response->addBody(MTimeStamp_Index_View::getActualStampInfo($stamp));
+		$response->addBody(MTimeStamp_Index_View::getUpdateJsc($stamp));
+	}
+
+	public function loadOldStampAction(M_Request_Interface $request,M_Response_Interface $response)
+	{
+		$session = M_Session::getInstance('dateselector');
+
+		$stamp = $session->oldStamps->{$request->{'loadStamp'}};
+
+		$response->addBody(MTimeStamp_Index_View::getActualStampInfo($stamp));
+		$response->addBody(MTimeStamp_Index_View::getUpdateJsc($stamp));
+	}
+
+	public function resetOldStampsAction(M_Request_Interface $request,M_Response_Interface $response)
+	{
+		$session = M_Session::getInstance('dateselector');
+		$session->oldStamps = new M_Factory_Data();
+
+		$response->addBody(MTimeStamp_Index_View::getOldStampList($session->oldStamps));
+	}
+
+	public function deleteOldStampAction(M_Request_Interface $request,M_Response_Interface $response)
+	{
+		$session = M_Session::getInstance('dateselector');
+		$session->oldStamps[$request->{'deleteStamp'}] = null;
+		$session->oldStamps = array_values((array) $session->oldStamps);
+
+		$response->addBody(MTimeStamp_Index_View::getOldStampList($session->oldStamps));
+	}
+
+	public function add2OldStampsAction(M_Request_Interface $request,M_Response_Interface $response)
+	{
+		$session = M_Session::getInstance('dateselector');
+		$session->oldStamps->append(clone $session->lastTimestamp);
+
+		$response->addBody(MTimeStamp_Index_View::getOldStampList($session->oldStamps));
+	}
+
+	public function selectOldStampAction(M_Request_Interface $request,M_Response_Interface $response)
+	{
+		$session = M_Session::getInstance('dateselector');
+
+		$stamp = $session->oldStamps->{$request->{'loadStamp'}};
+
+		$session->lastTimestamp = $stamp;
+
+		$response->addBody(MTimeStamp_Index_View::getActualStampInfo($stamp));
+		$response->addBody(MTimeStamp_Index_View::getUpdateJsc($stamp));
+	}
+}
+```

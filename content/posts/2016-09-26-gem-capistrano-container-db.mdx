@@ -1,0 +1,51 @@
+---
+excerpt: "Helps managing databases on local and remote stages"
+tags:
+- code
+- capistrano
+- deployment
+- docker
+- ruby
+---
+
+# gem capistrano-container-db
+
+Helps managing databases on local and remote stages, also on remote [docker](https://www.docker.com/) container for [Capistrano 3.x](http://capistranorb.com/).
+This project is in an early stage but helps me a lot dealing with my container deployments and keeps my code clean. It is not only meant for mysql, but at the moment there is only support for mysql, feel free to contribute =)
+This gem depends on [capistrano-container](https://github.com/creative-workflow/capistrano-container)
+
+### capistrano integration
+
+```ruby
+server 'www.example.com', user: 'root', roles: %w{web}
+
+container 'db', roles: %w{db},
+  container_id: 'website_company_beta_db',
+  server: ['www.example.com']
+
+# here is the capistrano-container-db config you need
+set :db_is_container, true
+set :db_user, 'wordpress'
+set :db_pass, 'wordpress'
+set :db_name, 'my_wordpress_db_inside_docker'
+```
+
+```
+
+This configures the db access for the db container. If :db\_is\_container is true, the gem uses the capistrano-container extension to select the container by name fetch(:db\_container\_name) (defaults to 'db').
+If the stage name is equal :local, export/import tasks will run on your local host (no matter if it's a dockaer container or local mysql installation).
+Dont forget to add a server (even for local stage) with the role db. `server 'localhost', user: 'any', roles: %w{web db php}`
+
+### commandline tasks
+
+```bash
+cap db:export               # export a local, remote or remote container mysql db
+cap db:import               # import a local, remote or remote container mysql db
+cap db:execute              # execute a mysql command local, remote or container host
+```
+
+### ressources
+
+* [code on github](https://github.com/creative-workflow/capistrano-container-db)
+* [rubygems.org](https://rubygems.org/gems/capistrano-container-db)
+* depends on [capistrano-container](https://rubygems.org/gems/capistrano-container)

@@ -1,0 +1,106 @@
+---
+excerpt: "Helps managing  docker container."
+tags:
+- code
+- capistrano
+- deployment
+- docker
+- ruby
+cover: /uploads/2016/06/code-150x150.png
+---
+
+# gem "capistrano-container"
+
+Helps managing [docker](https://www.docker.com/) container and files inside docker container for [Capistrano 3.x](http://capistranorb.com/).
+[This project](https://github.com/creative-workflow/capistrano-container) is in an early stage but helps me a lot dealing with my container deployments and keeps my code clean. It is not only meant for docker, but at the moment there is only support for docker, feel free to contribute =)
+This gem does not handle Dockerfiles (build, push, etc.) but handles docker container on your dev or staging system.
+The container implementation auto detects if it should run on local or remote docker-engine
+
+### capistrano integration
+
+```ruby
+server 'www.example.com', user: 'root', roles: %w{web}
+
+container 'db', roles: %w{db},
+  container_id: 'website_company_beta_db',
+  server: ['www.example.com']
+
+container 'php', roles: %w{php},
+  container_id: 'website_company_beta_php',
+  server: ['www.example.com']
+
+...
+```
+
+This registers two container (db, php) for the server www.example.com. You can use the container roles later to filter container like the way you filter server in capistrano (on([:role]) do ... expresion).
+The container id is optional. If its not set, the container id equals to the name you gave the container as first argument. The container id will be used later to run commands like container.upload or container.execute (with docker exec [container\_id] [command]).
+If you define a container, the role :container\_host will be added to the given hosts, so you can filter hosts that are running that specific container. Also a container specific role will be added. For a container like container 'php', roles: %w{php}, ... the host get a role named :container\_php.
+
+### commandline tasks
+
+There are generic container tasks you can run on local or remote host (you will be asked for container\_id sometimes).
+
+```bash
+cap container:all                  # show all docker containers
+cap container:delete               # delete a docker container
+cap container:diff                 # show FS diffs of docker container
+cap container:events               # show events of docker container
+cap container:inspect              # show info of docker container
+cap container:logs                 # show logs of docker container
+cap container:pause                # pause a docker container
+cap container:ports                # show shows public facing port of docker container
+cap container:ressources           # show resource usage statistics of docker container
+cap container:restart              # restart a docker container
+cap container:running              # show running docker containers
+cap container:stop                 # stop a docker container
+cap container:top                  # show running processes of docker container
+cap container:unpause              # unpause a docker container
+cap container:update_docker        # update docker
+cap container:delete               # delete a docker container
+cap container:diff                 # show FS diffs of docker container
+cap container:events               # show events of docker container
+cap container:inspect              # show info of docker container
+cap container:logs                 # show logs of docker container
+cap container:pause                # pause a docker container
+cap container:ports                # show shows public facing port of docker container
+cap container:ressources           # show resource usage statistics of docker container
+cap container:restart              # restart a docker container
+cap container:running              # show running docker containers
+cap container:stop                 # stop a docker container
+cap container:top                  # show running processes of docker container
+cap container:unpause              # unpause a docker container
+cap container:update_docker        # update docker
+```
+
+Also individual tasks will be created for every container you define in your deploy.rb:
+
+```bash
+cap container:php:delete           # delete a docker container
+cap container:php:diff             # show FS diffs of docker container
+cap container:php:events           # show events of docker container
+cap container:php:inspect          # show info of docker container
+cap container:php:logs             # show logs of docker container
+cap container:php:pause            # pause a docker container
+cap container:php:ports            # show shows public facing port of docker container
+cap container:php:ressources       # show resource usage statistics of docker container
+cap container:php:restart          # restart a docker container
+cap container:php:stop             # stop a docker container
+cap container:php:top              # show running processes of docker container
+cap container:php:unpause          # unpause a docker container
+cap container:php:diff             # show FS diffs of docker container
+cap container:php:events           # show events of docker container
+cap container:php:inspect          # show info of docker container
+cap container:php:logs             # show logs of docker container
+cap container:php:pause            # pause a docker container
+cap container:php:ports            # show shows public facing port of docker container
+cap container:php:ressources       # show resource usage statistics of docker container
+cap container:php:restart          # restart a docker container
+cap container:php:stop             # stop a docker container
+cap container:php:top              # show running processes of docker container
+cap container:php:unpause          # unpause a docker container
+```
+
+### ressources
+
+* [code on github](https://github.com/creative-workflow/capistrano-container)
+* [rubygems.org](https://rubygems.org/gems/capistrano-container)

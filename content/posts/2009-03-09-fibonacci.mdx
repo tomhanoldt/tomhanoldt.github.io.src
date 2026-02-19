@@ -1,0 +1,72 @@
+---
+excerpt: "Entstanden im Algorithmenkurs"
+tags:
+- code
+- php
+- java
+---
+
+# Fibonacci
+
+Entstanden im Algorithmenkurs [github](https://github.com/tomhanoldt/java_fibonacci)
+
+|  |  |
+| --- | --- |
+| Ziel: | Laufzeitvergleich(O-Notation) verschiedener Algorithmen zur Bestimmung von Fibonaccifolgen. |
+| Testbedingungen: | Es wird einmal der Fall einer Einzelberechnung betrachtet, und vor allem für die um Cashing erweiterten Algorithmen mehrfache Berechnung. |
+| Algorithmen: |
+
+ FibonacciFormel f(n)=O(1)   FibonacciIterativ f(n)=O(n)  FibonacciIterativCashed f(n)=O(n)     *\*für eine Berechnung*  FibonacciRekursiv f(n)=O(1.62^n)  FibonacciRekursivCashed f(n)=O(n)     *\*für eine Berechnung*  #TODO FibonacciMatrix |
+| Ergebnis: | Was man erwartet, zu bemerken ist, dass der FibonacciRekursivCashed-Algorithmus mit n wächst und im Fall von der Berechnung einer Folge von Fibonacci-Zahlen sogar erheblich Aufwand spart. Der FibonacciIterativCashed-Algorithmus hingegen, kann nur Vorteile vom Cashing nutzen, wenn die gleiche Zahl berechnet wird. |
+
+Wer die Tests nachvollziehen will, kann das fib Paket runterladen([github](https://github.com/tomhanoldt/java_fibonacci)) und die Gui.java “starten”
+
+fib.FibonacciRecursiveCashed.java
+```java
+public class FibonacciRecursiveCashed
+{
+	private static HashMap<Integer,Long> operationCash = new HashMap<Integer,Long> (100);
+
+	public static long getFibFromPosition(int position)
+	{
+		Helper.addCallInformation("FibonacciRecursiveCashed init");
+
+		if(position == 0)
+		{
+			return 0;
+		}
+
+		return _getFibFromPosition(
+					Math.abs(position)
+    );
+	}
+
+	protected static long _getFibFromPosition(int position)
+	{
+		if(position < 2)
+		{
+			Helper.addCallInformation("FibonacciRecursiveCashed : return 1");
+
+			return 1;
+		}
+
+		if(operationCash.containsKey(position))
+		{
+			return operationCash.get(position);
+		}
+
+		Helper.addCallInformation("FibonacciRecursiveCashed : not cashed for "+position);
+
+		long result = _getFibFromPosition(position - 1) + _getFibFromPosition(position - 2);
+
+		operationCash.put(position,result);
+
+		return result;
+	}
+
+	public static void clearCash()
+	{
+		operationCash.clear();
+	}
+}
+```

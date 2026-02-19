@@ -1,0 +1,199 @@
+---
+tags:
+- code
+- deployment
+- docker
+- docker-compose
+- raspberry
+cover: /uploads/2017/11/RPi-Logo-Reg-SCREEN-199x250-1-150x150.png
+---
+
+# Docker on Raspberry with GUI
+
+This post describes how to setup you raspberry from scratch for running, monitoring and deploying docker container, monitoring the raspberry system and accessing the gpio pins.
+
+This all will be done without any manual setup on the raspberry so its 100% repeatable.
+
+You will be able to:
+
+* deploy docker container via a web gui ([www.portainer.io](https://www.portainer.io/))
+* monitor the raspberry system stats ([www.elinux.org/RPi-Monitor](https://www.elinux.org/RPi-Monitor))
+* read and set the gpio pins ([webiopi.trouch.com](https://webiopi.trouch.com))
+
+## #1 Prepare your system
+
+We will use the hypriot “flash” tool for writing the image to the sd card because this works with Linux, OSX and Windows.
+
+So first follow the setup instructions on [www.github.com/hypriot/flash](https://www.github.com/hypriot/flash) (we will do this here for OSX).
+
+Open a terminal and type:
+
+```bash
+brew install pv curl unzip
+curl -O https://raw.githubusercontent.com/hypriot/flash/master/$(uname -s)/flash
+chmod +x flash
+sudo mv flash /usr/local/bin/flash
+```
+
+## #2 Setup the raspberry operating system on sd card
+
+Now we flash the image to the sd card.
+
+Before you insert the sd card open a terminal and type:
+
+```bash
+flash --hostname rpi-docker-host https://github.com/hypriot/image-builder-rpi/releases/download/v1.5.0/hypriotos-rpi-v1.5.0.img.zip
+```
+
+This command will download the operating system image for your raspberry and guide you to write it to the s card. The provided hostname will be the host name of your raspberry device.
+
+<Image src="/uploads/2017/11/01_rpi_docker_flash.png" alt="" />
+
+If the program finishes, your sd card is flashed with the raspberry operating system and you can now plug it in and boot your raspberry.
+
+## #3 Log in to your raspberry
+
+After the raspberry booted the new sd card image you can log in by typing:
+
+```bash
+ssh pirate@rpi-docker-host
+```
+
+The default password is hypriot but you should change this (passwd).
+
+<Image src="/uploads/2017/11/02_rpi_docker_login.png" alt="" />
+
+You can also use a ssh-key for authentication so you don’t have to type the password again and again: [www.raspberrypi.org/documentation/remote-access/ssh/passwordless.md](https://www.raspberrypi.org/documentation/remote-access/ssh/passwordless.md)
+
+## #4 Fix broken docker-compose
+
+As docker-compose makes things more reproducable but is broken in the actual hypriot image, we will fix this by typing this in to the raspberry terminal:
+
+```bash
+sudo easy_install --upgrade pip
+sudo pip uninstall docker docker-compose -y
+sudo pip install docker==2.3.0
+sudo pip install docker-compose==1.14.0
+```
+
+\*Note: pip is also broken, so we updated it first ;)
+
+## #5 Setup portainer for container management
+
+Log into your raspberry and type:
+
+```bash
+nano docker-compose.yml
+```
+
+This will create a file named docker-compose.yml. Insert the following content:
+
+```yaml
+version: "3"
+
+services:
+  rpi_monitor:
+    image: neoraptor/rpi-monitor
+    privileged: true
+    ports:
+      - "80:8888"
+    restart: unless-stopped
+
+  rpi_docker_ui:
+    image: portainer/portainer
+    ports:
+      - "81:9000"
+    volumes:
+      - /var/run/docker.sock:/var/run/docker.sock
+      - portainer_data:/data
+    restart: unless-stopped
+
+volumes:
+  portainer_data:
+```
+
+Press CTRL + X, confirm write content to file by typing ‘y’ and press return.
+
+Bring up the container by typing:
+
+```bash
+docker-compose up -d
+```
+
+This will download the needed images and start the container.
+
+<Image src="/uploads/2017/11/03_rpi_docker_up.png" alt="" />
+
+"docker ps" will show you the running container and their exposed ports.
+
+## #6 Access the raspberry monitor app
+
+Open your browser and goto [http://rpi-docker-host](http://rpi-docker-host).
+
+<Image src="/uploads/2017/11/04_rpi_docker_monitor.png" alt="" />
+
+## #7 Access the container management app (portainer)
+
+Open your browser and goto [http://rpi-docker-host:81](http://rpi-docker-host:81)
+
+You will be asked to set a user name and password, do so.
+
+Now you have to choose if you which to manage a docker swarm or a local docker insatnce. Choose local and press connect.
+
+<Image src="/uploads/2017/11/05_rpi_docker_portainer_setup.png" alt="" />
+
+You are now able to spawn and manage docker container via web interface.
+
+<Image src="/uploads/2017/11/06_rpi_docker_portainer_overview.png" alt="" />
+
+Get an overview: [www.portainer.io/overview.html](https://www.portainer.io/overview.html) Documentation: [portainer.readthedocs.io](https://portainer.readthedocs.io)
+
+## #8 Setup webiopi via portainer
+
+Navigate to “Containers” in the site menu. You will see our previous started container responsible for the monitor and portainer app.
+
+Now we would like to add the webiopi app for accessing the gpio-pins via web-interface.
+
+So click on “+ Add container”.
+
+<Image src="/uploads/2017/11/07_rpi_docker_portainer_add.png" alt="" />
+
+Name the container "rpi\_webiopi".
+
+Under “Image configuration” paste “wirthual/rpi-webiopi”.
+
+Under ”Port mapping” click “+ map additional port” and map host port 82 to container port 8000.
+
+Disable access control.
+
+<Image src="/uploads/2017/11/08_rpi_docker_portainer_add_mask.png" alt="" />
+
+Go to “advanced container settings” and type “webiopi” in to the input labeled “Command”. This will be the start command that runs inside the webiopi container.
+
+<Image src="/uploads/2017/11/09_rpi_docker_portainer_add_command.png" alt="" />
+
+We have to give the container privileged access to the host so the webiopi app can access the gpio pins. Scroll down to the “advanced container settings”, click on tab “Runtime & Ressources” and enable “Privileged mode”.
+
+<Image src="/uploads/2017/11/10_rpi_docker_portainer_add_privileged.png" alt="" />
+
+If you whish the container to start after a reboot, go to the “Restart policy” tab and select “Unless stopped”.
+
+Now we are finished and can deploy the container by clicking on “Deploy the container”.
+
+After a while (~15min) you see the container is up and running.
+
+Now you can navigate to [http://rpi-docker-host:82](http://rpi-docker-host:82) and access the gpio pins.
+
+<Image src="/uploads/2017/11/11_rpi_docker_webiopi.png" alt="" />
+
+More infos: [webiopi.trouch.com](http://webiopi.trouch.com)
+
+## #9 Wrapping it up
+
+You see there is no need to develop complicated setup routines for getting your raspberry to work as you expect.
+
+You can simply use arm compatible docker images to run you software stack. Find them by using the docker registry: [hub.docker.com/search/?q=rpi+arm](https://hub.docker.com/search/?q=rpi+arm)
+
+In a next tutorial (coming soon) we will evaluate how to deploy your code to a raspberry by using self (cross-)builded images or simply by copying the code and distribute it to a container.
+
+Feel free to stalk my person [www.tomhanoldt.info](http://0.0.0.0:10029) or write me an email to [tom@creative-workflow.berlin](mailto:tom@creative-workflow.berlin).

@@ -1,0 +1,131 @@
+---
+excerpt: "A side project around a raspberry-powered tank with deploy tooling and control UI."
+tags:
+- code
+- javascript
+- python
+- raspberry
+---
+
+# Raspberry-Pi-Tank
+
+A side project from me and a teammate is around the beautiful raspberry.
+  <Image
+    src="/uploads/2014/10/2014-07-08-00.09.40-1024x764.jpg"
+    alt="2014-07-08 00.09.40"
+  />
+
+  <Image
+    src="/uploads/2014/02/IMG_20140624_081218-1024x757.jpg"
+    alt="IMG_20140624_081218"
+  />
+We are mainly developing a setup and deploy tool based on pythons fabric which is for os image handling and service deployment like web-io-pi, music-player-daemon, accesspoint setup, network handling and our second project.
+
+```python
+from piservices import PiService
+
+class MusicPlayerDaemonService(PiService):
+
+class MusicPlayerDaemonService(PiService):
+    name = 'pimpd'
+    apt_get_install = ['mpd', 'mpc', 'alsa-utils']
+    path_to_music = '/var/lib/mpd/music'
+    init_script = 'installed'
+    config_file = '/etc/mpd.conf'
+    config_file_tpl = 'src/mpd.conf'
+
+    def install(self):
+        PiService.install(self)
+        self.sudo('modprobe snd_bcm2835')
+        self.sudo('amixer cset numid=3 1')
+        self.sudo('chmod g+w /var/lib/mpd/music/ /var/lib/mpd/playlists/')
+        self.sudo('chgrp audio /var/lib/mpd/music/ /var/lib/mpd/playlists/')
+
+    def deploy(self, restart=True):
+        config_writer = self.remote.template(self.config_file_tpl)
+        config_writer.render({
+            'host': self.config.host,
+            'port': self.config.port,
+        })
+
+        config_writer.write(self.config_file)
+        PiService.deploy(self, restart)
+        self.sudo('mpc update')
+
+    def start(self):
+        self.sudo('/etc/init.d/mpd start')
+        self.sudo('mpc update')
+
+    def restart(self):
+        self.sudo('/etc/init.d/mpd restart')
+        self.sudo('mpc update')
+
+    def stop(self):
+        self.sudo('/etc/init.d/mpd stop')
+```
+
+The second project is a simple web-socket driven web interface to a python tornado server which exposes capabilities of dynamic loaded and individual configured, hierarchical module system for raspberry hardware and services. Of course there is a native python bridge between these two projects, so the command server can use the deploy project for setting up network and services but the code isn't ready for public at this time ;)
+
+<a href="/uploads/2014/02/pi_server_interface.png">
+  <Image src="/uploads/2014/02/pi_server_interface.png" alt="pi_server_interface" />
+</a>
+
+```python
+class Application:
+    def __init__(self):
+        self.shutdown = threading.Event()
+        self.dispatcher = Dispatcher(self)
+        self.communicator = Communicator(self.dispatcher)
+        self._load_modules(self)
+
+    def _dispatch(self, command):
+        command = self._parse_command(command)
+        module = command.module
+        method = command.command
+        args = command.args
+
+        if module is 'app':
+            if method == 'stop':
+                return self.stop()
+
+            if method == 'client_connected':
+                return self.communicator.send('Welcome!')
+
+        self.communicator.send("%s" % (command))
+
+        if not self.modules.has_key(module):
+            return self.communicator.send('module %s unknown' % module)
+
+        method = getattr(self.modules[module], method, None)
+
+        if not method:
+            return self.communicator.send('module command %s unknown' % module + '::' + method)
+
+        try:
+            method(self, args)
+        except Error as e:
+            self.modules[module].on_error(e)
+      self.modules[module].on_error(e)
+
+...
+```
+
+<a href="/uploads/2014/10/2014-07-08-02.05.40.jpg">
+  <Image
+    src="/uploads/2014/10/2014-07-08-02.05.40-1024x764.jpg"
+    alt="2014-07-08 02.05.40"
+  />
+</a>
+<a href="/uploads/2014/10/2014-07-18-13.18.31.jpg">
+  <Image
+    src="/uploads/2014/10/2014-07-18-13.18.31-1024x764.jpg"
+    alt="2014-07-18 13.18.31"
+  />
+</a>
+In my early days around 2004 i started a related project with atmel microcontroller but there are no better days for such projects like these and we all love the raspberry :-)
+<a href="/uploads/2014/10/FI098362.jpg">
+  <Image src="/uploads/2014/10/FI098362-1024x768.jpg" alt="Exif_JPEG_422" />
+</a>
+<a href="/uploads/2014/10/PICT0019.jpg">
+  <Image src="/uploads/2014/10/PICT0019-1024x768.jpg" alt="Exif_JPEG_422" />
+</a>
