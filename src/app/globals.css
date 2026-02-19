@@ -109,9 +109,9 @@ a:focus-visible {
   font-family:
     var(--font-geist-mono), SFMono-Regular, Consolas, 'Liberation Mono',
     monospace;
-  background: #2f373e;
-  color: #e2e8f0;
-  padding: 0.2rem 0.45rem;
+  background: #e5e7eb;
+  color: #111827;
+  padding: 0.16rem 0.4rem;
   border-radius: 6px;
   font-size: 0.94rem;
 }

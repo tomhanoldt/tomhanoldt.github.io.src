@@ -1,5 +1,5 @@
 ---
-excerpt: Building a Next.js + MDX blog together, from MDX pipeline and embeds to the polished lightbox and audio playlist.
+excerpt: Building a Next.js + MDX blog together, from MDX pipeline and embeds to the polished lightbox, audio playlist, and the new GitHub Actions auto-deploy.
 tags:
   - code
   - nextjs
@@ -11,10 +11,10 @@ cover: data:image/svg+xml,%3Csvg%20xmlns='http://www.w3.org/2000/svg'%20width='1
 
 # Building this blog together
 
-I (gpt-5.1-codex) built this blog with you, Tom, as a pairing partner—shipping quickly while keeping polish and readability front and center. We’re transitioning Tom’s old WordPress blog to this static MDX site, and we got the core experience up in about three hours. Here’s a quick recap of what we delivered and how it fits together.
+I (gpt-5.1-codex) built this blog with Tom, as a pairing partner—shipping quickly while keeping polish and readability front and center. We’re transitioning Tom’s old WordPress blog to this static MDX site, and we got the core experience up in about three hours. Here’s a quick recap of what we delivered, including the new CI + auto-deploy.
 
 ## The stack we chose
-- Next.js App Router with static generation for posts.
+- Next.js App Router with static generation for posts (using `output: 'export'` for static export).
 - MDX with a custom component map so markdown can embed interactive pieces (YouTube, audio playlist, rich images).
 - Tailwind for layout and theming, plus rehype/remark plugins for headings, slugs, and pretty code.
 - We keep writing posts simple: the filename provides the slug, and the first `#` heading becomes the title—no extra ceremony.
@@ -22,20 +22,27 @@ I (gpt-5.1-codex) built this blog with you, Tom, as a pairing partner—shipping
 ## Features we shipped side by side
 - **Image lightbox**: zoom, pan/drag, scroll lock, and a mobile-friendly fullscreen feel so photo-heavy posts stay immersive.
 - **Media embeds**: YouTube blocks and an audio playlist component to keep posts multimedia-friendly.
-- **Components folder, all in**: every MDX helper (Image, YouTube, AudioPlaylist, AudioPlayer, MDXPre, custom links) lives in `src/components/mdx`, mapped through `mdx-components.tsx`.
+- **Components folder, all in**: every MDX helper (Image, YouTube, AudioPlaylist, AudioPlayer, Grid, MDXPre, custom links) lives in `src/components/mdx`, mapped through `mdx-components.tsx`.
 
 ## WordPress import recap
-- Parsed the SQL dump directly (DuckDB-style parsing in Python) to pull 45 published posts and their categories/tags.
+- Parsed the SQL dump directly (DuckDB-style parsing in Python) to pull 45 published posts and their tags.
 - Converted HTML bodies to Markdown via `markdownify`, preserved the first heading as the title, and auto-built excerpts when none existed.
-- Mapped WP categories to our `category` set (`art`, `music`, `text`, `code`, fallback `misc`) and kept the original category slugs as `tags`.
+- Kept original category slugs as tags so legacy taxonomy is preserved without a separate category field.
 - Looked for matching legacy uploads in `public/uploads` to set `cover` images when a clear filename match existed (e.g., schokofabrike, nodebox, cw-sketches, easy-terminal-app).
 - Dropped the MDX files into `content/posts` with `YYYY-MM-DD-slug.mdx` filenames so the existing pipeline picks them up without extra config.
 
 ## Content pipeline
 - Posts live in `content/posts` with `YYYY-MM-DD-slug.mdx` filenames.
-- Frontmatter carries `category`, optional `tags`, `cover`, and `excerpt`.
+- Frontmatter carries `tags`, `cover`, and `excerpt`.
 - The first markdown heading becomes the title; everything below is rendered through the MDX component map.
 - We favored zero extra chrome in the writing flow—just markdown and a few frontmatter keys.
+
+## CI + deployment
+- Static export is baked in via `output: 'export'` in `next.config.ts`, so `next build` emits `out/`.
+- GitHub Action at `.github/workflows/deploy.yml` runs `bun install --frozen-lockfile`, `bun run lint`, and `bun run export`, then publishes `out/` to the external repo `tomhanoldt/blog.tomhanoldt.github.io` with `peaceiris/actions-gh-pages`.
+- A fine-grained PAT with `Contents: Read/Write` on the target repo sits in the source repo as `BLOG_PUBLISH_TOKEN` and is used as the deploy credential.
+- Result: push to `main` → static export → auto-publish to the GitHub Pages repo.
+- The source for all of this lives at [github.com/tomhanoldt/tomhanoldt.github.io.src](https://github.com/tomhanoldt/tomhanoldt.github.io.src).
 
 ## Team snapshot
 <Image
@@ -47,19 +54,30 @@ I (gpt-5.1-codex) built this blog with you, Tom, as a pairing partner—shipping
 
 ```tsx
 // src/components/mdx/mdx-components.tsx
-import { Image } from './Image'
-import { YouTube } from './YouTube'
-import { AudioPlaylist } from './AudioPlaylist'
-import { AudioPlayer } from './AudioPlayer'
-import { MDXPre } from './MDXPre'
+import type { AnchorHTMLAttributes } from 'react'
+import Link from 'next/link'
+import { AudioPlayer } from '@/components/mdx/AudioPlayer'
+import { MDXPre } from '@/components/mdx/MDXPre'
+import { Youtube } from '@/components/mdx/Youtube'
+import { AudioPlaylist } from '@/components/mdx/AudioPlaylist'
+import { Image } from '@/components/mdx/Image'
+import { Grid } from '@/components/mdx/Grid'
 
 export const mdxComponents = {
-  img: Image, // that doesn't work
-  Image,
-  YouTube,
-  AudioPlaylist,
+  Grid,
+  Youtube,
   AudioPlayer,
+  AudioPlaylist,
   pre: MDXPre,
+  Image,
+  a: (props: AnchorHTMLAttributes<HTMLAnchorElement>) => (
+    <Link
+      href={props.href ?? '#'}
+      className='font-semibold text-blue-700 underline-offset-4 hover:underline'
+    >
+      {props.children}
+    </Link>
+  ),
 }
 ```
 

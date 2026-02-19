@@ -6,7 +6,7 @@ export function MDXPre(
   return (
     <pre
       {...props}
-      className='my-6 overflow-x-auto rounded-xl bg-slate-900/95 p-4 text-sm text-slate-100 shadow-inner'
+      className='my-6 overflow-x-auto rounded-xl border border-slate-200 bg-slate-100 p-3 text-sm text-slate-900 shadow-inner'
     />
   )
 }
