@@ -32,7 +32,15 @@ function isColumns(value: unknown): value is Columns {
 }
 
 function isGap(value: unknown): value is Gap {
-  return value === 0 || value === 2 || value === 4 || value === 6 || value === 8 || value === 10 || value === 12
+  return (
+    value === 0 ||
+    value === 2 ||
+    value === 4 ||
+    value === 6 ||
+    value === 8 ||
+    value === 10 ||
+    value === 12
+  )
 }
 
 export function Grid({ children, columns = 2, gap = 6, className }: GridProps) {
