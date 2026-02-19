@@ -26,7 +26,7 @@ jobs:
       - name: Lint
         run: bun run lint
 
-      - name: Export static site
+      - name: Build static site
         run: bun run export
 
       - name: Deploy to external repo

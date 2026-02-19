@@ -7,14 +7,17 @@ type GridProps = {
   className?: string
 }
 
-const columnClasses: Record<NonNullable<GridProps['columns']>, string> = {
+type Columns = NonNullable<GridProps['columns']>
+type Gap = NonNullable<GridProps['gap']>
+
+const columnClasses: Record<Columns, string> = {
   1: 'grid-cols-1',
   2: 'grid-cols-1 sm:grid-cols-2',
   3: 'grid-cols-1 sm:grid-cols-3',
   4: 'grid-cols-1 sm:grid-cols-2 md:grid-cols-4',
 }
 
-const gapClasses: Record<NonNullable<GridProps['gap']>, string> = {
+const gapClasses: Record<Gap, string> = {
   0: 'gap-0',
   2: 'gap-2',
   4: 'gap-4',
@@ -24,17 +27,21 @@ const gapClasses: Record<NonNullable<GridProps['gap']>, string> = {
   12: 'gap-12',
 }
 
+function isColumns(value: unknown): value is Columns {
+  return value === 1 || value === 2 || value === 3 || value === 4
+}
+
+function isGap(value: unknown): value is Gap {
+  return value === 0 || value === 2 || value === 4 || value === 6 || value === 8 || value === 10 || value === 12
+}
+
 export function Grid({ children, columns = 2, gap = 6, className }: GridProps) {
   const parsedColumnsRaw =
     typeof columns === 'string' ? parseInt(columns, 10) : columns
   const parsedGapRaw = typeof gap === 'string' ? parseInt(gap, 10) : gap
 
-  const parsedColumns = columnClasses[parsedColumnsRaw as GridProps['columns']]
-    ? (parsedColumnsRaw as GridProps['columns'])
-    : 2
-  const parsedGap = gapClasses[parsedGapRaw as GridProps['gap']]
-    ? (parsedGapRaw as GridProps['gap'])
-    : 6
+  const parsedColumns = isColumns(parsedColumnsRaw) ? parsedColumnsRaw : 2
+  const parsedGap = isGap(parsedGapRaw) ? parsedGapRaw : 6
 
   const classes = [
     'grid items-start',

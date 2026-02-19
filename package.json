@@ -10,7 +10,7 @@
     "lint": "eslint",
     "lint:fix": "eslint --fix .",
     "lint:mdx-yaml": "node scripts/check-frontmatter.js",
-    "export": "next build && next export",
+    "export": "next build",
     "clean": "rm -f .next/dev/lock && rm -rf .next"
   },
   "dependencies": {

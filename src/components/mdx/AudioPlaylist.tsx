@@ -13,6 +13,14 @@ type AudioPlaylistProps = {
   tracks?: Track[]
 }
 
+function isTrack(value: unknown): value is Track {
+  return (
+    typeof value === 'object' &&
+    value !== null &&
+    typeof (value as { src?: unknown }).src === 'string'
+  )
+}
+
 function formatTime(value: number) {
   if (!isFinite(value) || value < 0) return '0:00'
   const minutes = Math.floor(value / 60)
@@ -354,9 +362,7 @@ export function AudioPlaylist({ heading, tracks = [] }: AudioPlaylistProps) {
 function safeParseTracks(value: string): Track[] {
   try {
     const parsed = JSON.parse(value)
-    return Array.isArray(parsed)
-      ? parsed.filter((item): item is Track => typeof item?.src === 'string')
-      : []
+    return Array.isArray(parsed) ? parsed.filter(isTrack) : []
   } catch (error) {
     console.warn('AudioPlaylist: could not parse tracks string', error)
     return []
@@ -365,7 +371,7 @@ function safeParseTracks(value: string): Track[] {
 
 function normalizeTracks(value: unknown): Track[] {
   if (Array.isArray(value)) {
-    return value.filter((item): item is Track => typeof item?.src === 'string')
+    return value.filter(isTrack)
   }
 
   if (typeof value === 'string') {
@@ -374,9 +380,7 @@ function normalizeTracks(value: unknown): Track[] {
 
   if (value && typeof value === 'object') {
     const entries = Object.values(value as Record<string, unknown>)
-    return entries.filter(
-      (item): item is Track => typeof item?.src === 'string'
-    )
+    return entries.filter(isTrack)
   }
 
   return []
