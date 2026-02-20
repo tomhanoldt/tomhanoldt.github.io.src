@@ -14,6 +14,7 @@ Working notes
   Static generation is preferred (see `dynamic = 'force-static'` in pages).
 - MDX frontmatter powers metadata; keep slugs aligned with filenames and ensure `date`, `title`, `excerpt`, and `tags` are present.
 - Components of note: `PostCard` (list tiles), `PostHeader`, `ReturnLink` (back link), `PrevNextNav` (adjacent posts), `ScrollToTopButton`.
+- Navigation context: Post links include a `from` query (home `/` or `/tag/<tag>`). `ReturnLink` uses it to go back; `PrevNextNav` keeps prev/next within the tag when `from` points to a tag, otherwise uses global order.
 - Tag pills link to `/tag/<tag>`; posts resolve slugs via `getPostSlugs`/`getAllPosts` in `src/lib/posts`.
 
 Authoring tips
