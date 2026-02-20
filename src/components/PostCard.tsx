@@ -13,22 +13,25 @@ export function PostCard({ post }: { post: PostMeta }) {
   const fallback = getCoverIcon(post)
 
   return (
-    <article className='group surface relative overflow-hidden p-6 transition hover:-translate-y-[2px]'>
+    <article className='group surface relative overflow-hidden rounded-2xl p-5 transition hover:-translate-y-[2px] sm:p-6'>
       <span
         className='absolute left-0 top-0 h-full w-1 bg-[color:var(--accent)]'
         aria-hidden
       />
 
-      <Link href={`/posts/${post.slug}`} className='block'>
-        <div className='flex gap-4'>
-          <div className='relative h-[100px] w-[100px] flex-shrink-0 overflow-hidden rounded-xl border border-[color:var(--border)] bg-[color:var(--surface)]'>
+      <Link
+        href={`/posts/${post.slug}`}
+        className='block focus:outline-none focus-visible:ring-2 focus-visible:ring-[color:var(--accent)] focus-visible:ring-offset-2 focus-visible:ring-offset-[color:var(--background)]'
+      >
+        <div className='flex flex-col gap-4 sm:flex-row'>
+          <div className='relative h-[110px] w-[110px] self-center overflow-hidden rounded-xl border border-[color:var(--border)] bg-[color:var(--surface)] sm:self-start sm:flex-shrink-0'>
             {cover ? (
               <Image
                 src={cover}
                 alt={post.title}
-                width={440}
-                height={300}
-                className='h-full w-full object-contain'
+                width={150}
+                height={150}
+                className='h-full w-full object-cover object-center'
                 priority={false}
               />
             ) : (
@@ -47,18 +50,18 @@ export function PostCard({ post }: { post: PostMeta }) {
               <span>{formatPostDate(post.date)}</span>
             </div>
 
-            <h2 className='mt-2 text-2xl font-semibold text-[color:var(--foreground)] group-hover:text-[color:var(--accent)]'>
+            <h2 className='mt-2 text-xl font-semibold leading-snug text-[color:var(--foreground)] group-hover:text-[color:var(--accent)] sm:text-2xl'>
               {post.title}
             </h2>
 
-            <p className='mt-2 line-clamp-3 text-base text-[color:var(--muted)]'>
+            <p className='mt-2 line-clamp-3 text-sm text-[color:var(--muted)] sm:text-base'>
               {post.excerpt}
             </p>
           </div>
         </div>
       </Link>
 
-      <div className='mt-3 flex flex-wrap gap-2'>
+      <div className='mt-4 flex flex-wrap gap-2'>
         {post.tags.map((tag) => (
           <TagPill key={tag} label={`#${tag}`} href={`/tag/${tag}`} />
         ))}
