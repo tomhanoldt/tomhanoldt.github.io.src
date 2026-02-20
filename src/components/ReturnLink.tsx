@@ -24,6 +24,7 @@ export function ReturnLink({
     ? `Back to #${decodeURIComponent(tagMatch[1])}`
     : 'Back to latest'
   const label = children ?? autoLabel
+  const ariaLabel = typeof label === 'string' ? label : autoLabel
 
   if (variant === 'pill') {
     return (
@@ -41,7 +42,7 @@ export function ReturnLink({
     <Link
       href={href}
       className='inline-flex h-9 w-9 items-center justify-center rounded-full text-[color:var(--accent)] transition hover:bg-[color:var(--surface)] hover:text-[color:var(--accent)]'
-      aria-label={label}
+      aria-label={ariaLabel}
     >
       <ArrowUturnLeftIcon className='h-5 w-5' aria-hidden />
     </Link>
