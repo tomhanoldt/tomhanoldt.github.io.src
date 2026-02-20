@@ -105,8 +105,11 @@ export function AudioPlaylist({ heading, tracks = [] }: AudioPlaylistProps) {
       audio.src = current.src
       audio.load()
       audio.currentTime = 0
+      if (isPlaying) {
+        audio.play().catch(() => setIsPlaying(false))
+      }
     }
-  }, [clampedIndex, normalized])
+  }, [clampedIndex, normalized, isPlaying])
 
   useEffect(() => {
     const audio = audioRef.current
