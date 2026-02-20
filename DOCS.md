@@ -8,7 +8,10 @@ Project quick facts
 
 Working notes
 -------------
-- Default scripts: `bun run dev` to start the dev server, `bun run lint` for linting. Static generation is preferred (see `dynamic = 'force-static'` in pages).
+- Default scripts:
+  * `bun run dev` to start the dev server
+  * `bun run lint` for linting, TypeScript validation (no emit, skips lib warnings) and mdx file validation.
+  Static generation is preferred (see `dynamic = 'force-static'` in pages).
 - MDX frontmatter powers metadata; keep slugs aligned with filenames and ensure `date`, `title`, `excerpt`, and `tags` are present.
 - Components of note: `PostCard` (list tiles), `PostHeader`, `ReturnLink` (back link), `PrevNextNav` (adjacent posts), `ScrollToTopButton`.
 - Tag pills link to `/tag/<tag>`; posts resolve slugs via `getPostSlugs`/`getAllPosts` in `src/lib/posts`.

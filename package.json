@@ -7,9 +7,11 @@
     "dev": "next dev",
     "build": "next build",
     "start": "next start",
-    "lint": "eslint",
+    "lint": "bun run lint:eslint && bun run lint:mdx-yaml && bun run ts:check",
+    "lint:eslint": "eslint",
     "lint:fix": "eslint --fix .",
     "lint:mdx-yaml": "node scripts/check-frontmatter.js",
+    "ts:check": "tsc --noEmit --pretty false --skipLibCheck",
     "export": "next build",
     "clean": "rm -f .next/dev/lock && rm -rf .next"
   },
