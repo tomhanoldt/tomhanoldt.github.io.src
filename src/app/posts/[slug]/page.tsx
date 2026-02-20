@@ -82,9 +82,9 @@ export default async function PostPage({
     <article id='top' className='markdown'>
       <PostHeader meta={meta} />
 
-      <div className='my-8 h-px w-full bg-[color:var(--border)]' />
+      <div className='my-4 h-px w-full bg-[color:var(--border)]' />
 
-      <div className='mt-8'>{content}</div>
+      <div className='mt-4'>{content}</div>
 
       <PrevNextNav
         previous={
