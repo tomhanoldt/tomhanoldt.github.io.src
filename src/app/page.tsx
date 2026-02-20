@@ -20,7 +20,7 @@ export default async function Home() {
 
         <div className='grid gap-6'>
           {sortedPosts.map((post) => (
-            <PostCard key={post.slug} post={post} />
+            <PostCard key={post.slug} post={post} returnTo='/' />
           ))}
         </div>
       </section>

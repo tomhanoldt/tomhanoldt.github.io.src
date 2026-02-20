@@ -1,13 +1,4 @@
-- [x] Verify that the copilot-instructions.md file in the .github directory is created.
-- [x] Clarify Project Requirements (Next.js TypeScript static MDX blog).
-- [x] Scaffold the Project (create-next-app with Tailwind, App Router).
-- [x] Customize the Project (MDX pipeline, embeds, categories, tags).
-- [x] Install Required Extensions (none required).
-- [x] Compile the Project (npm run lint).
-- [x] Create and Run Task (not needed for this project).
-- [x] Launch the Project (start with `npm run dev` when ready).
-- [x] Ensure Documentation is Complete (README updated; comments removed).
-
-- Work through each checklist item systematically.
-- Keep communication concise and focused.
-- Follow development best practices.
+Guidelines
+----------
+- Keep communication concise and focused; follow development best practices.
+- Always consult and respect the guidance in DOCS.md when working on this repo.

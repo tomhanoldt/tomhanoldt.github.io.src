@@ -1,13 +1,10 @@
 import type { Metadata } from 'next'
 import Link from 'next/link'
 import { notFound } from 'next/navigation'
-import {
-  ArrowLeftIcon,
-  ArrowRightIcon,
-  ArrowUturnLeftIcon,
-} from '@heroicons/react/24/outline'
+import { ArrowLeftIcon, ArrowRightIcon } from '@heroicons/react/24/outline'
 import { PostHeader } from '@/components/PostHeader'
 import { ScrollToTopButton } from '@/components/ScrollToTopButton'
+import { ReturnLink } from '@/components/ReturnLink'
 import { getAllPosts, getPostBySlug, getPostSlugs } from '@/lib/posts'
 
 export const dynamic = 'force-static'
@@ -69,11 +66,14 @@ export default async function PostPage({
         {previous ? (
           <Link
             href={`/posts/${previous.slug}`}
-            className='group inline-flex h-12 w-12 items-center justify-center rounded-full border border-[color:var(--border)] bg-[color:var(--surface)] text-[color:var(--accent)] transition hover:border-[color:var(--accent)] hover:bg-[color:var(--accent)] hover:text-[color:var(--background)] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[color:var(--accent)] focus-visible:ring-offset-2 focus-visible:ring-offset-[color:var(--background)]'
+            className='group inline-flex max-w-[260px] min-w-0 items-center gap-2 rounded-full px-3 py-2 text-sm font-semibold text-[color:var(--accent)] transition hover:bg-[color:var(--surface)] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[color:var(--accent)] focus-visible:ring-offset-2 focus-visible:ring-offset-[color:var(--background)]'
             aria-label={`Newer post: ${previous.title}`}
-            title={`Newer post: ${previous.title}`}
+            title={previous.title}
           >
-            <ArrowLeftIcon className='h-5 w-5' aria-hidden />
+            <ArrowLeftIcon className='h-4 w-4 flex-shrink-0' aria-hidden />
+            <span className='block min-w-0 truncate text-left'>
+              {previous.title}
+            </span>
           </Link>
         ) : (
           <span className='text-sm text-[color:var(--muted)]'>
@@ -84,11 +84,14 @@ export default async function PostPage({
         {next ? (
           <Link
             href={`/posts/${next.slug}`}
-            className='group inline-flex h-12 w-12 items-center justify-center rounded-full border border-[color:var(--border)] bg-[color:var(--surface)] text-[color:var(--accent)] transition hover:border-[color:var(--accent)] hover:bg-[color:var(--accent)] hover:text-[color:var(--background)] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[color:var(--accent)] focus-visible:ring-offset-2 focus-visible:ring-offset-[color:var(--background)]'
+            className='group inline-flex max-w-[260px] min-w-0 items-center gap-2 rounded-full px-3 py-2 text-sm font-semibold text-[color:var(--accent)] transition hover:bg-[color:var(--surface)] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[color:var(--accent)] focus-visible:ring-offset-2 focus-visible:ring-offset-[color:var(--background)]'
             aria-label={`Older post: ${next.title}`}
-            title={`Older post: ${next.title}`}
+            title={next.title}
           >
-            <ArrowRightIcon className='h-5 w-5' aria-hidden />
+            <span className='block min-w-0 truncate text-left'>
+              {next.title}
+            </span>
+            <ArrowRightIcon className='h-4 w-4 flex-shrink-0' aria-hidden />
           </Link>
         ) : (
           <span className='text-sm text-[color:var(--muted)]'>
@@ -98,13 +101,7 @@ export default async function PostPage({
       </div>
 
       <div className='mt-10 flex items-center justify-between text-sm font-semibold text-[color:var(--accent)]'>
-        <Link
-          href='/'
-          className='inline-flex items-center gap-2 rounded-full px-3 py-2 transition hover:bg-[color:var(--surface)]'
-        >
-          <ArrowUturnLeftIcon className='h-4 w-4' aria-hidden />
-          Back to latest
-        </Link>
+        <ReturnLink variant='pill' />
 
         <ScrollToTopButton />
       </div>

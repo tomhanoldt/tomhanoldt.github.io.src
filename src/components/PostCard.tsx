@@ -8,9 +8,18 @@ import {
 } from '@/lib/posts'
 import { TagPill } from '@/components/TagPill'
 
-export function PostCard({ post }: { post: PostMeta }) {
+export function PostCard({
+  post,
+  returnTo = '/',
+}: {
+  post: PostMeta
+  returnTo?: string
+}) {
   const cover = getCoverImage(post)
   const fallback = getCoverIcon(post)
+  const href = returnTo
+    ? `/posts/${post.slug}?from=${encodeURIComponent(returnTo)}`
+    : `/posts/${post.slug}`
 
   return (
     <article className='group surface relative overflow-hidden rounded-2xl p-5 transition hover:-translate-y-[2px] sm:p-6'>
@@ -20,7 +29,7 @@ export function PostCard({ post }: { post: PostMeta }) {
       />
 
       <Link
-        href={`/posts/${post.slug}`}
+        href={href}
         className='block focus:outline-none focus-visible:ring-2 focus-visible:ring-[color:var(--accent)] focus-visible:ring-offset-2 focus-visible:ring-offset-[color:var(--background)]'
       >
         <div className='flex flex-col gap-4 sm:flex-row'>

@@ -1,6 +1,4 @@
 import Image from 'next/image'
-import Link from 'next/link'
-import { ArrowUturnLeftIcon } from '@heroicons/react/24/outline'
 import { TagPill } from '@/components/TagPill'
 import {
   formatPostDate,
@@ -8,6 +6,7 @@ import {
   getCoverImage,
   PostMeta,
 } from '@/lib/posts'
+import { ReturnLink } from '@/components/ReturnLink'
 
 export function PostHeader({ meta }: { meta: PostMeta }) {
   const cover = getCoverImage(meta)
@@ -16,13 +15,9 @@ export function PostHeader({ meta }: { meta: PostMeta }) {
   return (
     <div className='mt-2 flex flex-col gap-4'>
       <div className='relative flex items-center'>
-        <Link
-          href='/'
-          className='absolute -left-11 top-[55%] inline-flex h-9 w-9 -translate-y-1/2 items-center justify-center rounded-full text-[color:var(--accent)] transition hover:bg-[color:var(--surface)] hover:text-[color:var(--accent)]'
-          aria-label='Back to latest posts'
-        >
-          <ArrowUturnLeftIcon className='h-5 w-5' aria-hidden />
-        </Link>
+        <div className='absolute -left-11 top-[55%] -translate-y-1/2'>
+          <ReturnLink variant='icon' />
+        </div>
 
         <h1 className='text-4xl font-semibold leading-tight text-[color:var(--foreground)]'>
           {meta.title}

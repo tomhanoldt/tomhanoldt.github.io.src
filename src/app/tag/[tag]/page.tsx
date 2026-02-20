@@ -44,7 +44,7 @@ export default async function TagPage({
       ) : (
         <div className='grid gap-6'>
           {filtered.map((post) => (
-            <PostCard key={post.slug} post={post} />
+            <PostCard key={post.slug} post={post} returnTo={`/tag/${tag}`} />
           ))}
         </div>
       )}
