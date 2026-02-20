@@ -25,7 +25,7 @@ export function PostHeader({ meta }: { meta: PostMeta }) {
       </div>
 
       <div className='flex flex-col gap-4 sm:flex-row sm:items-start sm:gap-6'>
-        <div className='relative h-[150px] w-[220px] flex-shrink-0 overflow-hidden rounded-xl bg-[color:var(--surface)]'>
+        <div className='relative h-full w-auto flex-shrink-0 overflow-hidden rounded-xl bg-[color:var(--surface)]'>
           {cover ? (
             <Image
               src={cover}
