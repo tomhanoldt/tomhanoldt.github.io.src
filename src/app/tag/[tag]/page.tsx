@@ -43,20 +43,18 @@ export default async function TagPage({
     <div className='space-y-6'>
       <div className='flex items-center justify-between'>
         <div>
-          <h1 className='text-3xl font-semibold text-[color:var(--foreground)]'>
-            #{tag}
-          </h1>
+          <h1 className='text-3xl font-semibold text-foreground'>#{tag}</h1>
         </div>
         <Link
           href='/'
-          className='text-sm font-semibold text-[color:var(--accent)] hover:underline'
+          className='text-sm font-semibold text-(--accent) hover:underline'
         >
           Back home
         </Link>
       </div>
 
       {filtered.length === 0 ? (
-        <p className='text-[color:var(--muted)]'>No posts use this tag yet.</p>
+        <p className='text-(--muted)'>No posts use this tag yet.</p>
       ) : (
         <>
           <div className='grid gap-6'>
@@ -65,10 +63,9 @@ export default async function TagPage({
             ))}
           </div>
           <Pagination
-            total={filtered.length}
-            page={page}
-            perPage={perPage}
-            baseHref={`/tag/${tag}`}
+            currentPage={page}
+            totalPages={Math.ceil(filtered.length / perPage)}
+            tag={tag}
           />
         </>
       )}

@@ -15,9 +15,10 @@ export async function generateStaticParams() {
 
 export default async function Page({
   params,
-}: { params: { page: string } } | { params: Promise<{ page: string }> }) {
-  const resolvedParams =
-    typeof params.then === 'function' ? await params : params
+}: {
+  params: { page: string } | Promise<{ page: string }>
+}) {
+  const resolvedParams = await Promise.resolve(params)
   const posts = await getAllPosts()
   const pageSize = 20
   const page = parseInt(resolvedParams.page, 10) || 1

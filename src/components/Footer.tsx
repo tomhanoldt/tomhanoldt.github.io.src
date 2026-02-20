@@ -7,9 +7,17 @@ export function Footer() {
         <span className='opacity-70'>
           &copy; {new Date().getFullYear()} blog.tomhanoldt.info
         </span>
-        <Link href='/sitemap.xml' className='underline hover:text-[#e5e7eb]'>
-          Sitemap
-        </Link>
+        <div className='flex flex-wrap gap-4 items-center'>
+          <Link href='/imprint' className='underline hover:text-[#e5e7eb]'>
+            Imprint
+          </Link>
+          <Link href='/privacy' className='underline hover:text-[#e5e7eb]'>
+            Privacy
+          </Link>
+          <Link href='/sitemap.xml' className='underline hover:text-[#e5e7eb]'>
+            Sitemap
+          </Link>
+        </div>
       </div>
     </footer>
   )
