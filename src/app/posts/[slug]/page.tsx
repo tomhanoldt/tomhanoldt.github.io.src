@@ -1,7 +1,11 @@
 import type { Metadata } from 'next'
 import Link from 'next/link'
 import { notFound } from 'next/navigation'
-import { ArrowUturnLeftIcon } from '@heroicons/react/24/outline'
+import {
+  ArrowLeftIcon,
+  ArrowRightIcon,
+  ArrowUturnLeftIcon,
+} from '@heroicons/react/24/outline'
 import { PostHeader } from '@/components/PostHeader'
 import { ScrollToTopButton } from '@/components/ScrollToTopButton'
 import { getAllPosts, getPostBySlug, getPostSlugs } from '@/lib/posts'
@@ -61,31 +65,31 @@ export default async function PostPage({
 
       <div className='mt-8'>{content}</div>
 
-      <div className='mt-10 flex flex-col gap-4 border border-[color:var(--border)] bg-[color:var(--surface)] p-4 sm:flex-row sm:items-center sm:justify-between'>
+      <div className='mt-10 flex items-center justify-between gap-4'>
         {previous ? (
           <Link
             href={`/posts/${previous.slug}`}
-            className='text-sm font-semibold text-[color:var(--accent)] hover:underline'
+            className='group inline-flex h-12 w-12 items-center justify-center rounded-full border border-[color:var(--border)] bg-[color:var(--surface)] text-[color:var(--accent)] transition hover:border-[color:var(--accent)] hover:bg-[color:var(--accent)] hover:text-[color:var(--background)] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[color:var(--accent)] focus-visible:ring-offset-2 focus-visible:ring-offset-[color:var(--background)]'
+            aria-label={`Newer post: ${previous.title}`}
+            title={`Newer post: ${previous.title}`}
           >
-            ← Previous: {previous.title}
+            <ArrowLeftIcon className='h-5 w-5' aria-hidden />
           </Link>
         ) : (
-          <span className='text-sm text-[color:var(--muted)]'>
-            No newer post
-          </span>
+          <span className='text-sm text-[color:var(--muted)]'>No newer post</span>
         )}
 
         {next ? (
           <Link
             href={`/posts/${next.slug}`}
-            className='text-sm font-semibold text-[color:var(--accent)] hover:underline text-right'
+            className='group inline-flex h-12 w-12 items-center justify-center rounded-full border border-[color:var(--border)] bg-[color:var(--surface)] text-[color:var(--accent)] transition hover:border-[color:var(--accent)] hover:bg-[color:var(--accent)] hover:text-[color:var(--background)] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[color:var(--accent)] focus-visible:ring-offset-2 focus-visible:ring-offset-[color:var(--background)]'
+            aria-label={`Older post: ${next.title}`}
+            title={`Older post: ${next.title}`}
           >
-            Next: {next.title} →
+            <ArrowRightIcon className='h-5 w-5' aria-hidden />
           </Link>
         ) : (
-          <span className='text-sm text-[color:var(--muted)] self-end'>
-            No older post
-          </span>
+          <span className='text-sm text-[color:var(--muted)]'>No older post</span>
         )}
       </div>
 
