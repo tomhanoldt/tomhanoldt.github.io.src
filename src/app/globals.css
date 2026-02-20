@@ -81,7 +81,6 @@ a:focus-visible {
 
 .markdown p {
   margin: 1rem 0;
-  white-space: pre-line;
 }
 
 .markdown ul,
@@ -90,6 +89,14 @@ a:focus-visible {
   padding-left: 0.5rem;
   display: grid;
   gap: 0.4rem;
+}
+
+.markdown ul {
+  list-style-type: disc !important;
+}
+
+.markdown ol {
+  list-style-type: decimal !important;
 }
 
 .markdown li::marker {
