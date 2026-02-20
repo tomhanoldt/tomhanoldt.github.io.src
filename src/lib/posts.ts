@@ -216,11 +216,11 @@ const coverIconMap: Record<
   string,
   { Icon: React.ComponentType<React.SVGProps<SVGSVGElement>>; color: string }
 > = {
-  code: { Icon: CodeBracketIcon, color: '#2563eb' },
-  text: { Icon: DocumentTextIcon, color: '#10b981' },
-  art: { Icon: PaintBrushIcon, color: '#c084fc' },
-  music: { Icon: MusicalNoteIcon, color: '#60a5fa' },
-  misc: { Icon: SparklesIcon, color: '#0ea5e9' },
+  code: { Icon: CodeBracketIcon, color: '#005a8c' },
+  text: { Icon: DocumentTextIcon, color: '#005a8c' },
+  painting: { Icon: PaintBrushIcon, color: '#005a8c' },
+  music: { Icon: MusicalNoteIcon, color: '#005a8c' },
+  misc: { Icon: SparklesIcon, color: '#005a8c' },
 }
 
 export function getCoverIcon(meta: PostMeta) {
