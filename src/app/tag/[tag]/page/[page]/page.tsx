@@ -1,6 +1,6 @@
 import { getAllPosts } from '@/lib/posts'
-import PostCard from '@/components/PostCard'
-import Pagination from '@/components/Pagination'
+import { PostCard } from '@/components/PostCard'
+import { Pagination } from '@/components/Pagination'
 
 export const dynamic = 'force-static'
 
@@ -37,7 +37,9 @@ export default async function TagPage({
     <div className='space-y-12'>
       <section className='space-y-6'>
         <div className='flex items-center justify-between'>
-          <h1 className='text-2xl font-bold'>Posts tagged with "{tag}"</h1>
+          <h1 className='text-2xl font-bold'>
+            Posts tagged with &quot;{tag}&quot;
+          </h1>
         </div>
         <div className='grid gap-6'>
           {paginatedPosts.map((post) => (

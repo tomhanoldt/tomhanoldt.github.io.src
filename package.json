@@ -12,7 +12,8 @@
     "lint:fix": "eslint --fix .",
     "lint:mdx-yaml": "node scripts/check-frontmatter.js",
     "ts:check": "tsc --noEmit --pretty false --skipLibCheck",
-    "export": "next build",
+    "export": "next build && bun run generate-sitemap",
+    "generate-sitemap": "bun scripts/generate-sitemap.js",
     "clean": "rm -f .next/dev/lock && rm -rf .next"
   },
   "dependencies": {
