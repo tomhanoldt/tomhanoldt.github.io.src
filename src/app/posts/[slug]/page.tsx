@@ -76,7 +76,9 @@ export default async function PostPage({
             <ArrowLeftIcon className='h-5 w-5' aria-hidden />
           </Link>
         ) : (
-          <span className='text-sm text-[color:var(--muted)]'>No newer post</span>
+          <span className='text-sm text-[color:var(--muted)]'>
+            No newer post
+          </span>
         )}
 
         {next ? (
@@ -89,7 +91,9 @@ export default async function PostPage({
             <ArrowRightIcon className='h-5 w-5' aria-hidden />
           </Link>
         ) : (
-          <span className='text-sm text-[color:var(--muted)]'>No older post</span>
+          <span className='text-sm text-[color:var(--muted)]'>
+            No older post
+          </span>
         )}
       </div>
 

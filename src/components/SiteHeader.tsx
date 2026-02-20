@@ -26,7 +26,9 @@ export function SiteHeader() {
             aria-label={open ? 'Menü schließen' : 'Menü öffnen'}
             onClick={() => setOpen((prev) => !prev)}
           >
-            <span className='sr-only'>{open ? 'Menü schließen' : 'Menü öffnen'}</span>
+            <span className='sr-only'>
+              {open ? 'Menü schließen' : 'Menü öffnen'}
+            </span>
             <svg
               className='h-5 w-5'
               viewBox='0 0 24 24'
