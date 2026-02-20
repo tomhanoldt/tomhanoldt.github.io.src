@@ -18,6 +18,17 @@ Working notes
 - Tag pills link to `/tag/<tag>`; posts resolve slugs via `getPostSlugs`/`getAllPosts` in `src/lib/posts`.
 
 Authoring tips
+Static Pagination
+----------------
+Homepage and tag overview use static paginated routes for compatibility with static export:
+
+- Homepage: `/page/[page]` (e.g., `/page/2` for page 2)
+- Tag overview: `/tag/[tag]/page/[page]` (e.g., `/tag/design/page/3` for page 3 of 'design' tag)
+- Pagination links use these routes; page 1 is `/` (home) or `/tag/[tag]` (tag root).
+- All paginated routes are generated via `generateStaticParams` in their respective page files.
+- Each page shows 20 posts.
+
+When adding posts or tags, static params will automatically include new pages/tags on next build.
 --------------
 - When adding posts, place assets in `public/uploads/<year>/` and reference them with absolute paths (e.g., `/uploads/2024/foo.jpg`).
 - Keep excerpts short (1–2 sentences) to avoid overflow in cards.

@@ -9,7 +9,7 @@ export function ScrollToTopButton({ className }: { className?: string }) {
       onClick={() => {
         window.scrollTo({ top: 0, behavior: 'smooth' })
       }}
-      className={`inline-flex items-center gap-2 rounded-full px-3 py-2 text-sm font-semibold text-[color:var(--accent)] transition hover:bg-[color:var(--surface)]${className ? ` ${className}` : ''}`}
+      className={`inline-flex cursor-pointer items-center gap-2 rounded-full px-3 py-2 text-sm font-semibold text-[color:var(--accent)] transition hover:bg-[color:var(--surface)]${className ? ` ${className}` : ''}`}
       aria-label='Back to top'
     >
       Back to top
