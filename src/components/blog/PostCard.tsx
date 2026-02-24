@@ -6,7 +6,7 @@ import {
   getCoverImage,
   PostMeta,
 } from '@/lib/posts'
-import { TagPill } from '@/components/TagPill'
+import { TagPill } from '@/components/blog/TagPill'
 
 export function PostCard({
   post,
@@ -18,8 +18,8 @@ export function PostCard({
   const cover = getCoverImage(post)
   const fallback = getCoverIcon(post)
   const href = returnTo
-    ? `/posts/${post.slug}?from=${encodeURIComponent(returnTo)}`
-    : `/posts/${post.slug}`
+    ? `/blog/${post.slug}?from=${encodeURIComponent(returnTo)}`
+    : `/blog/${post.slug}`
 
   return (
     <article className='group surface relative overflow-hidden rounded-2xl p-5 transition hover:-translate-y-[2px] sm:p-6'>
@@ -72,7 +72,7 @@ export function PostCard({
 
       <div className='mt-4 flex flex-wrap gap-2'>
         {post.tags.map((tag) => (
-          <TagPill key={tag} label={`#${tag}`} href={`/tag/${tag}`} />
+          <TagPill key={tag} label={`#${tag}`} href={`/blog/tag/${tag}`} />
         ))}
       </div>
     </article>

@@ -12,14 +12,14 @@ export type ReturnLinkProps = {
 }
 
 export function ReturnLink({
-  fallback = '/',
+  fallback = '/blog/',
   variant = 'icon',
   children,
 }: ReturnLinkProps) {
   const searchParams = useSearchParams()
   const fromParam = searchParams?.get('from')
   const href = fromParam && fromParam.startsWith('/') ? fromParam : fallback
-  const tagMatch = fromParam?.match(/^\/tag\/([^/?#]+)/)
+  const tagMatch = fromParam?.match(/^\/blog\/tag\/([^/?#]+)/)
   const autoLabel = tagMatch
     ? `Back to #${decodeURIComponent(tagMatch[1])}`
     : 'Back to latest'

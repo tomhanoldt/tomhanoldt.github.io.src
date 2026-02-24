@@ -1,10 +1,12 @@
 import type { Metadata } from 'next'
 import { notFound } from 'next/navigation'
-import { PostHeader } from '@/components/PostHeader'
-import { ScrollToTopButton } from '@/components/ScrollToTopButton'
-import { ReturnLink } from '@/components/ReturnLink'
-import { PrevNextNav } from '@/components/PrevNextNav'
-import { getAllPosts, getPostBySlug, getPostSlugs } from '@/lib/posts'
+import { getAllPosts, getPostBySlug, getPostSlugs } from '@/lib'
+import {
+  PostHeader,
+  ScrollToTopButton,
+  ReturnLink,
+  PrevNextNav,
+} from '@/components/blog'
 
 export const dynamic = 'force-static'
 
@@ -82,7 +84,7 @@ export default async function PostPage({
     <article id='top' className='markdown'>
       <PostHeader meta={meta} />
 
-      <div className='my-4 h-px w-full bg-[color:var(--border)]' />
+      <div className='my-4 h-px w-full bg-(--border)' />
 
       <div className='mt-4'>{content}</div>
 
@@ -94,7 +96,7 @@ export default async function PostPage({
         tagNav={tagNav}
       />
 
-      <div className='mt-10 flex items-center justify-between text-sm font-semibold text-[color:var(--accent)]'>
+      <div className='mt-10 flex items-center justify-between text-sm font-semibold text-(--accent)'>
         <ReturnLink variant='pill' />
 
         <ScrollToTopButton />

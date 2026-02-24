@@ -1,11 +1,11 @@
 import type { AnchorHTMLAttributes } from 'react'
 import Link from 'next/link'
-import { AudioPlayer } from '@/components/mdx/AudioPlayer'
-import { MDXPre } from '@/components/mdx/MDXPre'
-import { Youtube } from '@/components/mdx/Youtube'
-import { AudioPlaylist } from '@/components/mdx/AudioPlaylist'
-import { Image } from '@/components/mdx/Image'
-import { Grid } from '@/components/mdx/Grid'
+import { AudioPlayer } from '@/components/blog/mdx/AudioPlayer'
+import { MDXPre } from '@/components/blog/mdx/MDXPre'
+import { Youtube } from '@/components/blog/mdx/Youtube'
+import { AudioPlaylist } from '@/components/blog/mdx/AudioPlaylist'
+import { Image } from '@/components/blog/mdx/Image'
+import { Grid } from '@/components/blog/mdx/Grid'
 
 export const mdxComponents = {
   Grid,

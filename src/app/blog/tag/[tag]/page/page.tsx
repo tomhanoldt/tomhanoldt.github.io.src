@@ -1,6 +1,5 @@
-import { getAllPosts } from '@/lib/posts'
-import { PostCard } from '@/components/PostCard'
-import { Pagination } from '@/components/Pagination'
+import { getAllPosts } from '@/lib'
+import { PostCard, Pagination } from '@/components/blog'
 
 export const dynamic = 'force-static'
 
@@ -22,11 +21,11 @@ export async function generateStaticParams() {
 export default async function TagPage({
   params,
 }: {
-  params: { tag: string; page: string }
+  params: Promise<{ tag: string; page: string }>
 }) {
   const posts = await getAllPosts()
   const pageSize = 20
-  const { tag, page } = params
+  const { tag, page } = await params
   const taggedPosts = posts.filter((post) => post.tags.includes(tag))
   const pageNum = parseInt(page, 10) || 1
   const start = (pageNum - 1) * pageSize
@@ -43,7 +42,11 @@ export default async function TagPage({
         </div>
         <div className='grid gap-6'>
           {paginatedPosts.map((post) => (
-            <PostCard key={post.slug} post={post} />
+            <PostCard
+              key={post.slug}
+              post={post}
+              returnTo={`/blog/tag/${tag}`}
+            />
           ))}
         </div>
         <Pagination

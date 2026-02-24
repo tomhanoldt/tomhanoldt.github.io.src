@@ -19,9 +19,9 @@ export function Pagination({
         const p = i + 1
         let href = ''
         if (tag) {
-          href = p === 1 ? `/tag/${tag}` : `/tag/${tag}/page/${p}`
+          href = p === 1 ? `/blog/tag/${tag}` : `/blog/tag/${tag}/page/${p}`
         } else {
-          href = p === 1 ? `/` : `/page/${p}`
+          href = p === 1 ? `/blog` : `/blog/page/${p}`
         }
         const isCurrent = p === currentPage
         return (

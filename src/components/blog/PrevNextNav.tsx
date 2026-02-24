@@ -24,7 +24,7 @@ export function PrevNextNav({
   const params = useSearchParams()
   const rawFrom = params?.get('from')
   const from = rawFrom && rawFrom.startsWith('/') ? rawFrom : '/'
-  const tagMatch = rawFrom?.match(/^\/tag\/([^/?#]+)/)
+  const tagMatch = rawFrom?.match(/^\/blog\/tag\/([^/?#]+)/)
   const tag = tagMatch?.[1]
   const scoped = tag && tagNav ? tagNav[tag] : undefined
   const prevLink = scoped?.previous ?? previous
@@ -34,7 +34,7 @@ export function PrevNextNav({
     <div className='mt-10 flex items-center justify-between gap-4'>
       {prevLink ? (
         <Link
-          href={{ pathname: `/posts/${prevLink.slug}`, query: { from } }}
+          href={{ pathname: `/blog/${prevLink.slug}`, query: { from } }}
           className='group inline-flex max-w-[260px] min-w-0 items-center gap-2 rounded-full px-3 py-2 text-sm font-semibold text-[color:var(--accent)] transition hover:bg-[color:var(--surface)] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[color:var(--accent)] focus-visible:ring-offset-2 focus-visible:ring-offset-[color:var(--background)]'
           aria-label={`Newer post: ${prevLink.title}`}
           title={prevLink.title}
@@ -50,7 +50,7 @@ export function PrevNextNav({
 
       {nextLink ? (
         <Link
-          href={{ pathname: `/posts/${nextLink.slug}`, query: { from } }}
+          href={{ pathname: `/blog/${nextLink.slug}`, query: { from } }}
           className='group inline-flex max-w-[260px] min-w-0 items-center gap-2 rounded-full px-3 py-2 text-sm font-semibold text-[color:var(--accent)] transition hover:bg-[color:var(--surface)] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[color:var(--accent)] focus-visible:ring-offset-2 focus-visible:ring-offset-[color:var(--background)]'
           aria-label={`Older post: ${nextLink.title}`}
           title={nextLink.title}

@@ -16,7 +16,7 @@ import {
   PaintBrushIcon,
   SparklesIcon,
 } from '@heroicons/react/24/outline'
-import { mdxComponents } from '@/components/mdx/mdx-components'
+import { mdxComponents } from '@/components/blog/mdx/mdx-components'
 import { Category } from '@/lib/types'
 
 export type PostFrontmatter = {

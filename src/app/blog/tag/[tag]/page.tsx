@@ -1,8 +1,7 @@
 import Link from 'next/link'
 import { notFound } from 'next/navigation'
-import { PostCard } from '@/components/PostCard'
-import { Pagination } from '@/components/Pagination'
-import { getAllPosts } from '@/lib/posts'
+import { getAllPosts } from '@/lib'
+import { PostCard, Pagination } from '@/components/blog'
 
 export const dynamic = 'force-static'
 
@@ -24,19 +23,11 @@ export default async function TagPage({
 
   const filtered = posts.filter((post) => post.tags.includes(tag))
 
-  // Pagination
+  // Page 1 — further pages served by /blog/tag/[tag]/page/[page]
   const perPage = 20
-  const searchParams =
-    typeof window === 'undefined'
-      ? null
-      : new URLSearchParams(window.location.search)
-  let page = 1
-  if (searchParams) {
-    const p = parseInt(searchParams.get('page') || '1', 10)
-    if (!isNaN(p) && p > 0) page = p
-  }
-  const start = (page - 1) * perPage
-  const end = start + perPage
+  const page = 1
+  const start = 0
+  const end = perPage
   const paginatedPosts = filtered.slice(start, end)
 
   return (
@@ -46,7 +37,7 @@ export default async function TagPage({
           <h1 className='text-3xl font-semibold text-foreground'>#{tag}</h1>
         </div>
         <Link
-          href='/'
+          href='/blog'
           className='text-sm font-semibold text-(--accent) hover:underline'
         >
           Back home
@@ -59,7 +50,11 @@ export default async function TagPage({
         <>
           <div className='grid gap-6'>
             {paginatedPosts.map((post) => (
-              <PostCard key={post.slug} post={post} returnTo={`/tag/${tag}`} />
+              <PostCard
+                key={post.slug}
+                post={post}
+                returnTo={`/blog/tag/${tag}`}
+              />
             ))}
           </div>
           <Pagination

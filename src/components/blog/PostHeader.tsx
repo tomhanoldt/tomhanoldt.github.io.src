@@ -1,12 +1,12 @@
 import Image from 'next/image'
-import { TagPill } from '@/components/TagPill'
+import { TagPill } from '@/components/blog/TagPill'
 import {
   formatPostDate,
   getCoverIcon,
   getCoverImage,
   PostMeta,
 } from '@/lib/posts'
-import { ReturnLink } from '@/components/ReturnLink'
+import { ReturnLink } from '@/components/blog/ReturnLink'
 
 export function PostHeader({ meta }: { meta: PostMeta }) {
   const cover = getCoverImage(meta)
@@ -34,7 +34,7 @@ export function PostHeader({ meta }: { meta: PostMeta }) {
                   key={tag}
                   className='opacity-70 hover:opacity-100 transition-opacity'
                 >
-                  <TagPill label={`#${tag}`} href={`/tag/${tag}`} />
+                  <TagPill label={`#${tag}`} href={`/blog/tag/${tag}`} />
                 </span>
               ))}
           </div>

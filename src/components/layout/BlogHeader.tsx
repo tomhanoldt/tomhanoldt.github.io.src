@@ -3,7 +3,7 @@
 import Link from 'next/link'
 import { useState } from 'react'
 
-export function SiteHeader() {
+export function BlogHeader() {
   const [open, setOpen] = useState(false)
   const tags = ['code', 'painting', 'text', 'music', 'art']
   const topTags = tags.slice(0, 8)
@@ -12,7 +12,7 @@ export function SiteHeader() {
     <header className='sticky top-0 z-30 border-b border-[#111827] bg-[#2f373e] text-white shadow-md backdrop-blur'>
       <div className='mx-auto flex h-12 max-w-5xl items-center justify-between px-4 sm:px-6'>
         <Link
-          href='/'
+          href='/blog/'
           className='relative top-[8px] left-[-8px] text-[14px] font-semibold !text-[#838383] transition hover:text-[#e5e7eb]'
           onClick={() => setOpen(false)}
         >
@@ -53,7 +53,7 @@ export function SiteHeader() {
             {topTags.map((tag) => (
               <Link
                 key={tag}
-                href={`/tag/${tag}`}
+                href={`/blog/tag/${tag}`}
                 className='rounded-full px-3 py-2 transition hover:bg-[#1f2937] hover:text-white'
                 onClick={() => setOpen(false)}
               >
@@ -69,7 +69,7 @@ export function SiteHeader() {
             {topTags.map((tag) => (
               <Link
                 key={`mobile-${tag}`}
-                href={`/tag/${tag}`}
+                href={`/blog/tag/${tag}`}
                 className='rounded-md px-3 py-2 transition hover:bg-[#1f2937] hover:text-white'
                 onClick={() => setOpen(false)}
               >
