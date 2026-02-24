@@ -14,6 +14,11 @@ Working notes
   Static generation is preferred (see `dynamic = 'force-static'` in pages).
 - MDX frontmatter powers metadata; keep slugs aligned with filenames and ensure `date`, `title`, `excerpt`, and `tags` are present.
 - Components of note: `PostCard` (list tiles), `PostHeader`, `ReturnLink` (back link), `PrevNextNav` (adjacent posts), `ScrollToTopButton`.
+- AudioPlaylist behaviour:
+  * Tracks are normalized from arrays/JSON; playlist remounts when the track list changes.
+  * Uses a shared `audio-playlist-play` event so only one playlist plays at a time (others pause).
+  * `ended` advances to the next track and stops at the end; seeking updates time and resumes playback if paused.
+  * Durations are preloaded via lightweight `Audio` objects to render lengths before playback starts.
 - Navigation context: Post links now use `/blog/[slug]` (with a `from` query for context: home `/` or `/tag/<tag>`). `ReturnLink` uses it to go back; `PrevNextNav` keeps prev/next within the tag when `from` points to a tag, otherwise uses global order.
 - Tag pills link to `/tag/<tag>`; posts resolve slugs via `getPostSlugs`/`getAllPosts` in `src/lib/posts`.
 
