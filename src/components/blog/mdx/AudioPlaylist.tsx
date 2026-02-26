@@ -1,19 +1,16 @@
 'use client'
 
+import type { FC } from 'react'
 import { PauseIcon, PlayIcon } from '@heroicons/react/24/solid'
 import { useEffect, useMemo, useRef, useState, useId, useCallback } from 'react'
-
-type Track = {
-  src: string
-  title?: string
-}
+import type { Track } from './AudioPlayer'
 
 type AudioPlaylistProps = {
   heading?: string
   tracks?: Track[]
 }
 
-function isTrack(value: unknown): value is Track {
+const isTrack = (value: unknown): value is Track => {
   return (
     typeof value === 'object' &&
     value !== null &&
@@ -21,14 +18,17 @@ function isTrack(value: unknown): value is Track {
   )
 }
 
-function formatTime(value: number) {
+const formatTime = (value: number) => {
   if (!isFinite(value) || value < 0) return '0:00'
   const minutes = Math.floor(value / 60)
   const seconds = Math.floor(value % 60)
   return `${minutes}:${seconds.toString().padStart(2, '0')}`
 }
 
-export function AudioPlaylist({ heading, tracks = [] }: AudioPlaylistProps) {
+export const AudioPlaylist: FC<AudioPlaylistProps> = ({
+  heading,
+  tracks = [],
+}) => {
   const normalized = useMemo(() => normalizeTracks(tracks), [tracks])
   const playlistKey = useMemo(
     () => normalized.map((track) => track.src).join('|'),
@@ -156,7 +156,7 @@ export function AudioPlaylist({ heading, tracks = [] }: AudioPlaylistProps) {
 
   if (!normalized.length) {
     return (
-      <section className='my-6 rounded-xl border border-(--border) bg-(--surface) p-4 text-sm text-(--muted) shadow-sm'>
+      <section className='my-6 rounded-lg border border-(--border) bg-(--surface) p-4 text-sm text-(--muted) shadow-sm'>
         <p className='font-semibold text-foreground'>{heading ?? 'Playlist'}</p>
         <p>Keine Tracks gefunden.</p>
       </section>
@@ -217,7 +217,7 @@ export function AudioPlaylist({ heading, tracks = [] }: AudioPlaylistProps) {
   return (
     <section
       key={playlistKey || 'playlist'}
-      className='my-6 rounded-xl border border-(--border) bg-(--surface) p-4 shadow-sm'
+      className='my-6 rounded-lg border border-(--border) bg-(--surface) p-4 shadow-sm'
     >
       {heading ? (
         <h3 className='mb-3 text-lg font-semibold text-foreground'>
@@ -339,7 +339,7 @@ export function AudioPlaylist({ heading, tracks = [] }: AudioPlaylistProps) {
   )
 }
 
-function safeParseTracks(value: string): Track[] {
+const safeParseTracks = (value: string): Track[] => {
   try {
     const parsed = JSON.parse(value)
     return Array.isArray(parsed) ? parsed.filter(isTrack) : []
@@ -349,7 +349,7 @@ function safeParseTracks(value: string): Track[] {
   }
 }
 
-function normalizeTracks(value: unknown): Track[] {
+const normalizeTracks = (value: unknown): Track[] => {
   if (Array.isArray(value)) {
     return value.filter(isTrack)
   }

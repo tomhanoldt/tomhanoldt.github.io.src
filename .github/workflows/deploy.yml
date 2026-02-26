@@ -32,8 +32,8 @@ jobs:
       - name: Deploy to external repo
         uses: peaceiris/actions-gh-pages@v4
         with:
-          personal_token: ${{ secrets.BLOG_PUBLISH_TOKEN }}
-          external_repository: tomhanoldt/blog.tomhanoldt.github.io
+          personal_token: ${{ secrets.TOM_HANOLDT_INFO_PUBLISH_TOKEN }}
+          external_repository: tomhanoldt/tomhanoldt.github.io
           publish_branch: main
           publish_dir: ./out
           user_name: github-actions[bot]

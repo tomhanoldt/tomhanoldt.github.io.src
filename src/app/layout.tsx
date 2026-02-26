@@ -1,8 +1,7 @@
 import type { Metadata } from 'next'
 import { Geist, Geist_Mono } from 'next/font/google'
-import { BlogHeader } from '@/components/layout/BlogHeader'
-import { Footer } from '@/components/layout/Footer'
 import './globals.css'
+import { Footer } from '@/components/layout/Footer'
 
 const geistSans = Geist({
   variable: '--font-geist-sans',
@@ -15,26 +14,31 @@ const geistMono = Geist_Mono({
 })
 
 export const metadata: Metadata = {
-  title: 'blog.tomhanoldt.info',
-  description: 'A static-exported blog powered by Next.js, MDX, and Tailwind.',
+  title: 'Tom Hanoldt | developer, artist, human',
+  description:
+    'Full stack developer, web designer, and artist from Berlin — building products, mentoring teams, and supporting open source.',
 }
 
-export default function RootLayout({
+const RootLayout = ({
   children,
 }: Readonly<{
   children: React.ReactNode
-}>) {
+}>) => {
   return (
     <html lang='en'>
       <body
-        className={`${geistSans.variable} ${geistMono.variable} text-slate-900 antialiased`}
+        className={`${geistSans.variable} ${geistMono.variable} min-h-screen bg-background text-foreground antialiased`}
       >
-        <BlogHeader />
-        <main className='mx-auto max-w-5xl px-6 pb-16 pt-6 lg:px-0'>
-          {children}
-        </main>
+        <div className='min-h-screen bg-background text-foreground mx-auto w-full max-w-5xl'>
+          <div className='flex flex-col gap-6 px-4 pb-6 pt-8 sm:px-6 lg:px-0'>
+            {children}
+          </div>
+        </div>
+
         <Footer />
       </body>
     </html>
   )
 }
+
+export default RootLayout

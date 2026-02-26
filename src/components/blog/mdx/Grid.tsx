@@ -1,4 +1,4 @@
-import type { ReactNode } from 'react'
+import type { FC, ReactNode } from 'react'
 
 type GridProps = {
   children: ReactNode
@@ -27,23 +27,24 @@ const gapClasses: Record<Gap, string> = {
   12: 'gap-12',
 }
 
-function isColumns(value: unknown): value is Columns {
-  return value === 1 || value === 2 || value === 3 || value === 4
-}
+const isColumns = (value: unknown): value is Columns =>
+  value === 1 || value === 2 || value === 3 || value === 4
 
-function isGap(value: unknown): value is Gap {
-  return (
-    value === 0 ||
-    value === 2 ||
-    value === 4 ||
-    value === 6 ||
-    value === 8 ||
-    value === 10 ||
-    value === 12
-  )
-}
+const isGap = (value: unknown): value is Gap =>
+  value === 0 ||
+  value === 2 ||
+  value === 4 ||
+  value === 6 ||
+  value === 8 ||
+  value === 10 ||
+  value === 12
 
-export function Grid({ children, columns = 2, gap = 6, className }: GridProps) {
+export const Grid: FC<GridProps> = ({
+  children,
+  columns = 2,
+  gap = 6,
+  className,
+}) => {
   const parsedColumnsRaw =
     typeof columns === 'string' ? parseInt(columns, 10) : columns
   const parsedGapRaw = typeof gap === 'string' ? parseInt(gap, 10) : gap

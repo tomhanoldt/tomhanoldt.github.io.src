@@ -1,12 +1,14 @@
 import { notFound } from 'next/navigation'
 import { getAllPosts } from '@/lib'
 import { PostCard, Pagination } from '@/components/blog'
+import { HeadMenu } from '@/components/layout/HeadMenu'
+import { blogMenuLinks } from '@/components/layout/menuLinks'
 
 export const dynamic = 'force-static'
 
 const PAGE_SIZE = 20
 
-export async function generateStaticParams() {
+export const generateStaticParams = async () => {
   const posts = await getAllPosts()
   const totalPages = Math.ceil(posts.length / PAGE_SIZE)
   const params = []
@@ -16,11 +18,7 @@ export async function generateStaticParams() {
   return params
 }
 
-export default async function BlogPage({
-  params,
-}: {
-  params: Promise<{ page: string }>
-}) {
+const BlogPage = async ({ params }: { params: Promise<{ page: string }> }) => {
   const { page } = await params
   const pageNum = parseInt(page, 10)
   const posts = await getAllPosts()
@@ -39,21 +37,27 @@ export default async function BlogPage({
   const paginatedPosts = sortedPosts.slice(start, end)
 
   return (
-    <div className='space-y-12'>
-      <section className='space-y-6'>
-        <div className='flex items-center justify-between'>
-          <h2 className='text-xl font-semibold text-foreground'>
-            Latest posts
-          </h2>
-        </div>
+    <>
+      <HeadMenu links={blogMenuLinks} />
 
-        <div className='grid gap-6'>
-          {paginatedPosts.map((post) => (
-            <PostCard key={post.slug} post={post} returnTo='/blog' />
-          ))}
-        </div>
-        <Pagination currentPage={pageNum} totalPages={totalPages} />
-      </section>
-    </div>
+      <div className='space-y-12'>
+        <section className='space-y-6'>
+          <div className='flex items-center justify-between'>
+            <h2 className='text-xl font-semibold text-foreground'>
+              Latest posts
+            </h2>
+          </div>
+
+          <div className='grid gap-6'>
+            {paginatedPosts.map((post) => (
+              <PostCard key={post.slug} post={post} returnTo='/blog' />
+            ))}
+          </div>
+          <Pagination currentPage={pageNum} totalPages={totalPages} />
+        </section>
+      </div>
+    </>
   )
 }
+
+export default BlogPage

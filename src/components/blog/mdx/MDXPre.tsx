@@ -1,12 +1,15 @@
-import type { DetailedHTMLProps, HTMLAttributes } from 'react'
+import type { DetailedHTMLProps, FC, HTMLAttributes } from 'react'
 
-export function MDXPre(
-  props: DetailedHTMLProps<HTMLAttributes<HTMLPreElement>, HTMLPreElement>
-) {
+type MDXPreProps = DetailedHTMLProps<
+  HTMLAttributes<HTMLPreElement>,
+  HTMLPreElement
+>
+
+export const MDXPre: FC<MDXPreProps> = (props) => {
   return (
     <pre
       {...props}
-      className='my-6 overflow-x-auto rounded-xl border border-slate-200 bg-slate-100 p-3 text-sm text-slate-900 shadow-inner'
+      className='my-6 overflow-x-auto rounded-lg border border-slate-200 bg-slate-100 p-3 text-sm text-slate-900 shadow-inner'
     />
   )
 }

@@ -1,17 +1,17 @@
 'use client'
 
+import type { FC, ImgHTMLAttributes } from 'react'
 import { useEffect, useMemo, useRef, useState } from 'react'
 import { createPortal } from 'react-dom'
 
 /* eslint-disable @next/next/no-img-element */
 
-export type ImageProps = React.ImgHTMLAttributes<HTMLImageElement>
+export type ImageProps = ImgHTMLAttributes<HTMLImageElement>
 
-function clamp(value: number, min: number, max: number) {
-  return Math.min(Math.max(value, min), max)
-}
+const clamp = (value: number, min: number, max: number) =>
+  Math.min(Math.max(value, min), max)
 
-export function Image(props: ImageProps) {
+export const Image: FC<ImageProps> = (props: ImageProps) => {
   const { src = '', alt = '', style, ...rest } = props
   const [isOpen, setIsOpen] = useState(false)
   const [zoom, setZoom] = useState(1)
@@ -26,7 +26,7 @@ export function Image(props: ImageProps) {
   })
 
   useEffect(() => {
-    function onKey(e: KeyboardEvent) {
+    const onKey = (e: KeyboardEvent) => {
       if (e.key === 'Escape') setIsOpen(false)
       if (e.key === '+') setZoom((z) => clamp(z + 0.25, 1, 4))
       if (e.key === '-') setZoom((z) => clamp(z - 0.25, 1, 4))
@@ -113,7 +113,7 @@ export function Image(props: ImageProps) {
 
         <div className='flex h-full w-full items-center justify-center px-2 sm:px-4'>
           <div
-            className='relative max-h-[100vh] w-full max-w-6xl overflow-hidden rounded-none bg-black/40 p-2 shadow-2xl sm:max-h-[90vh] sm:rounded-2xl sm:p-4'
+            className='relative max-h-screen w-full max-w-6xl overflow-hidden rounded-none bg-black/40 p-2 shadow-2xl sm:max-h-[90vh] sm:rounded-2xl sm:p-4'
             onClick={(e) => e.stopPropagation()}
             onWheel={(e) => {
               e.preventDefault()
@@ -179,7 +179,7 @@ export function Image(props: ImageProps) {
         src={src}
         alt={alt}
         {...rest}
-        className={`max-w-full rounded-xl border border-(--border) object-contain ${
+        className={`max-w-full rounded-lg border border-(--border) object-contain ${
           rest.className ?? ''
         } cursor-pointer`}
         style={{ marginBottom: '1rem', ...(style ?? {}) }}

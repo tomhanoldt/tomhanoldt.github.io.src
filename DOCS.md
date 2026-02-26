@@ -5,6 +5,7 @@ Project quick facts
 - Package runner: bun (`bun run dev`, `bun run lint`).
 - Content source: MDX posts live in `content/posts/`; media under `public/uploads/` (yearly folders) and `public/images/`.
 - Routing: pages live under `src/app/`; posts at `src/app/blog/[slug]/page.tsx` (URL: `/blog/[slug]`); tag listing at `src/app/tag/[tag]/page.tsx`.
+- Layouts: homepage lives under `src/app/(home)` with its own chrome; blog, imprint, and privacy share the `SiteChrome` shell via `src/app/blog/layout.tsx`.
 
 Working notes
 -------------
@@ -12,6 +13,8 @@ Working notes
   * `bun run dev` to start the dev server
   * `bun run lint` for linting, TypeScript validation (no emit, skips lib warnings) and mdx file validation.
   Static generation is preferred (see `dynamic = 'force-static'` in pages).
+- Prefer exported `const` arrow functions over `function` declarations in app pages, components, and helpers (applies to both default exports and named utilities).
+- For components with no props, define `type XProps = Record<string, never>` instead of `{}` to satisfy lint and keep intent explicit.
 - MDX frontmatter powers metadata; keep slugs aligned with filenames and ensure `date`, `title`, `excerpt`, and `tags` are present.
 - Components of note: `PostCard` (list tiles), `PostHeader`, `ReturnLink` (back link), `PrevNextNav` (adjacent posts), `ScrollToTopButton`.
 - AudioPlaylist behaviour:

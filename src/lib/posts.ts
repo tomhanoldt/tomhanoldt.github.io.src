@@ -42,9 +42,9 @@ type PostFileEntry = {
   filePath: string
 }
 
-function sanitizeFrontmatter(
+const sanitizeFrontmatter = (
   data: Record<string, unknown>
-): PostFrontmatter | null {
+): PostFrontmatter | null => {
   const category = typeof data.category === 'string' ? data.category : undefined
 
   const excerpt = typeof data.excerpt === 'string' ? data.excerpt : undefined
@@ -54,7 +54,7 @@ function sanitizeFrontmatter(
   return { excerpt, category, tags, cover }
 }
 
-function extractTitleFromContent(content: string): string | null {
+const extractTitleFromContent = (content: string): string | null => {
   const match = content.match(/^#\s+(.+)$/m)
   return match ? match[1].trim() : null
 }
@@ -63,12 +63,12 @@ const rehypePrettyCodeOptions = {
   theme: 'github-light',
 }
 
-async function getPostFileNames(): Promise<string[]> {
+const getPostFileNames = async (): Promise<string[]> => {
   const files = await fs.readdir(postsDir)
   return files.filter((file) => file.endsWith('.mdx'))
 }
 
-function parsePostFileName(file: string): PostFileEntry | null {
+const parsePostFileName = (file: string): PostFileEntry | null => {
   const match = postFilePattern.exec(file)
   if (!match) return null
 
@@ -81,7 +81,7 @@ function parsePostFileName(file: string): PostFileEntry | null {
   }
 }
 
-async function getPostFileEntries(): Promise<PostFileEntry[]> {
+const getPostFileEntries = async (): Promise<PostFileEntry[]> => {
   const files = await getPostFileNames()
   return files
     .map(parsePostFileName)
@@ -133,7 +133,7 @@ export const getAllPosts = cache(async (): Promise<PostMeta[]> => {
     .sort((a, b) => new Date(b.date).getTime() - new Date(a.date).getTime())
 })
 
-export async function getPostBySlug(slug: string) {
+export const getPostBySlug = async (slug: string) => {
   try {
     const entries = await getPostFileEntries()
     const entry = entries.find((item) => item.slug === slug)
@@ -203,14 +203,13 @@ export async function getPostBySlug(slug: string) {
   }
 }
 
-export function formatPostDate(value: string) {
+export const formatPostDate = (value: string) => {
   const date = new Date(value)
   return new Intl.DateTimeFormat('en', { dateStyle: 'medium' }).format(date)
 }
 
-export function getCoverImage(meta: PostMeta) {
-  return meta.cover && meta.cover.length > 0 ? meta.cover : null
-}
+export const getCoverImage = (meta: PostMeta) =>
+  meta.cover && meta.cover.length > 0 ? meta.cover : null
 
 const coverIconMap: Record<
   string,
@@ -223,7 +222,7 @@ const coverIconMap: Record<
   misc: { Icon: SparklesIcon, color: '#005a8c' },
 }
 
-export function getCoverIcon(meta: PostMeta) {
+export const getCoverIcon = (meta: PostMeta) => {
   const preferred = meta.tags.find((tag) => coverIconMap[tag.toLowerCase()])
   const key = preferred ? preferred.toLowerCase() : 'misc'
   return coverIconMap[key] ?? coverIconMap.misc

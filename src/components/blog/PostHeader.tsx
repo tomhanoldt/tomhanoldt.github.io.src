@@ -1,14 +1,19 @@
+import type { FC } from 'react'
 import Image from 'next/image'
 import { TagPill } from '@/components/blog/TagPill'
+import { ReturnLink } from '@/components/blog/ReturnLink'
 import {
   formatPostDate,
   getCoverIcon,
   getCoverImage,
-  PostMeta,
+  type PostMeta,
 } from '@/lib/posts'
-import { ReturnLink } from '@/components/blog/ReturnLink'
 
-export function PostHeader({ meta }: { meta: PostMeta }) {
+type PostHeaderProps = {
+  meta: PostMeta
+}
+
+export const PostHeader: FC<PostHeaderProps> = ({ meta }) => {
   const cover = getCoverImage(meta)
   const fallback = getCoverIcon(meta)
 
@@ -19,13 +24,13 @@ export function PostHeader({ meta }: { meta: PostMeta }) {
           <div className='absolute -left-11 top-[55%] -translate-y-1/2'>
             <ReturnLink variant='icon' />
           </div>
-          <h1 className='text-4xl font-semibold leading-tight text-[color:var(--foreground)]'>
+          <h1 className='text-4xl font-semibold leading-tight text-foreground'>
             {meta.title}
           </h1>
         </div>
         <div className='flex flex-1 flex-col min-w-0'>
           <div className='flex flex-wrap gap-2 items-baseline'>
-            <span className='text-xs text-[color:var(--muted)] italic mr-4'>
+            <span className='text-xs text-(--muted) italic mr-4'>
               {formatPostDate(meta.date)}
             </span>
             {meta.tags.length > 0 &&
@@ -41,7 +46,7 @@ export function PostHeader({ meta }: { meta: PostMeta }) {
         </div>
       </div>
 
-      <div className='h-[100px] w-[100px] flex-shrink-0 overflow-hidden rounded-xl bg-[color:var(--surface)] sm:ml-6 hidden md:block'>
+      <div className='h-25 w-25 shrink-0 overflow-hidden rounded-lg bg-(--surface) sm:ml-6 hidden md:block'>
         {cover ? (
           <Image
             src={cover}
@@ -52,7 +57,7 @@ export function PostHeader({ meta }: { meta: PostMeta }) {
             priority={false}
           />
         ) : (
-          <div className='flex h-full w-full items-center justify-center bg-[color:var(--surface-strong)] text-[color:var(--muted)]'>
+          <div className='flex h-full w-full items-center justify-center bg-(--surface-strong) text-(--muted)'>
             <fallback.Icon
               className='h-14 w-14'
               strokeWidth={1.4}

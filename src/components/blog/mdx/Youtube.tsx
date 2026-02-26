@@ -1,9 +1,11 @@
+import type { FC } from 'react'
+
 type YouTubeProps = {
   id: string
   title?: string
 }
 
-export function Youtube({ id, title }: YouTubeProps) {
+export const Youtube: FC<YouTubeProps> = ({ id, title }) => {
   return (
     <div className='my-8 overflow-hidden rounded-2xl border border-slate-200 shadow-sm'>
       <div className='relative aspect-video w-full bg-slate-100'>

@@ -1,5 +1,6 @@
 'use client'
 
+import type { FC } from 'react'
 import Link from 'next/link'
 import { useSearchParams } from 'next/navigation'
 import { ArrowLeftIcon, ArrowRightIcon } from '@heroicons/react/24/outline'
@@ -9,18 +10,20 @@ export type AdjacentLink = {
   title: string
 }
 
-export function PrevNextNav({
-  previous,
-  next,
-  tagNav,
-}: {
+type PrevNextNavProps = {
   previous: AdjacentLink | null
   next: AdjacentLink | null
   tagNav?: Record<
     string,
     { previous: AdjacentLink | null; next: AdjacentLink | null }
   >
-}) {
+}
+
+export const PrevNextNav: FC<PrevNextNavProps> = ({
+  previous,
+  next,
+  tagNav,
+}) => {
   const params = useSearchParams()
   const rawFrom = params?.get('from')
   const from = rawFrom && rawFrom.startsWith('/') ? rawFrom : '/'
@@ -35,33 +38,33 @@ export function PrevNextNav({
       {prevLink ? (
         <Link
           href={{ pathname: `/blog/${prevLink.slug}`, query: { from } }}
-          className='group inline-flex max-w-[260px] min-w-0 items-center gap-2 rounded-full px-3 py-2 text-sm font-semibold text-[color:var(--accent)] transition hover:bg-[color:var(--surface)] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[color:var(--accent)] focus-visible:ring-offset-2 focus-visible:ring-offset-[color:var(--background)]'
+          className='group inline-flex max-w-65 min-w-0 items-center gap-2 rounded-full px-3 py-2 text-sm font-semibold text-(--accent) transition hover:bg-(--surface) focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-(--accent) focus-visible:ring-offset-2 focus-visible:ring-offset-background'
           aria-label={`Newer post: ${prevLink.title}`}
           title={prevLink.title}
         >
-          <ArrowLeftIcon className='h-4 w-4 flex-shrink-0' aria-hidden />
+          <ArrowLeftIcon className='h-4 w-4 shrink-0' aria-hidden />
           <span className='block min-w-0 truncate text-left'>
             {prevLink.title}
           </span>
         </Link>
       ) : (
-        <span className='text-sm text-[color:var(--muted)]'>No newer post</span>
+        <span className='text-sm text-(--muted)'>No newer post</span>
       )}
 
       {nextLink ? (
         <Link
           href={{ pathname: `/blog/${nextLink.slug}`, query: { from } }}
-          className='group inline-flex max-w-[260px] min-w-0 items-center gap-2 rounded-full px-3 py-2 text-sm font-semibold text-[color:var(--accent)] transition hover:bg-[color:var(--surface)] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[color:var(--accent)] focus-visible:ring-offset-2 focus-visible:ring-offset-[color:var(--background)]'
+          className='group inline-flex max-w-65 min-w-0 items-center gap-2 rounded-full px-3 py-2 text-sm font-semibold text-(--accent) transition hover:bg-(--surface) focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-(--accent) focus-visible:ring-offset-2 focus-visible:ring-offset-background'
           aria-label={`Older post: ${nextLink.title}`}
           title={nextLink.title}
         >
           <span className='block min-w-0 truncate text-left'>
             {nextLink.title}
           </span>
-          <ArrowRightIcon className='h-4 w-4 flex-shrink-0' aria-hidden />
+          <ArrowRightIcon className='h-4 w-4 shrink-0' aria-hidden />
         </Link>
       ) : (
-        <span className='text-sm text-[color:var(--muted)]'>No older post</span>
+        <span className='text-sm text-(--muted)'>No older post</span>
       )}
     </div>
   )

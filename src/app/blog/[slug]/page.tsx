@@ -7,19 +7,21 @@ import {
   ReturnLink,
   PrevNextNav,
 } from '@/components/blog'
+import { HeadMenu } from '@/components/layout/HeadMenu'
+import { blogMenuLinks } from '@/components/layout/menuLinks'
 
 export const dynamic = 'force-static'
 
-export async function generateStaticParams() {
+export const generateStaticParams = async () => {
   const slugs = await getPostSlugs()
   return slugs.map((slug) => ({ slug }))
 }
 
-export async function generateMetadata({
+export const generateMetadata = async ({
   params,
 }: {
   params: Promise<{ slug: string }>
-}): Promise<Metadata> {
+}): Promise<Metadata> => {
   const { slug } = await params
   const posts = await getAllPosts()
   const meta = posts.find((post) => post.slug === slug)
@@ -34,11 +36,7 @@ export async function generateMetadata({
   }
 }
 
-export default async function PostPage({
-  params,
-}: {
-  params: Promise<{ slug: string }>
-}) {
+const PostPage = async ({ params }: { params: Promise<{ slug: string }> }) => {
   const { slug } = await params
   const [post, posts] = await Promise.all([
     getPostBySlug(slug).catch(() => null),
@@ -81,26 +79,32 @@ export default async function PostPage({
   }, {})
 
   return (
-    <article id='top' className='markdown'>
-      <PostHeader meta={meta} />
+    <>
+      <HeadMenu links={blogMenuLinks} />
 
-      <div className='my-4 h-px w-full bg-(--border)' />
+      <article id='top' className='markdown'>
+        <PostHeader meta={meta} />
 
-      <div className='mt-4'>{content}</div>
+        <div className='my-4 h-px w-full bg-(--border)' />
 
-      <PrevNextNav
-        previous={
-          previous ? { slug: previous.slug, title: previous.title } : null
-        }
-        next={next ? { slug: next.slug, title: next.title } : null}
-        tagNav={tagNav}
-      />
+        <div className='mt-4'>{content}</div>
 
-      <div className='mt-10 flex items-center justify-between text-sm font-semibold text-(--accent)'>
-        <ReturnLink variant='pill' />
+        <PrevNextNav
+          previous={
+            previous ? { slug: previous.slug, title: previous.title } : null
+          }
+          next={next ? { slug: next.slug, title: next.title } : null}
+          tagNav={tagNav}
+        />
 
-        <ScrollToTopButton />
-      </div>
-    </article>
+        <div className='mt-10 flex items-center justify-between text-sm font-semibold text-(--accent)'>
+          <ReturnLink variant='pill' />
+
+          <ScrollToTopButton />
+        </div>
+      </article>
+    </>
   )
 }
+
+export default PostPage

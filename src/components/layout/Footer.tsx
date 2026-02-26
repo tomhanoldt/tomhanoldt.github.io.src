@@ -1,23 +1,46 @@
-import Link from 'next/link'
+import type { FC } from 'react'
+import Image from 'next/image'
 
-export function Footer() {
+type FooterProps = Record<string, never>
+
+export const Footer: FC<FooterProps> = () => {
   return (
-    <footer className='w-full border-t border-[#111827] bg-[#2f373e] text-white py-6 mt-8'>
-      <div className='mx-auto max-w-5xl px-4 flex flex-col sm:flex-row items-center justify-between gap-2 text-sm'>
-        <span className='opacity-70'>
-          &copy; {new Date().getFullYear()} blog.tomhanoldt.info
-        </span>
-        <div className='flex flex-wrap gap-4 items-center'>
-          <Link href='/imprint' className='underline hover:text-[#e5e7eb]'>
-            Imprint
-          </Link>
-          <Link href='/privacy' className='underline hover:text-[#e5e7eb]'>
-            Privacy
-          </Link>
-          <Link href='/sitemap.xml' className='underline hover:text-[#e5e7eb]'>
-            Sitemap
-          </Link>
-        </div>
+    <footer className='mx-auto mb-4 mt-0 flex w-full max-w-5xl flex-col gap-3 border-t border-[#d9d9d9] pt-4 text-center text-sm text-slate-600 sm:flex-row sm:items-center sm:justify-between sm:text-left'>
+      <div className='flex items-center justify-center gap-2 sm:justify-start'>
+        <Image
+          src='/images/social/github.png'
+          alt='GitHub icon'
+          width={18}
+          height={18}
+        />
+        <a
+          href='https://github.com/tomhanoldt/tomhanoldt.github.io.src'
+          className='hover:underline'
+          target='_blank'
+          rel='noreferrer'
+        >
+          code available on github
+        </a>
+      </div>
+      <div className='flex flex-wrap items-center justify-center gap-2 text-xs text-slate-500 sm:justify-end'>
+        <span>&copy; {new Date().getFullYear()} by Tom Hanoldt</span>
+        <span className='hidden sm:inline'>|</span>
+        <a
+          href='https://www.creative-workflow.berlin/imprint.html'
+          target='_blank'
+          rel='noreferrer'
+          className='hover:underline'
+        >
+          imprint
+        </a>
+        <a
+          href='https://www.creative-workflow.berlin/privacy.html'
+          target='_blank'
+          rel='noreferrer'
+          className='hover:underline'
+        >
+          privacy
+        </a>
       </div>
     </footer>
   )

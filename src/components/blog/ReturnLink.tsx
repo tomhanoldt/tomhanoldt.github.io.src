@@ -1,6 +1,6 @@
 'use client'
 
-import type React from 'react'
+import type { FC, ReactNode } from 'react'
 import Link from 'next/link'
 import { useSearchParams } from 'next/navigation'
 import { ArrowUturnLeftIcon } from '@heroicons/react/24/outline'
@@ -8,14 +8,14 @@ import { ArrowUturnLeftIcon } from '@heroicons/react/24/outline'
 export type ReturnLinkProps = {
   fallback?: string
   variant?: 'icon' | 'pill'
-  children?: React.ReactNode
+  children?: ReactNode
 }
 
-export function ReturnLink({
+export const ReturnLink: FC<ReturnLinkProps> = ({
   fallback = '/blog/',
   variant = 'icon',
   children,
-}: ReturnLinkProps) {
+}) => {
   const searchParams = useSearchParams()
   const fromParam = searchParams?.get('from')
   const href = fromParam && fromParam.startsWith('/') ? fromParam : fallback

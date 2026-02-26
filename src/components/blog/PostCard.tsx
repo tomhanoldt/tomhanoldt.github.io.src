@@ -1,20 +1,20 @@
+import type { FC } from 'react'
 import Image from 'next/image'
 import Link from 'next/link'
+import { TagPill } from '@/components/blog/TagPill'
 import {
   formatPostDate,
   getCoverIcon,
   getCoverImage,
-  PostMeta,
+  type PostMeta,
 } from '@/lib/posts'
-import { TagPill } from '@/components/blog/TagPill'
 
-export function PostCard({
-  post,
-  returnTo = '/',
-}: {
+type PostCardProps = {
   post: PostMeta
   returnTo?: string
-}) {
+}
+
+export const PostCard: FC<PostCardProps> = ({ post, returnTo = '/' }) => {
   const cover = getCoverImage(post)
   const fallback = getCoverIcon(post)
   const href = returnTo
@@ -22,18 +22,18 @@ export function PostCard({
     : `/blog/${post.slug}`
 
   return (
-    <article className='group surface relative overflow-hidden rounded-2xl p-5 transition hover:-translate-y-[2px] sm:p-6'>
+    <article className='group surface relative overflow-hidden rounded-lg p-5 transition hover:-translate-y-0.5 sm:p-6'>
       <span
-        className='absolute left-0 top-0 h-full w-1 bg-[color:var(--accent)]'
+        className='absolute left-0 top-0 h-full w-1 bg-(--accent)'
         aria-hidden
       />
 
       <Link
         href={href}
-        className='block focus:outline-none focus-visible:ring-2 focus-visible:ring-[color:var(--accent)] focus-visible:ring-offset-2 focus-visible:ring-offset-[color:var(--background)]'
+        className='block focus:outline-none focus-visible:ring-2 focus-visible:ring-(--accent) focus-visible:ring-offset-2 focus-visible:ring-offset-background'
       >
         <div className='flex flex-col gap-4 sm:flex-row'>
-          <div className='relative h-[110px] w-[110px] self-center overflow-hidden rounded-xl border border-[color:var(--border)] bg-[color:var(--surface)] sm:self-start sm:flex-shrink-0'>
+          <div className='relative h-27.5 w-27.5 self-center overflow-hidden rounded-lg border border-(--border) bg-(--surface) sm:self-start sm:shrink-0'>
             {cover ? (
               <Image
                 src={cover}
@@ -44,7 +44,7 @@ export function PostCard({
                 priority={false}
               />
             ) : (
-              <div className='flex h-full w-full items-center justify-center bg-[color:var(--surface-strong)] text-[color:var(--muted)]'>
+              <div className='flex h-full w-full items-center justify-center bg-(--surface-strong) text-(--muted)'>
                 <fallback.Icon
                   className='h-12 w-12'
                   strokeWidth={1.4}
@@ -55,15 +55,15 @@ export function PostCard({
           </div>
 
           <div className='flex min-w-0 flex-1 flex-col'>
-            <div className='flex items-center gap-3 text-xs text-[color:var(--muted)]'>
+            <div className='flex items-center gap-3 text-xs text-(--muted)'>
               <span>{formatPostDate(post.date)}</span>
             </div>
 
-            <h2 className='mt-2 text-xl font-semibold leading-snug text-[color:var(--foreground)] group-hover:text-[color:var(--accent)] sm:text-2xl'>
+            <h2 className='mt-2 text-xl font-semibold leading-snug text-foreground group-hover:text-(--accent) sm:text-2xl'>
               {post.title}
             </h2>
 
-            <p className='mt-2 line-clamp-3 text-sm text-[color:var(--muted)] sm:text-base'>
+            <p className='mt-2 line-clamp-3 text-sm text-(--muted) sm:text-base'>
               {post.excerpt}
             </p>
           </div>

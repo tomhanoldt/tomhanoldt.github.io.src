@@ -1,16 +1,19 @@
 'use client'
 
+import type { FC } from 'react'
 import Link from 'next/link'
 
-export function Pagination({
-  currentPage,
-  totalPages,
-  tag,
-}: {
+type PaginationProps = {
   currentPage: number
   totalPages: number
   tag?: string
-}) {
+}
+
+export const Pagination: FC<PaginationProps> = ({
+  currentPage,
+  totalPages,
+  tag,
+}) => {
   if (totalPages <= 1) return null
 
   return (
@@ -28,7 +31,7 @@ export function Pagination({
           <Link
             key={p}
             href={href}
-            className={`inline-flex cursor-pointer items-center gap-2 rounded-full px-3 py-1 text-sm font-semibold !text-[color:var(--accent)] transition hover:bg-[color:var(--surface)]${isCurrent ? ' text-xl' : ''}`}
+            className={`inline-flex cursor-pointer items-center gap-2 rounded-full px-3 py-1 text-sm font-semibold text-(--accent)! transition hover:bg-(--surface)${isCurrent ? ' text-xl' : ''}`}
             aria-current={isCurrent ? 'page' : undefined}
           >
             {p}

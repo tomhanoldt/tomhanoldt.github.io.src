@@ -1,6 +1,10 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   <url>
+    <loc>https://tomhanoldt.info/</loc>
+    <lastmod>2026-02-26T12:20:07.953Z</lastmod>
+  </url>
+  <url>
     <loc>https://tomhanoldt.info/blog/blog/das-ende-eines-gedanken</loc>
     <lastmod>2026-02-20T14:03:36.041Z</lastmod>
   </url>
@@ -14,7 +18,7 @@
   </url>
   <url>
     <loc>https://tomhanoldt.info/blog/blog/rip-kaosrap</loc>
-    <lastmod>2026-02-19T14:59:31.364Z</lastmod>
+    <lastmod>2026-02-24T11:35:04.162Z</lastmod>
   </url>
   <url>
     <loc>https://tomhanoldt.info/blog/blog/wilhelm-busch-funk</loc>

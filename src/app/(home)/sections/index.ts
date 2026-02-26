@@ -1,0 +1,5 @@
+export { ContactSection } from './ContactSection'
+export { HeroSection } from './HeroSection'
+export { OpenSourceSection } from './OpenSourceSection'
+export { SkillsSection } from './SkillsSection'
+export { WorkLifeSection } from './WorkLifeSection'
