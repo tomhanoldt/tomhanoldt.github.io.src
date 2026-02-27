@@ -9,10 +9,6 @@ export const SkillsSection = ({}: SkillsSectionProps) => {
       id='skills'
       className='space-y-6 rounded-lg border border-[#d9d9d9] bg-white p-5 shadow-sm relative overflow-hidden'
     >
-      <span
-        className='absolute left-0 top-0 h-full w-1 bg-(--accent)'
-        aria-hidden
-      />
       <div className='space-y-2'>
         <p className='text-xs font-semibold uppercase tracking-[0.24em] text-(--accent)'>
           skills
