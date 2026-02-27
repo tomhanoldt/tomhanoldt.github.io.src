@@ -29,6 +29,9 @@ jobs:
       - name: Build static site
         run: bun run export
 
+      - name: Copy CNAME file
+        run: cp public/CNAME out/CNAME
+
       - name: Deploy to external repo
         uses: peaceiris/actions-gh-pages@v4
         with:
