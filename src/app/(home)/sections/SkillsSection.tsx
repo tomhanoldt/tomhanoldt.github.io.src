@@ -54,7 +54,6 @@ export const SkillsSection = ({}: SkillsSectionProps) => {
                     sizes='40px'
                   />
                 </div>
-                {tool.name}
               </div>
             ))}
           </div>
