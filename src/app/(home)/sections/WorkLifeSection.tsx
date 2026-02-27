@@ -18,10 +18,10 @@ export const WorkLifeSection = ({}: WorkLifeSectionProps) => {
           work life
         </p>
         <h2 className='text-3xl font-semibold text-slate-900'>
-          Projects, teams, and companies
+          Projects, teams and companies
         </h2>
         <p className='max-w-3xl text-sm leading-relaxed text-slate-700'>
-          A few stations from the past years - building products, scaling teams,
+          A few stations from the past years - building products, scaling teams
           and focusing on UX and delivery.
         </p>
       </div>

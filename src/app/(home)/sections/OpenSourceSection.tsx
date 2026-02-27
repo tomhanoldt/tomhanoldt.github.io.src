@@ -20,7 +20,7 @@ export const OpenSourceSection = ({}: OpenSourceSectionProps) => {
           Tools I share with the community
         </h2>
         <p className='max-w-3xl text-sm leading-relaxed text-slate-700'>
-          Lightweight helpers for shipping websites, automating deploys, and
+          Lightweight helpers for shipping websites, automating deploys and
           smoothing UI workflows.
         </p>
       </div>

@@ -16,7 +16,7 @@ const geistMono = Geist_Mono({
 export const metadata: Metadata = {
   title: 'Tom Hanoldt | developer, artist, human',
   description:
-    'Full stack developer, web designer, and artist from Berlin — building products, mentoring teams, and supporting open source.',
+    'Full stack developer, artist and human from Berlin — building products, mentoring teams and supporting open source.',
 }
 
 const RootLayout = ({

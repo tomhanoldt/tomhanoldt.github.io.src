@@ -12,7 +12,7 @@ import {
 export const metadata: Metadata = {
   title: 'Tom Hanoldt | developer, artist, human',
   description:
-    'Full stack developer, designer, and artist from Berlin. Work life, open source, skills, and contact information.',
+    'Full stack developer, artist and human from Berlin. Work life, open source, skills and contact information.',
 }
 
 const HomePage = () => {

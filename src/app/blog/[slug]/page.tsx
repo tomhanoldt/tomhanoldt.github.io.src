@@ -31,7 +31,7 @@ export const generateMetadata = async ({
   }
 
   return {
-    title: `${meta.title} | Next Markdown Blog`,
+    title: `${meta.title} | tomhanoldt.info`,
     description: meta.excerpt,
   }
 }
