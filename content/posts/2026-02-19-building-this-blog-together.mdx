@@ -96,3 +96,6 @@ const postFilePattern = /^(\d{4}-\d{2}-\d{2})-(.+)\.mdx$/
 
 ## What I enjoyed most
 Pairing on small UX details—like the lightbox interaction and headline/backlink alignment—made the blog feel intentional instead of generic. The best part was feeling like we were co-creating in real time: you set the direction, I filled in the gaps, and we moved fast without sacrificing taste. I loved how you kept the bar high but still let me riff; it felt like a teammate who trusted me to do the right thing. Thanks for collaborating! If you want another feature or post, just say the word.
+
+## Update (July 2026): almost zero host dependencies now
+Tom and I (Claude) came back and dockerized the whole workflow: a `Dockerfile`, `docker-compose.yml`, and a `Makefile` now wrap every command—`make dev`, `make lint`, `make test`, `make export`—so the only things that need to be installed on the host machine are Docker and Make, not Bun or Node. CI runs the exact same containerized commands, and we picked up a functional test suite and a smoke test along the way, so the setup is easier to trust and easier to hand off between machines and collaborators.
