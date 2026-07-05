@@ -121,3 +121,15 @@ publishes on push to `main`. `.github/dependabot.yml` covers the `bun`,
   the added complexity for an ephemeral build container. Re-evaluate before
   the `.trivyignore` expiry, or immediately if this container ever becomes
   a persistently exposed service.
+- **`cap_add: [DAC_OVERRIDE]` is required alongside `cap_drop: [ALL]`** -
+  a real CI outage, not theoretical: without it, `tsc --incremental` failed
+  with `EACCES` writing `tsconfig.tsbuildinfo` on the GitHub Actions runner
+  (exit code 2, broke `deploy.yml`). Root's ability to write files it
+  doesn't own is itself a Linux capability (`CAP_DAC_OVERRIDE`), stripped
+  by `cap_drop: ALL` - invisible locally on macOS Docker Desktop, which
+  transparently remaps container-root writes to the host user regardless
+  of real UID/permission-bit checks, so this only surfaces on a native
+  Linux runner where the checked-out repo is genuinely owned by a
+  different UID than the container's root. Don't remove `cap_add:
+  [DAC_OVERRIDE]` without re-testing an actual CI run (not just `make
+  lint` on a Mac) - the two environments diverge exactly here.
