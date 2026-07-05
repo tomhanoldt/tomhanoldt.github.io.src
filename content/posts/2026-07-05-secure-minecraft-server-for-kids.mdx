@@ -1,0 +1,108 @@
+---
+excerpt: How I turned a manual Ubuntu install into a fully automated, Tailscale-locked Minecraft server for my kids - and whether I actually trust the Microsoft account it all depends on.
+tags:
+  - code
+  - docker
+  - ansible
+  - security
+  - minecraft
+  - self-hosted
+  - tailscale
+  - family
+cover: data:image/svg+xml,%3Csvg%20xmlns%3D%27http%3A//www.w3.org/2000/svg%27%20width%3D%271000%27%20height%3D%27520%27%20viewBox%3D%270%200%201000%20520%27%3E%20%3Cdefs%3E%20%3ClinearGradient%20id%3D%27bg%27%20x1%3D%270%27%20x2%3D%271%27%20y1%3D%270%27%20y2%3D%271%27%3E%20%3Cstop%20stop-color%3D%27%23111827%27/%3E%20%3Cstop%20offset%3D%271%27%20stop-color%3D%27%230f172a%27/%3E%20%3C/linearGradient%3E%20%3C/defs%3E%20%3Crect%20width%3D%271000%27%20height%3D%27520%27%20fill%3D%27url%28%23bg%29%27/%3E%20%3Ccircle%20cx%3D%27150%27%20cy%3D%2790%27%20r%3D%273%27%20fill%3D%27%2364748b%27%20opacity%3D%270.5%27/%3E%20%3Ccircle%20cx%3D%27860%27%20cy%3D%27120%27%20r%3D%273%27%20fill%3D%27%2364748b%27%20opacity%3D%270.5%27/%3E%20%3Ccircle%20cx%3D%27900%27%20cy%3D%27420%27%20r%3D%273%27%20fill%3D%27%2364748b%27%20opacity%3D%270.5%27/%3E%20%3Ccircle%20cx%3D%27110%27%20cy%3D%27440%27%20r%3D%273%27%20fill%3D%27%2364748b%27%20opacity%3D%270.5%27/%3E%20%3Cline%20x1%3D%27150%27%20y1%3D%2790%27%20x2%3D%27420%27%20y2%3D%27230%27%20stroke%3D%27%23334155%27%20stroke-width%3D%272%27%20stroke-dasharray%3D%274%206%27%20opacity%3D%270.6%27/%3E%20%3Cline%20x1%3D%27860%27%20y1%3D%27120%27%20x2%3D%27580%27%20y2%3D%27230%27%20stroke%3D%27%23334155%27%20stroke-width%3D%272%27%20stroke-dasharray%3D%274%206%27%20opacity%3D%270.6%27/%3E%20%3Cline%20x1%3D%27900%27%20y1%3D%27420%27%20x2%3D%27600%27%20y2%3D%27340%27%20stroke%3D%27%23334155%27%20stroke-width%3D%272%27%20stroke-dasharray%3D%274%206%27%20opacity%3D%270.6%27/%3E%20%3Cline%20x1%3D%27110%27%20y1%3D%27440%27%20x2%3D%27400%27%20y2%3D%27340%27%20stroke%3D%27%23334155%27%20stroke-width%3D%272%27%20stroke-dasharray%3D%274%206%27%20opacity%3D%270.6%27/%3E%20%3Cg%20opacity%3D%270.9%27%3E%20%3Cpolygon%20points%3D%27500%2C150%20610%2C205%20500%2C260%20390%2C205%27%20fill%3D%27%2322c55e%27/%3E%20%3Cpolygon%20points%3D%27390%2C205%20500%2C260%20500%2C370%20390%2C315%27%20fill%3D%27%2315803d%27/%3E%20%3Cpolygon%20points%3D%27610%2C205%20500%2C260%20500%2C370%20610%2C315%27%20fill%3D%27%23166534%27/%3E%20%3Cpolygon%20points%3D%27420%2C190%20460%2C210%20460%2C225%20420%2C205%27%20fill%3D%27%234ade80%27%20opacity%3D%270.6%27/%3E%20%3C/g%3E%20%3Cg%3E%20%3Cpath%20d%3D%27M500%2095%20C455%2095%20425%20130%20425%20170%20L425%20230%20C425%20265%20460%20290%20500%20300%20C540%20290%20575%20265%20575%20230%20L575%20170%20C575%20130%20545%2095%20500%2095%20Z%27%20fill%3D%27none%27%20stroke%3D%27%230ea5e9%27%20stroke-width%3D%277%27/%3E%20%3Crect%20x%3D%27478%27%20y%3D%27175%27%20width%3D%2744%27%20height%3D%2734%27%20rx%3D%276%27%20fill%3D%27%230f172a%27%20stroke%3D%27%230ea5e9%27%20stroke-width%3D%275%27/%3E%20%3Cpath%20d%3D%27M486%20175%20L486%20158%20C486%20145%20493%20137%20500%20137%20C507%20137%20514%20145%20514%20158%20L514%20175%27%20fill%3D%27none%27%20stroke%3D%27%230ea5e9%27%20stroke-width%3D%276%27/%3E%20%3Ccircle%20cx%3D%27500%27%20cy%3D%27190%27%20r%3D%275%27%20fill%3D%27%230ea5e9%27/%3E%20%3C/g%3E%20%3Ccircle%20cx%3D%27150%27%20cy%3D%2790%27%20r%3D%2716%27%20fill%3D%27none%27%20stroke%3D%27%23a855f7%27%20stroke-width%3D%273%27%20opacity%3D%270.7%27/%3E%20%3Ccircle%20cx%3D%27860%27%20cy%3D%27120%27%20r%3D%2716%27%20fill%3D%27none%27%20stroke%3D%27%23a855f7%27%20stroke-width%3D%273%27%20opacity%3D%270.7%27/%3E%20%3Ccircle%20cx%3D%27900%27%20cy%3D%27420%27%20r%3D%2716%27%20fill%3D%27none%27%20stroke%3D%27%23a855f7%27%20stroke-width%3D%273%27%20opacity%3D%270.7%27/%3E%20%3Ccircle%20cx%3D%27110%27%20cy%3D%27440%27%20r%3D%2716%27%20fill%3D%27none%27%20stroke%3D%27%23a855f7%27%20stroke-width%3D%273%27%20opacity%3D%270.7%27/%3E%20%3Ctext%20x%3D%27500%27%20y%3D%27420%27%20fill%3D%27%23e2e8f0%27%20font-family%3D%27Inter%2C%20sans-serif%27%20font-size%3D%2722%27%20text-anchor%3D%27middle%27%20opacity%3D%270.75%27%3Ewhitelist%20only%3C/text%3E%20%3Ctext%20x%3D%27500%27%20y%3D%27450%27%20fill%3D%27%23e2e8f0%27%20font-family%3D%27Inter%2C%20sans-serif%27%20font-size%3D%2716%27%20text-anchor%3D%27middle%27%20opacity%3D%270.55%27%3Eno%20port%20forwarding%2C%20no%20public%20access%3C/text%3E%20%3C/svg%3E
+---
+
+# Operating a Minecraft server for kids - secure and responsible
+
+My daughter and her friends wanted to play Minecraft together. Not on some random public server with 500 strangers and a chat log full of things I'd rather they didn't see, and not on a "family-friendly" server run by someone I've never met. A private one, ours, with nobody on it who isn't actually invited.
+
+I work in security for a living, so of course this couldn't just be "buy a Realms subscription and move on." It turned into a proper project: a mini-PC on my home network, provisioned with Ansible, running hardened Docker containers, reachable only over a locked-down Tailscale network - and, somewhere along the way, a genuine reckoning with whether I actually trust the Microsoft account that the whole thing quietly depends on.
+
+This is the story of how it went, in the order that actually makes sense - not the order I stumbled through it in.
+
+## Where it started: a USB stick and a keyboard I only needed once
+
+The very first version of this had nothing to do with Ansible. It was a page of personal notes for myself, in German, that boiled down to: download the Ubuntu Server ISO, flash it to a USB stick with [balenaEtcher](https://etcher.balena.io), plug a monitor and keyboard into the mini-PC exactly once to click through the installer (tick "Install OpenSSH server," this matters), find its new IP address in the router's device list, give it a static lease, and then never touch a physical keyboard on that box again:
+
+```bash
+ssh minecraft@192.168.178.42
+sudo apt update && sudo apt upgrade -y
+```
+
+That's it. That was the whole plan. And it worked, in the sense that a Minecraft server did eventually run. But every change after that first day meant SSH-ing in and doing something by hand, with no record of what I'd actually done. Three months later I would not have been able to tell you why a particular firewall rule existed, or which package I'd installed to fix which problem. That's not a security posture, that's a pile of manual steps I'd have to trust myself to remember correctly forever.
+
+## Turning it into infrastructure, not a pet
+
+So the next real step wasn't a Minecraft feature at all - it was throwing away the manual setup in favor of an [Ansible](https://www.ansible.com) playbook that could rebuild the whole box from a fresh Ubuntu install, reproducibly, with the entire configuration checked into git. Docker Compose for the actual Minecraft server and its backup sidecar, so "what's running" is a file, not something I have to remember. The Ansible tooling itself runs containerized too - nothing gets installed on my own Mac, `docker compose run --rm ansible <command>` handles everything.
+
+This sounds like overkill for a kids' Minecraft server, and it kind of is - but it's also what turns "I hope I remember how I configured this" into "here's exactly what's configured, and here's the command that makes it true again." When I found a bug (and I found several, more on that below), the fix went into the playbook, not into a one-off SSH session I'd forget by the next deploy.
+
+## Locking down the network before anything else
+
+The single most important decision, before any Minecraft-specific hardening: **the server is never reachable from the public internet at all.** No port forwarding, no dynamic DNS, no exposed IP. Everyone connects over [Tailscale](https://tailscale.com), a WireGuard-based mesh VPN - the Minecraft ports only accept traffic from the tailnet's own address range, enforced by UFW.
+
+Friends' families join via Tailscale's **Device Sharing** feature rather than becoming full tailnet members: their device sees only the Minecraft box, nothing else on my home network, and the share is "quarantined" so their device can only respond, never initiate connections on its own.
+
+The one wrinkle worth mentioning, because it's a genuinely easy mistake to make: I use Tailscale ACL tags to scope access per person, not just "any tailnet member gets in." My own devices keep broad access to each other and to my home automation; my kid's device is tagged to reach *only* the Minecraft ports and nothing else, even signed in under my own account rather than a separate identity. The gotcha - tagging a device removes it from Tailscale's `autogroup:member` entirely, so any *existing* broad grant silently stops applying to it. I tagged my own phone and laptop and briefly locked myself out of my own home automation dashboard as a result, because I'd forgotten that tagging isn't additive - it replaces which rules apply, it doesn't just add a new restriction on top. Worth knowing before you go down this path.
+
+## Locking down the server itself
+
+Both the Minecraft container (`itzg/minecraft-server`) and its backup sidecar (`itzg/mc-backup`) run with `cap_drop: ALL` and only the specific Linux capabilities their entrypoints actually need added back - checked by actually running them and watching what broke, not by guessing. Both are pinned to an exact image digest, not a floating tag, so what runs today is exactly what ran yesterday unless I deliberately change it. `ONLINE_MODE` and a whitelist are both enforced, so only specifically invited, authenticated accounts can ever connect in the first place.
+
+That whitelist is also where I hit the ugliest bug of this whole project. The Docker image resolves whitelisted usernames against Mojang's PlayerDB at container startup - and if one single name doesn't resolve (which happens routinely for a brand-new Bedrock/mobile player who's never connected before), that's treated as a **fatal error that crash-loops the entire container**, kicking every already-connected player off, over and over, every few seconds. Not "reject that one player" - take the whole server down, repeatedly, for everyone. This turned out to be a [known, long-unresolved limitation](https://github.com/itzg/docker-minecraft-server/issues/3380) in the image itself. The actual fix was to stop relying on the image's live name resolution at all: Ansible now resolves Java usernames against Mojang's API at deploy time (so a typo fails the deploy cleanly, with a readable error, instead of crash-looping something already running), and hands the server a pre-built whitelist file directly - which the image just copies byte-for-byte, no validation, no way for a bad entry to crash anything ever again.
+
+Bedrock accounts added their own flavor of chaos on top. Xbox Gamertags get sanitized before they ever reach the server - a `name#1234`-style suffix has its `#` stripped entirely, while an older two-word Gamertag like `name 1234` gets its space replaced with an underscore instead. Two different transformations, not the same rule, and neither is guessable in advance - the only reliable way to know what a given player's actual in-game identity will be is to watch them connect once and read it straight out of the server's own log.
+
+## Actually making it safe for an 11-year-old
+
+The technical lockdown above is what stops a stranger from ever reaching the server. A separate set of plugins is what keeps things reasonable *between* the kids who are already on it:
+
+- **GriefPrevention** lets each kid claim their own build area with a golden shovel - nobody else can touch it, by accident or on purpose.
+- **CoreProtect** logs every world action, so if something does go wrong, it can be rolled back and attributed rather than just vanishing.
+- **ChatFilter** actively blocks links, IP addresses, and known-bad content in chat - configured to actually do this, not just installed and left on its default (which, in this plugin's case, registers filter categories without switching any of them on).
+- The server defaults to Creative mode with `force-gamemode=true`, so nobody's fighting mobs or losing a build to fall damage, and even players who aren't admins can toggle their own gamemode without needing full operator access.
+
+One deliberate, disclosed tradeoff: Minecraft's built-in chat-signing/reporting feature is turned off, because Bedrock players connecting through the Geyser/Floodgate bridge have no Mojang signing key at all, and leaving it on silently disabled their chat entirely with no error message - just quietly broken chat for half the players. Turning it off does mean losing Mojang's own "report a player" pipeline; ChatFilter and CoreProtect are the compensating control instead. Worth being honest about, rather than pretending nothing was traded away.
+
+And because "trust me, it's fine" isn't good enough for the other kids' parents, there's a plain-language document that spells out exactly what's logged, how long it's kept, and who can actually read it - which, in practice, is just me, via one SSH key.
+
+## The part that isn't a technical problem at all: Microsoft
+
+Here's where the actual project stops being fun. **Both Minecraft editions require a Microsoft account today.** The old "Mojang account" login that didn't need one is gone. Since the players are minors, that means every parent has to set up a Microsoft Family group and register their kid as a managed child account - a real, if one-time, piece of admin overhead for every single family who wants to join, before anyone's even touched the actual game.
+
+And then there's the money. Bedrock Edition (phone/tablet/console) is typically already owned via a mobile app purchase. Java Edition, as of 2026, isn't sold standalone anymore - it's bundled with a PC copy of Bedrock for around $30. So if a kid wants to play on their tablet *and* eventually on a PC, that's two separate purchases for what's nominally "the same game," tied to the same account, sold twice.
+
+I specifically went looking for a way to restrict a child's Microsoft/Xbox account to *only* my server, so a house rule wouldn't be the only thing stopping them from typing in some other server's address. There isn't one. Microsoft's controls are broad on/off toggles - allow multiplayer, allow cross-network play, allow playing with people not on your friends list - not a per-server allowlist. Once multiplayer is turned on at all, it's turned on for every server, not just mine. The best available mitigation is blocking "play with people not on your friends list" account-wide (which does help against strangers messaging or inviting them, and applies regardless of platform), plus an actual house rule - not a technical guarantee.
+
+## So how much do I actually trust Microsoft here?
+
+This is the question that made me want to write this post in the first place, because the honest answer, from someone who does this professionally, is: **less than the marketing suggests, but not so little that it changes what I did.**
+
+A few data points that stuck with me while researching this:
+
+- In 2023, a China-linked actor known as Storm-0558 forged authentication tokens and read email from 22 organizations and 503 individual accounts, including the US State Department and a sitting Commerce Secretary - using a Microsoft signing key that had leaked into a crash dump two years earlier and then escaped an isolated production network after an engineer's corporate account was separately compromised. The US Cyber Safety Review Board's [subsequent report](https://www.cisa.gov/sites/default/files/2025-03/CSRBReviewOfTheSummer2023MEOIntrusion508.pdf) didn't mince words: "Storm-0558 was able to succeed because of a cascade of security failures at Microsoft," and Microsoft's "security culture was inadequate and requires an overhaul." Microsoft didn't even catch it themselves - the State Department did, using logging they'd specifically requested.
+- A few months later, in January 2024, a Russian state-linked actor (Midnight Blizzard) broke into Microsoft's *own* corporate email - including senior leadership - through a legacy test account that simply didn't have MFA enabled. By March, Microsoft confirmed the same actor had pivoted from there into some of its own source code repositories.
+- A design flaw nicknamed [nOAuth](https://www.descope.com/blog/post/noauth) let an attacker take over someone else's account in many Microsoft-identity-backed apps just by claiming their email address, unverified. Microsoft shipped a mitigation in 2023 - but independent researchers found roughly 9% of Microsoft Entra Gallery apps were *still* vulnerable two years later.
+- In response to the fallout, Microsoft announced its Secure Future Initiative in late 2023, with genuinely substantive technical commitments (migrating signing keys into hardware security modules, unifying token validation). Independent assessments as recently as [February 2026](https://www.lawfaremedia.org/article/microsoft-forgoes-its-secure-future) are still skeptical it reflects a durable culture shift rather than a reaction to political pressure - and note that the CSRB itself, the external body whose report forced this response, has since been disbanded.
+
+None of this is a reason to panic about your kid's Minecraft account specifically - I found no evidence of a large-scale breach of consumer Xbox/Microsoft account infrastructure itself, as opposed to enterprise systems. But it's a good reminder that "it's just a Microsoft account" is not actually a strong security boundary, and it changed how I think about my own mitigations: I don't need to fully trust Microsoft's identity platform, because my server doesn't depend on it for isolation. Even in the worst case - a child's Microsoft account gets compromised somehow - the attacker still can't reach my server. It's not on the internet. It's whitelist-only, over a VPN, and that account was never the thing standing between an outsider and my network in the first place. Layered defense means no single vendor's failure is the whole story.
+
+## The open-source path I considered, and didn't take
+
+If avoiding Microsoft's account requirement entirely matters to you, [Luanti](https://www.luanti.org) (formerly Minetest) is the real alternative - genuinely open-source, and, notably, **account-free at the platform level**: each server just runs its own local login, no centralized identity provider involved at all. It supports self-hosting and whitelisting exactly the way this setup does.
+
+I didn't switch, for two concrete reasons that haven't changed as of writing this: there's still no official iOS app - only an unofficial, ad-supported fork on an outdated engine, which isn't something I want to hand a kid - and its mod ecosystem, while real and active (a few thousand mods on ContentDB), is nowhere near the scale of what Minecraft's Java/Bedrock plugin and mod communities offer. For a family that's all-Android and doesn't care about the wider plugin selection, it's a genuinely better privacy story. For mine, with a mix of iOS and Android devices, it wasn't yet a workable swap.
+
+## So what age is this actually for?
+
+Officially, Minecraft is rated PEGI 7 / ESRB E10+ for fantasy violence - Common Sense Media's own editorial recommendation lands around age 8. That's a reasonable floor for solo or Creative-mode play with a parent nearby.
+
+Where it gets more nuanced is *this specific setup* - a whitelisted, parent-run private server rather than open public multiplayer. Because the whitelist, the Microsoft Family group, and the Tailscale invite are all still controlled entirely by a parent, a younger kid (7-8) can safely use exactly this setup, supervised, well before they'd be ready for open servers. What actually shifts with age isn't "can they technically join" - it's how much independent trust you extend around chat and strangers: being reliably able to follow "don't share your real name/school/address" and "don't accept friend requests from people you don't know" rules without a parent hovering over every session is a judgment call most guidance ties to somewhere around 10-12 - which, not coincidentally, is roughly where Microsoft's own Xbox privacy controls start treating a child account as capable of more independent settings in several countries.
+
+My practical answer: start the *server-and-account setup* whenever a parent is willing to do the admin work - realistically as young as 7-8, given how contained this environment is - and treat 10-12 as the point where you can reasonably start loosening the direct supervision, not the point where the server itself becomes appropriate.
+
+## Wrapping up
+
+The whole thing - Ansible playbook, Docker Compose templates, plugin configs, and all the documentation above - is public on GitHub: [tomhanoldt/little-family-minecraft-server](https://github.com/tomhanoldt/little-family-minecraft-server), MIT licensed. If you're setting up something similar for your own family, feel free to steal from it rather than starting from my original German USB-stick notes.
+
+Most of the actual implementation - chasing the whitelist crash-loop, working out the Gamertag sanitization rules, untangling the Tailscale ACL gotcha - happened in pairing sessions with Claude Code, in the same spirit as [how this blog itself got built](/blog/building-this-blog-together). It's a genuinely different way of working through a project like this: real bugs, caught by actually running the thing rather than reading the docs and hoping.
