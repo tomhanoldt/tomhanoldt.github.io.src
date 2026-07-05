@@ -35,7 +35,7 @@ jobs:
           output: "trivy-image.sarif"
           severity: "CRITICAL,HIGH"
           trivyignores: ".trivyignore"
-      - uses: github/codeql-action/upload-sarif@v3
+      - uses: github/codeql-action/upload-sarif@v4
         if: always()
         with:
           sarif_file: "trivy-image.sarif"
@@ -56,7 +56,7 @@ jobs:
           output: "trivy-config.sarif"
           severity: "CRITICAL,HIGH"
           trivyignores: ".trivyignore"
-      - uses: github/codeql-action/upload-sarif@v3
+      - uses: github/codeql-action/upload-sarif@v4
         if: always()
         with:
           sarif_file: "trivy-config.sarif"
@@ -78,7 +78,7 @@ jobs:
           scanners: "secret"
           format: "sarif"
           output: "trivy-secrets.sarif"
-      - uses: github/codeql-action/upload-sarif@v3
+      - uses: github/codeql-action/upload-sarif@v4
         if: always()
         with:
           sarif_file: "trivy-secrets.sarif"
