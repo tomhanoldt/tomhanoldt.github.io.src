@@ -1,18 +1,16 @@
 import { notFound } from 'next/navigation'
-import { getAllPosts } from '@/lib'
+import { getAllPosts, paginate, totalPages as getTotalPages } from '@/lib'
 import { PostCard, Pagination } from '@/components/blog'
 import { HeadMenu } from '@/components/layout/HeadMenu'
 import { blogMenuLinks } from '@/components/layout/menuLinks'
 
 export const dynamic = 'force-static'
 
-const PAGE_SIZE = 20
-
 export const generateStaticParams = async () => {
   const posts = await getAllPosts()
-  const totalPages = Math.ceil(posts.length / PAGE_SIZE)
+  const pages = getTotalPages(posts.length)
   const params = []
-  for (let i = 2; i <= totalPages; i++) {
+  for (let i = 2; i <= pages; i++) {
     params.push({ page: i.toString() })
   }
   return params
@@ -26,15 +24,13 @@ const BlogPage = async ({ params }: { params: Promise<{ page: string }> }) => {
     (a, b) => new Date(b.date).getTime() - new Date(a.date).getTime()
   )
 
-  const totalPages = Math.ceil(sortedPosts.length / PAGE_SIZE)
+  const pages = getTotalPages(sortedPosts.length)
 
-  if (isNaN(pageNum) || pageNum < 2 || pageNum > totalPages) {
+  if (isNaN(pageNum) || pageNum < 2 || pageNum > pages) {
     notFound()
   }
 
-  const start = (pageNum - 1) * PAGE_SIZE
-  const end = start + PAGE_SIZE
-  const paginatedPosts = sortedPosts.slice(start, end)
+  const paginatedPosts = paginate(sortedPosts, pageNum)
 
   return (
     <>
@@ -53,7 +49,7 @@ const BlogPage = async ({ params }: { params: Promise<{ page: string }> }) => {
               <PostCard key={post.slug} post={post} returnTo='/blog' />
             ))}
           </div>
-          <Pagination currentPage={pageNum} totalPages={totalPages} />
+          <Pagination currentPage={pageNum} totalPages={pages} />
         </section>
       </div>
     </>

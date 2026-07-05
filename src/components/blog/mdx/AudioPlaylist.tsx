@@ -10,7 +10,7 @@ type AudioPlaylistProps = {
   tracks?: Track[]
 }
 
-const isTrack = (value: unknown): value is Track => {
+export const isTrack = (value: unknown): value is Track => {
   return (
     typeof value === 'object' &&
     value !== null &&
@@ -18,7 +18,7 @@ const isTrack = (value: unknown): value is Track => {
   )
 }
 
-const formatTime = (value: number) => {
+export const formatTime = (value: number) => {
   if (!isFinite(value) || value < 0) return '0:00'
   const minutes = Math.floor(value / 60)
   const seconds = Math.floor(value % 60)
@@ -339,7 +339,7 @@ export const AudioPlaylist: FC<AudioPlaylistProps> = ({
   )
 }
 
-const safeParseTracks = (value: string): Track[] => {
+export const safeParseTracks = (value: string): Track[] => {
   try {
     const parsed = JSON.parse(value)
     return Array.isArray(parsed) ? parsed.filter(isTrack) : []
@@ -349,7 +349,7 @@ const safeParseTracks = (value: string): Track[] => {
   }
 }
 
-const normalizeTracks = (value: unknown): Track[] => {
+export const normalizeTracks = (value: unknown): Track[] => {
   if (Array.isArray(value)) {
     return value.filter(isTrack)
   }

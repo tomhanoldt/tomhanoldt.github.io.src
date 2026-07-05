@@ -5,6 +5,21 @@ const fs = require('node:fs/promises')
 const path = require('node:path')
 const matter = require('gray-matter')
 
+// Returns { ok: true } or { ok: false, message, line?, column? }.
+function validateFrontmatter(source) {
+  try {
+    matter(source)
+    return { ok: true }
+  } catch (error) {
+    const result = { ok: false, message: error.message }
+    if (error.mark && typeof error.mark.line === 'number') {
+      result.line = error.mark.line + 1
+      result.column = error.mark.column + 1
+    }
+    return result
+  }
+}
+
 async function main() {
   const postsDir = path.join(process.cwd(), 'content', 'posts')
   const files = await fs.readdir(postsDir)
@@ -20,16 +35,13 @@ async function main() {
   for (const file of mdxFiles) {
     const fullPath = path.join(postsDir, file)
     const source = await fs.readFile(fullPath, 'utf8')
+    const result = validateFrontmatter(source)
 
-    try {
-      matter(source)
-    } catch (error) {
+    if (!result.ok) {
       hasError = true
-      console.error(`✖ ${file}: ${error.message}`)
-      if (error.mark && typeof error.mark.line === 'number') {
-        console.error(
-          `    at line ${error.mark.line + 1}, column ${error.mark.column + 1}`
-        )
+      console.error(`✖ ${file}: ${result.message}`)
+      if (typeof result.line === 'number') {
+        console.error(`    at line ${result.line}, column ${result.column}`)
       }
     }
   }
@@ -43,7 +55,11 @@ async function main() {
   console.log('✔ All MDX frontmatter parsed successfully.')
 }
 
-main().catch((error) => {
-  console.error(error)
-  process.exitCode = 1
-})
+module.exports = { validateFrontmatter }
+
+if (require.main === module) {
+  main().catch((error) => {
+    console.error(error)
+    process.exitCode = 1
+  })
+}

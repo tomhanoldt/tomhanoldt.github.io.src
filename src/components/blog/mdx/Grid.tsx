@@ -27,10 +27,10 @@ const gapClasses: Record<Gap, string> = {
   12: 'gap-12',
 }
 
-const isColumns = (value: unknown): value is Columns =>
+export const isColumns = (value: unknown): value is Columns =>
   value === 1 || value === 2 || value === 3 || value === 4
 
-const isGap = (value: unknown): value is Gap =>
+export const isGap = (value: unknown): value is Gap =>
   value === 0 ||
   value === 2 ||
   value === 4 ||

@@ -2,16 +2,16 @@ Project quick facts
 -------------------
 - Stack: Next.js (App Router) + TypeScript + MDX content.
 - Styling: Tailwind CSS with PostCSS config in `postcss.config.mjs`; global styles under `src/app/globals.css`.
-- Package runner: bun (`bun run dev`, `bun run lint`).
+- Package runner: bun, run inside Docker via `make` targets (`make dev`, `make lint`) - no local Node/Bun install needed. See `AGENT.md` for the full command list.
 - Content source: MDX posts live in `content/posts/`; media under `public/uploads/` (yearly folders) and `public/images/`.
 - Routing: pages live under `src/app/`; posts at `src/app/blog/[slug]/page.tsx` (URL: `/blog/[slug]`); tag listing at `src/app/tag/[tag]/page.tsx`.
 - Layouts: homepage lives under `src/app/(home)` with its own chrome; blog, imprint, and privacy share the `SiteChrome` shell via `src/app/blog/layout.tsx`.
 
 Working notes
 -------------
-- Default scripts:
-  * `bun run dev` to start the dev server
-  * `bun run lint` for linting, TypeScript validation (no emit, skips lib warnings) and mdx file validation.
+- Default scripts (run via `make`, containerized - see `AGENT.md`):
+  * `make dev` to start the dev server
+  * `make lint` for linting, TypeScript validation (no emit, skips lib warnings) and mdx file validation.
   Static generation is preferred (see `dynamic = 'force-static'` in pages).
 - Prefer exported `const` arrow functions over `function` declarations in app pages, components, and helpers (applies to both default exports and named utilities).
 - For components with no props, define `type XProps = Record<string, never>` instead of `{}` to satisfy lint and keep intent explicit.
@@ -45,4 +45,4 @@ When adding posts or tags, static params will automatically include new pages/ta
 --------------
 - When adding posts, place assets in `public/uploads/<year>/` and reference them with absolute paths (e.g., `/uploads/2024/foo.jpg`).
 - Keep excerpts short (1–2 sentences) to avoid overflow in cards.
-- Run `bun run lint` before committing changes.
+- Run `make lint` before committing changes.

@@ -1,0 +1,14 @@
+# DS-0002 (Dockerfile should USER a non-root user): deliberately not fixed.
+# This image is only ever used for local dev/build (`docker compose run`)
+# and short-lived CI steps - never as a persistently exposed service. The
+# bind-mounted repo source (`.:/app` in docker-compose.yml) needs matching
+# write ownership across two very different host environments: macOS Docker
+# Desktop (which transparently maps container-root writes to the host user)
+# and native-UID GitHub Actions runners (where a mismatched non-root UID
+# would hit real permission errors writing `out/`, `package.json`, etc. -
+# confirmed while building this setup, see AGENT.md). Solving that properly
+# needs per-environment UID build args, which isn't worth the complexity for
+# an ephemeral build container that already runs with `cap_drop: ALL` and
+# `no-new-privileges` (see docker-compose.yml). Re-evaluate if this ever
+# becomes a long-running exposed service.
+AVD-DS-0002 exp:2027-01-05

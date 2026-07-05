@@ -12,12 +12,15 @@ Static-exportable Next.js blog with Markdown/MDX posts, code highlighting, audio
 
 ### Getting started
 
+Everything runs in Docker - no local Node/Bun install needed, just Docker
+and Docker Compose:
+
 ```bash
-bun install
-bun run dev
+make dev
 ```
 
-Visit http://localhost:3000 to view the site.
+Visit http://localhost:3000 to view the site. Run `make help` to see all
+available commands.
 
 ### Writing posts
 
@@ -48,13 +51,17 @@ Place local media under `public/media` if you want it packaged with the static e
 
 ### Commands
 
-- `bun run dev` – start local development
-- `bun run lint` – run ESLint
-- `bun run build` – production build
-- `bun run export` – static export into `out/` (copy this folder to your server)
+- `make dev` – start local development
+- `make lint` – run the full lint suite (eslint + MDX frontmatter + TypeScript)
+- `make test` – run the functional/unit test suite
+- `make next-build` – production build
+- `make export` – static export into `out/` (copy this folder to your server)
+- `make smoke-test` – build + serve the real static export and hit key routes
+- `make outdated` / `make upgrade` – check for / apply dependency updates
+- `make help` – list every available command
 
 ### Deployment
 
-After running `npm run export`, deploy the `out` directory to any static host (S3, Nginx, GitHub Pages, etc.).
+After running `make export`, deploy the `out` directory to any static host (S3, Nginx, GitHub Pages, etc.).
 
 

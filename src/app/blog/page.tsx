@@ -1,4 +1,4 @@
-import { getAllPosts } from '@/lib'
+import { getAllPosts, paginate, totalPages } from '@/lib'
 import { PostCard, Pagination } from '@/components/blog'
 import { HeadMenu } from '@/components/layout/HeadMenu'
 import { blogMenuLinks } from '@/components/layout/menuLinks'
@@ -9,9 +9,7 @@ const BlogHome = async () => {
     (a, b) => new Date(b.date).getTime() - new Date(a.date).getTime()
   )
 
-  // Show only first 20 posts on homepage
-  const pageSize = 20
-  const paginatedPosts = sortedPosts.slice(0, pageSize)
+  const paginatedPosts = paginate(sortedPosts, 1)
 
   return (
     <>
@@ -32,7 +30,7 @@ const BlogHome = async () => {
           </div>
           <Pagination
             currentPage={1}
-            totalPages={Math.ceil(sortedPosts.length / pageSize)}
+            totalPages={totalPages(sortedPosts.length)}
           />
         </section>
       </div>

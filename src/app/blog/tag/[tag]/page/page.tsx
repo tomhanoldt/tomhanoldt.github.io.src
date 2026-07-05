@@ -1,4 +1,4 @@
-import { getAllPosts } from '@/lib'
+import { getAllPosts, paginate, totalPages } from '@/lib'
 import { PostCard, Pagination } from '@/components/blog'
 import { HeadMenu } from '@/components/layout/HeadMenu'
 import { blogMenuLinks } from '@/components/layout/menuLinks'
@@ -8,12 +8,11 @@ export const dynamic = 'force-static'
 export const generateStaticParams = async () => {
   const posts = await getAllPosts()
   const tags = Array.from(new Set(posts.flatMap((post) => post.tags)))
-  const pageSize = 20
   const params = []
   for (const tag of tags) {
     const taggedPosts = posts.filter((post) => post.tags.includes(tag))
-    const totalPages = Math.ceil(taggedPosts.length / pageSize)
-    for (let i = 1; i <= totalPages; i++) {
+    const pages = totalPages(taggedPosts.length)
+    for (let i = 1; i <= pages; i++) {
       params.push({ tag, page: i.toString() })
     }
   }
@@ -26,13 +25,10 @@ const TagPage = async ({
   params: Promise<{ tag: string; page: string }>
 }) => {
   const posts = await getAllPosts()
-  const pageSize = 20
   const { tag, page } = await params
   const taggedPosts = posts.filter((post) => post.tags.includes(tag))
   const pageNum = parseInt(page, 10) || 1
-  const start = (pageNum - 1) * pageSize
-  const end = start + pageSize
-  const paginatedPosts = taggedPosts.slice(start, end)
+  const paginatedPosts = paginate(taggedPosts, pageNum)
 
   return (
     <>
@@ -56,7 +52,7 @@ const TagPage = async ({
           </div>
           <Pagination
             currentPage={pageNum}
-            totalPages={Math.ceil(taggedPosts.length / pageSize)}
+            totalPages={totalPages(taggedPosts.length)}
             tag={tag}
           />
         </section>

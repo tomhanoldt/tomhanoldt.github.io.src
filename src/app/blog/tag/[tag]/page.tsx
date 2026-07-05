@@ -1,6 +1,6 @@
 import Link from 'next/link'
 import { notFound } from 'next/navigation'
-import { getAllPosts } from '@/lib'
+import { getAllPosts, paginate, totalPages } from '@/lib'
 import { PostCard, Pagination } from '@/components/blog'
 import { HeadMenu } from '@/components/layout/HeadMenu'
 import { blogMenuLinks } from '@/components/layout/menuLinks'
@@ -22,11 +22,8 @@ const TagPage = async ({ params }: { params: Promise<{ tag: string }> }) => {
   const filtered = posts.filter((post) => post.tags.includes(tag))
 
   // Page 1 — further pages served by /blog/tag/[tag]/page/[page]
-  const perPage = 20
   const page = 1
-  const start = 0
-  const end = perPage
-  const paginatedPosts = filtered.slice(start, end)
+  const paginatedPosts = paginate(filtered, page)
 
   return (
     <>
@@ -60,7 +57,7 @@ const TagPage = async ({ params }: { params: Promise<{ tag: string }> }) => {
             </div>
             <Pagination
               currentPage={page}
-              totalPages={Math.ceil(filtered.length / perPage)}
+              totalPages={totalPages(filtered.length)}
               tag={tag}
             />
           </>

@@ -69,7 +69,7 @@ function generateSitemap(posts, homeLastmod) {
   const postUrls = posts
     .map(
       ({ slug, lastmod }) =>
-        `  <url>\n    <loc>${SITE_URL}/blog/${slug}</loc>\n    <lastmod>${lastmod}</lastmod>\n  </url>`
+        `  <url>\n    <loc>${SITE_URL}/${slug}</loc>\n    <lastmod>${lastmod}</lastmod>\n  </url>`
     )
     .join('\n')
 
@@ -85,4 +85,8 @@ function main() {
   console.log('sitemap.xml generated with', posts.length, 'posts.')
 }
 
-main()
+export { getAllPosts, getLatestMtimeInDir, generateSitemap }
+
+if (import.meta.main) {
+  main()
+}
