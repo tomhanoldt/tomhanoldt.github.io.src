@@ -133,3 +133,58 @@ publishes on push to `main`. `.github/dependabot.yml` covers the `bun`,
   different UID than the container's root. Don't remove `cap_add:
   [DAC_OVERRIDE]` without re-testing an actual CI run (not just `make
   lint` on a Mac) - the two environments diverge exactly here.
+
+## Writing blog posts (don't re-discover these either)
+
+- **Post files:** `content/posts/YYYY-MM-DD-slug.mdx`. The **date comes from
+  the filename prefix** and the **title from the first `# ` heading** (see
+  `src/lib/posts.ts`) - not from frontmatter. Served at `/blog/<slug>`;
+  cross-link posts with `/blog/<slug>`.
+- **Frontmatter** (`excerpt`, `tags`, `cover` - all optional). An `excerpt:`
+  containing a colon-space (`: `) **must be quoted**, or `make lint`'s
+  frontmatter check fails with "incomplete explicit mapping pair". Verify
+  with `docker compose run --rm app node scripts/check-frontmatter.js`.
+- **THE big MDX gotcha: the pipeline silently strips inline
+  `style={{...}}` objects** - on the custom `<Image>` component *and* on
+  raw elements like `<div>`. They just vanish from the rendered HTML with no
+  error. To size / center / lay out anything, add a rule under `.markdown`
+  in `src/app/globals.css` and pass `className="..."` instead. Plain HTML
+  attributes (`width`/`height`/`fill` on inline `<svg>`, etc.) *do* survive;
+  only JS style objects are dropped. Existing opt-in classes:
+  `post-img-narrow` (center + cap a photo's width), `gh-links` (icon+handle
+  row). Table styling also lives here (there was none until it was added).
+- **All post CSS is scoped under `.markdown`** in `globals.css` - the post
+  body wrapper (`src/app/blog/[slug]/page.tsx`) has `className='markdown'`.
+- **Cover images and inline diagrams are hand-built, URL-encoded inline SVG
+  `data:` URIs** (dark house style: `#111827`→`#0f172a` gradient, sky-blue /
+  green / purple / amber accents, Inter font). Workflow: write the `.svg` in
+  the scratchpad, `xmllint --noout` it, preview with `qlmanage -t -s 1000`,
+  then `urllib.parse.quote(svg, safe='')` and prefix `data:image/svg+xml,`.
+  Keep the giant data-URI on one line; edit via targeted string replacement,
+  never by regenerating the whole SVG (it desyncs working coordinates).
+- **Photos** go in `public/uploads/<year>/`, referenced by absolute path.
+  Resize with `sips -Z <max> -s format jpeg`; `sips` also crops with no
+  extra install - `sips --cropOffset <x> <y> -c <h> <w> in.jpg --out out.jpg`
+  (offset + size in px) - so reach for Pillow only if you need something
+  `sips` can't do. **Some images are shared between posts** - don't
+  overwrite an original in place; make a distinct `-crop` copy.
+- **The `cover:` is shown as a small SQUARE thumbnail in the post list**
+  (`PostCard.tsx`, `object-cover object-center`), so make covers read at 1:1
+  with the subject centered - a wide 1000x520 hero SVG gets center-cropped to
+  a square there. A cover can be *either* an inline-SVG `data:` URI or a plain
+  photo path (`cover: /uploads/<year>/foo.jpg`); both work. `qlmanage`'s own
+  square preview can make a wide SVG *look* clipped when it's actually fine -
+  confirm real layout in the browser.
+- **Rows of images:** wrap `<Image>`s in `<Grid columns="2|3" gap="4">`
+  (props are strings, not JS numbers). Give each image a fixed-height cover
+  class (`className="h-80 w-full object-cover"`) so differing aspect ratios
+  still tile as equal, gap-free rectangles instead of a ragged row.
+- **Author's voice** (match it): first-person, personal, security-minded,
+  em-dashes, concrete numbers, honest about trade-offs, links liberally to
+  his own related posts. Deliberate spelling: the battery is **"Buletti"**
+  (one t), not "Bluetti" - a running joke explained in the solar post, not a
+  typo to "correct".
+- **Verifying a post:** a dev server is usually already on
+  `http://localhost:3000` (a second `make dev` fails with "Another next dev
+  server is already running"); `curl` the `/blog/<slug>` route for a 200 and
+  grep the HTML rather than spinning up a new one.
