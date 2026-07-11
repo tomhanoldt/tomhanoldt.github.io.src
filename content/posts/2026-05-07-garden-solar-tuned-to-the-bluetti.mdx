@@ -1,0 +1,126 @@
+---
+excerpt: Four salvaged panels, one Bluetti, and four labelled lanes across the garden - a build where the only number that can kill the box is voltage, so the amps get spent on purpose.
+tags:
+  - solar
+  - bluetti
+  - home-assistant
+  - self-hosted
+  - garden
+  - diy
+cover: /uploads/2026/cover-sun-box.jpg
+---
+
+# Let It Clip: A Garden Solar Build Tuned to One Buletti
+
+I call it the *Buletti* - one "t" - because I can't resist a proper Berlin-style [Bulette](https://en.wikipedia.org/wiki/Frikadeller), and the name stuck the day it arrived. It's really a [Bluetti Apex 300](https://www.bluetti.com), the battery my whole garden now runs on - and the one-letter slip turned out to be prophetic, though that's a bug for later.
+
+The garden runs on sunshine now. Panels on the shed roof, one Buletti in the corner, and four labelled cables fanning across the lawn to everything that needs power - shower, whirlpool, pavilion, house. The panels went up in a weekend. Settling the *wiring* took two months of evenings (and a lot of back-and-forth with Claude), because I didn't want *a* setup - I wanted the one that fit the hardware exactly, now and when I add to it later.
+
+<Grid columns="3" gap="4">
+  <Image
+    src="/uploads/2026/cable-run-garden.jpg"
+    alt="A cable running across the lawn from the shed - one of the four garden lanes."
+  />
+  <Image
+    src="/uploads/2026/buletti-device.jpg"
+    alt="The Bluetti Apex 300 on a shelf with its four AC outputs each cabled and hand-labelled Pool, Haus, Pavillon and Dusch; the display reads 230V/3840W, 2764.8Wh."
+  />
+  <Image
+    src="/uploads/2026/panels-roof-2.jpg"
+    alt="The panels on the shed roof from the side, wired down into the corner below."
+  />
+</Grid>
+
+*Three frames: a cable crossing the lawn on install day, since trenched underground (left); the Buletti itself, its four plugs tagged **Pool**, **Haus**, **Pavillon**, **Dusch** (middle); and the panels up on the shed roof (right).*
+
+## Only one number can kill it
+
+Each of the Buletti's two solar inputs has three ceilings, and they are not equal:
+
+- **60 V (Voc)** - the wall. Cross it and you can *destroy the input*. Sacred, always.
+- **~20 A** - a soft ceiling. Overshoot and the box just curtails the excess - nothing breaks. Not quite free, though: pinned at the limit the electronics run warm, and sustained heat is slow wear.
+- **wattage** - same story: curtailed, never catastrophic (same heat caveat applies).
+
+> Voltage is the one number that kills the Buletti *outright* - cross 60 V and the input is gone that instant. Too much current or wattage it simply curtails, refusing to pass what it can't. Survivable, not free: held at the ceiling it runs hot, and heat is the slow tax on its lifespan. So the rule: never breach the voltage wall; lean on the current one, eyes open to the trade.
+
+## The panels I had (for free)
+
+| Panel | Qty | Pmax | Voc | Isc |
+|---|---|---|---|---|
+| Trina TSM-425NEG9R.28 | 1 | 425 W | 50.90 V | 10.56 A |
+| Axitec AC-290M | 3 | 290 W | 39.70 V | 9.70 A |
+
+One big, higher-voltage Trina and three matched Axitecs.
+
+## Over-panelled on purpose
+
+Here's where most guides tell you to be careful. I did the opposite, deliberately.
+
+Series is out. Two Axitecs nose-to-tail make 39.7 + 39.7 = **79.4 V** - nineteen volts over the wall, and Voc peaks on a *cold, sunlit morning before any current flows*. That's the one mistake that ends in smoke.
+
+So everything goes parallel. The Trina rides MPPT 1 alone at a calm 50.9 V. And all **three** Axitecs go parallel onto MPPT 2: 3 × 9.70 = **29.1 A**, cheerfully past the 20 A ceiling, ~1,295 W of nameplate panel feeding an input that won't pass it all.
+
+<Image
+  src="data:image/svg+xml,%3Csvg%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%20width%3D%221000%22%20height%3D%22460%22%20viewBox%3D%220%200%201000%20460%22%3E%3Cdefs%3E%3ClinearGradient%20id%3D%22bg2%22%20x1%3D%220%22%20x2%3D%221%22%20y1%3D%220%22%20y2%3D%221%22%3E%3Cstop%20stop-color%3D%22%23111827%22%2F%3E%3Cstop%20offset%3D%221%22%20stop-color%3D%22%230f172a%22%2F%3E%3C%2FlinearGradient%3E%3Cmarker%20id%3D%22arr%22%20markerWidth%3D%2210%22%20markerHeight%3D%2210%22%20refX%3D%228%22%20refY%3D%223%22%20orient%3D%22auto%22%3E%3Cpath%20d%3D%22M0%2C0%20L0%2C6%20L9%2C3%20z%22%20fill%3D%22%230ea5e9%22%2F%3E%3C%2Fmarker%3E%3C%2Fdefs%3E%3Crect%20width%3D%221000%22%20height%3D%22460%22%20fill%3D%22url%28%23bg2%29%22%2F%3E%3Crect%20x%3D%2260%22%20y%3D%2246%22%20width%3D%22180%22%20height%3D%2266%22%20rx%3D%228%22%20fill%3D%22%231c2538%22%20stroke%3D%22%2338bdf8%22%20stroke-width%3D%222%22%2F%3E%3Ctext%20x%3D%22150%22%20y%3D%2276%22%20fill%3D%22%237dd3fc%22%20font-family%3D%22Inter%2C%20sans-serif%22%20font-size%3D%2215%22%20text-anchor%3D%22middle%22%20font-weight%3D%22600%22%3ETrina%20425%20W%3C%2Ftext%3E%3Ctext%20x%3D%22150%22%20y%3D%2298%22%20fill%3D%22%2394a3b8%22%20font-family%3D%22monospace%22%20font-size%3D%2212%22%20text-anchor%3D%22middle%22%3EVoc%2050.9%20V%3C%2Ftext%3E%3Crect%20x%3D%2260%22%20y%3D%22164%22%20width%3D%22180%22%20height%3D%2252%22%20rx%3D%228%22%20fill%3D%22%231c2538%22%20stroke%3D%22%230ea5e9%22%20stroke-width%3D%222%22%2F%3E%3Ctext%20x%3D%22150%22%20y%3D%22185%22%20fill%3D%22%23e2e8f0%22%20font-family%3D%22Inter%2C%20sans-serif%22%20font-size%3D%2214%22%20text-anchor%3D%22middle%22%3EAxitec%20290%20W%3C%2Ftext%3E%3Ctext%20x%3D%22150%22%20y%3D%22204%22%20fill%3D%22%2394a3b8%22%20font-family%3D%22monospace%22%20font-size%3D%2211.5%22%20text-anchor%3D%22middle%22%3EIsc%209.70%20A%3C%2Ftext%3E%3Crect%20x%3D%2260%22%20y%3D%22222%22%20width%3D%22180%22%20height%3D%2252%22%20rx%3D%228%22%20fill%3D%22%231c2538%22%20stroke%3D%22%230ea5e9%22%20stroke-width%3D%222%22%2F%3E%3Ctext%20x%3D%22150%22%20y%3D%22243%22%20fill%3D%22%23e2e8f0%22%20font-family%3D%22Inter%2C%20sans-serif%22%20font-size%3D%2214%22%20text-anchor%3D%22middle%22%3EAxitec%20290%20W%3C%2Ftext%3E%3Ctext%20x%3D%22150%22%20y%3D%22262%22%20fill%3D%22%2394a3b8%22%20font-family%3D%22monospace%22%20font-size%3D%2211.5%22%20text-anchor%3D%22middle%22%3EIsc%209.70%20A%3C%2Ftext%3E%3Crect%20x%3D%2260%22%20y%3D%22280%22%20width%3D%22180%22%20height%3D%2252%22%20rx%3D%228%22%20fill%3D%22%231c2538%22%20stroke%3D%22%230ea5e9%22%20stroke-width%3D%222%22%2F%3E%3Ctext%20x%3D%22150%22%20y%3D%22301%22%20fill%3D%22%23e2e8f0%22%20font-family%3D%22Inter%2C%20sans-serif%22%20font-size%3D%2214%22%20text-anchor%3D%22middle%22%3EAxitec%20290%20W%3C%2Ftext%3E%3Ctext%20x%3D%22150%22%20y%3D%22320%22%20fill%3D%22%2394a3b8%22%20font-family%3D%22monospace%22%20font-size%3D%2211.5%22%20text-anchor%3D%22middle%22%3EIsc%209.70%20A%3C%2Ftext%3E%3Ctext%20x%3D%22150%22%20y%3D%22356%22%20fill%3D%22%23fca5a5%22%20font-family%3D%22Inter%2C%20sans-serif%22%20font-size%3D%2212.5%22%20text-anchor%3D%22middle%22%3E3%C3%97%20parallel%20%3D%20870%20W%2C%2029.1%20A%3C%2Ftext%3E%3Cpath%20d%3D%22M240%2079%20L%20452%2088%22%20stroke%3D%22%230ea5e9%22%20stroke-width%3D%223%22%20fill%3D%22none%22%20marker-end%3D%22url%28%23arr%29%22%2F%3E%3Cpath%20d%3D%22M240%20190%20C%20330%20190%20360%20250%20452%20258%22%20stroke%3D%22%230ea5e9%22%20stroke-width%3D%223%22%20fill%3D%22none%22%2F%3E%3Cpath%20d%3D%22M240%20248%20L%20360%20250%22%20stroke%3D%22%230ea5e9%22%20stroke-width%3D%223%22%20fill%3D%22none%22%2F%3E%3Cpath%20d%3D%22M240%20306%20C%20330%20306%20360%20262%20452%20266%22%20stroke%3D%22%230ea5e9%22%20stroke-width%3D%223%22%20fill%3D%22none%22%2F%3E%3Cpath%20d%3D%22M452%20262%20L%20470%20262%22%20stroke%3D%22%230ea5e9%22%20stroke-width%3D%223%22%20fill%3D%22none%22%20marker-end%3D%22url%28%23arr%29%22%2F%3E%3Crect%20x%3D%22472%22%20y%3D%2252%22%20width%3D%22222%22%20height%3D%2282%22%20rx%3D%2210%22%20fill%3D%22%230ea5e9%22%20opacity%3D%220.15%22%20stroke%3D%22%2338bdf8%22%20stroke-width%3D%222%22%2F%3E%3Ctext%20x%3D%22583%22%20y%3D%2282%22%20fill%3D%22%237dd3fc%22%20font-family%3D%22Inter%2C%20sans-serif%22%20font-size%3D%2216%22%20text-anchor%3D%22middle%22%20font-weight%3D%22600%22%3EMPPT%201%3C%2Ftext%3E%3Ctext%20x%3D%22583%22%20y%3D%22106%22%20fill%3D%22%23e2e8f0%22%20font-family%3D%22monospace%22%20font-size%3D%2213%22%20text-anchor%3D%22middle%22%3E~425%20W%3C%2Ftext%3E%3Ctext%20x%3D%22583%22%20y%3D%22125%22%20fill%3D%22%2394a3b8%22%20font-family%3D%22monospace%22%20font-size%3D%2211.5%22%20text-anchor%3D%22middle%22%3E50.9%20V%2C%20one%20panel%3C%2Ftext%3E%3Crect%20x%3D%22472%22%20y%3D%22216%22%20width%3D%22222%22%20height%3D%2296%22%20rx%3D%2210%22%20fill%3D%22%23f59e0b%22%20opacity%3D%220.13%22%20stroke%3D%22%23f59e0b%22%20stroke-width%3D%222%22%2F%3E%3Ctext%20x%3D%22583%22%20y%3D%22246%22%20fill%3D%22%23fcd34d%22%20font-family%3D%22Inter%2C%20sans-serif%22%20font-size%3D%2216%22%20text-anchor%3D%22middle%22%20font-weight%3D%22600%22%3EMPPT%202%3C%2Ftext%3E%3Ctext%20x%3D%22583%22%20y%3D%22270%22%20fill%3D%22%23e2e8f0%22%20font-family%3D%22monospace%22%20font-size%3D%2213%22%20text-anchor%3D%22middle%22%3E870%20W%20in%20%E2%86%92%20clipped%3C%2Ftext%3E%3Ctext%20x%3D%22583%22%20y%3D%22290%22%20fill%3D%22%23fcd34d%22%20font-family%3D%22monospace%22%20font-size%3D%2211.5%22%20text-anchor%3D%22middle%22%3Eheld%20to%20the%20input%20limit%3C%2Ftext%3E%3Cpath%20d%3D%22M694%2090%20C%20760%2090%20780%20200%20812%20214%22%20stroke%3D%22%23475569%22%20stroke-width%3D%223%22%20fill%3D%22none%22%2F%3E%3Cpath%20d%3D%22M694%20264%20C%20760%20264%20780%20232%20812%20224%22%20stroke%3D%22%23475569%22%20stroke-width%3D%223%22%20fill%3D%22none%22%2F%3E%3Cpath%20d%3D%22M810%20219%20L%20830%20219%22%20stroke%3D%22%23475569%22%20stroke-width%3D%223%22%20fill%3D%22none%22%20marker-end%3D%22url%28%23arr%29%22%2F%3E%3Crect%20x%3D%22830%22%20y%3D%22150%22%20width%3D%22140%22%20height%3D%22140%22%20rx%3D%2212%22%20fill%3D%22%231c2538%22%20stroke%3D%22%2338bdf8%22%20stroke-width%3D%222.5%22%2F%3E%3Ctext%20x%3D%22900%22%20y%3D%22186%22%20fill%3D%22%237dd3fc%22%20font-family%3D%22Inter%2C%20sans-serif%22%20font-size%3D%2215%22%20text-anchor%3D%22middle%22%20font-weight%3D%22600%22%3EApex%20300%3C%2Ftext%3E%3Crect%20x%3D%22848%22%20y%3D%22202%22%20width%3D%22104%22%20height%3D%2226%22%20rx%3D%224%22%20fill%3D%22%230f172a%22%20stroke%3D%22%23475569%22%20stroke-width%3D%221.5%22%2F%3E%3Crect%20x%3D%22851%22%20y%3D%22205%22%20width%3D%2270%22%20height%3D%2220%22%20rx%3D%222%22%20fill%3D%22%2322c55e%22%20opacity%3D%220.85%22%2F%3E%3Ctext%20x%3D%22900%22%20y%3D%22256%22%20fill%3D%22%2394a3b8%22%20font-family%3D%22monospace%22%20font-size%3D%2212%22%20text-anchor%3D%22middle%22%3E~1%2C295%20W%3C%2Ftext%3E%3Ctext%20x%3D%22900%22%20y%3D%22274%22%20fill%3D%22%2364748b%22%20font-family%3D%22monospace%22%20font-size%3D%2211%22%20text-anchor%3D%22middle%22%3Enameplate%3C%2Ftext%3E%3Ctext%20x%3D%22900%22%20y%3D%22290%22%20fill%3D%22%2364748b%22%20font-family%3D%22monospace%22%20font-size%3D%2210.5%22%20text-anchor%3D%22middle%22%3E2764.8%20Wh%3C%2Ftext%3E%3Ctext%20x%3D%22500%22%20y%3D%22410%22%20fill%3D%22%2394a3b8%22%20font-family%3D%22Inter%2C%20sans-serif%22%20font-size%3D%2213.5%22%20text-anchor%3D%22middle%22%20opacity%3D%220.9%22%3ESeries%20would%20hit%2079.4%20V%20and%20cook%20the%20box%20%E2%80%94%20forbidden.%2029.1%20A%20only%20clips%20to%20the%20limit%20%E2%80%94%20allowed%2C%20on%20purpose.%3C%2Ftext%3E%3C%2Fsvg%3E"
+  alt="Wiring diagram: the Trina 425 W feeds MPPT 1 alone at 50.9 V; three Axitec 290 W panels in parallel (870 W, 29.1 A) feed MPPT 2 and get clipped to the input limit; ~1,295 W nameplate into the Apex 300. Series would hit 79.4 V and destroy the box; 29.1 A only clips."
+/>
+
+Why hang a third panel I *know* gets clipped? Because clipping costs nothing but the rare bright peak - and this is Germany, not Arizona. Under the cloud we sit beneath most of the year, three panels in parallel reach the inverter's working point sooner and harvest more on dull days; all I forfeit is a sliver of the handful of blazing afternoons. Over-panelling isn't waste here. It's the point.
+
+The one honest cost is heat: on those bright peaks MPPT 2 sits pinned at its current limit and runs warm, and sustained heat is what quietly ages the electronics (the Buletti handles it - it even derates itself when hot - but "handles" isn't "loves"). A deliberate trade, then: a little long-term longevity for a lot more grey-day yield, eyes open.
+
+<Image
+  src="/uploads/2026/panels-on-shed-roof.jpg"
+  alt="Two of the solar panels mounted and tilted on the flat shed roof, wired down to the box below."
+/>
+
+*The panels on the shed roof - tilted, ballasted, wired down into the corner.*
+
+## Four labelled lanes
+
+A full battery is worth nothing if the power can't reach what needs it. The Buletti has four 16 A outputs, and each drives its own cable across the garden - trenched safely underground, not left lying on the lawn, and physically taped with a label at each end, because future-me will forget:
+
+<Image
+  src="data:image/svg+xml,%3Csvg%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%20width%3D%221000%22%20height%3D%22520%22%20viewBox%3D%220%200%201000%20520%22%3E%3Cdefs%3E%3ClinearGradient%20id%3D%22bg5%22%20x1%3D%220%22%20x2%3D%221%22%20y1%3D%220%22%20y2%3D%221%22%3E%3Cstop%20stop-color%3D%22%23111827%22%2F%3E%3Cstop%20offset%3D%221%22%20stop-color%3D%22%230f172a%22%2F%3E%3C%2FlinearGradient%3E%3Cmarker%20id%3D%22gin%22%20markerWidth%3D%2210%22%20markerHeight%3D%2210%22%20refX%3D%228%22%20refY%3D%223%22%20orient%3D%22auto%22%3E%3Cpath%20d%3D%22M0%2C0%20L0%2C6%20L9%2C3%20z%22%20fill%3D%22%2394a3b8%22%2F%3E%3C%2Fmarker%3E%3C%2Fdefs%3E%3Crect%20width%3D%221000%22%20height%3D%22520%22%20fill%3D%22url%28%23bg5%29%22%2F%3E%3Ctext%20x%3D%22500%22%20y%3D%2230%22%20fill%3D%22%2394a3b8%22%20font-family%3D%22Inter%2C%20sans-serif%22%20font-size%3D%2216.5%22%20text-anchor%3D%22middle%22%20opacity%3D%220.9%22%3Eone%20Buletti%2C%20four%20labelled%20lanes%20out%20%26%238212%3B%20and%20one%20grid%20line%20in%3C%2Ftext%3E%3Crect%20x%3D%2248%22%20y%3D%22222%22%20width%3D%22184%22%20height%3D%22112%22%20rx%3D%2214%22%20fill%3D%22%231c2538%22%20stroke%3D%22%2338bdf8%22%20stroke-width%3D%223%22%2F%3E%3Ctext%20x%3D%22140%22%20y%3D%22258%22%20fill%3D%22%237dd3fc%22%20font-family%3D%22Inter%2C%20sans-serif%22%20font-size%3D%2216%22%20text-anchor%3D%22middle%22%20font-weight%3D%22600%22%3EBuletti%20Apex%20300%3C%2Ftext%3E%3Crect%20x%3D%2274%22%20y%3D%22274%22%20width%3D%22132%22%20height%3D%2226%22%20rx%3D%225%22%20fill%3D%22%230f172a%22%20stroke%3D%22%23475569%22%20stroke-width%3D%221.5%22%2F%3E%3Crect%20x%3D%2277%22%20y%3D%22277%22%20width%3D%2288%22%20height%3D%2220%22%20rx%3D%222%22%20fill%3D%22%2322c55e%22%20opacity%3D%220.85%22%2F%3E%3Ctext%20x%3D%22140%22%20y%3D%22320%22%20fill%3D%22%2364748b%22%20font-family%3D%22monospace%22%20font-size%3D%2211.5%22%20text-anchor%3D%22middle%22%3E4%26%23215%3B%2016%20A%20out%20%26%23183%3B%202764.8%20Wh%3C%2Ftext%3E%3Cpath%20d%3D%22M140%20408%20L%20140%20340%22%20stroke%3D%22%2364748b%22%20stroke-width%3D%223%22%20fill%3D%22none%22%20stroke-dasharray%3D%226%205%22%20marker-end%3D%22url%28%23gin%29%22%2F%3E%3Crect%20x%3D%2242%22%20y%3D%22410%22%20width%3D%22196%22%20height%3D%2286%22%20rx%3D%2212%22%20fill%3D%22%231c2538%22%20stroke%3D%22%2364748b%22%20stroke-width%3D%222%22%20stroke-dasharray%3D%227%204%22%2F%3E%3Ctext%20x%3D%22140%22%20y%3D%22438%22%20fill%3D%22%23cbd5e1%22%20font-family%3D%22Inter%2C%20sans-serif%22%20font-size%3D%2215%22%20text-anchor%3D%22middle%22%20font-weight%3D%22600%22%3ECity%20grid%20%28fallback%29%3C%2Ftext%3E%3Ctext%20x%3D%22140%22%20y%3D%22460%22%20fill%3D%22%2386efac%22%20font-family%3D%22monospace%22%20font-size%3D%2212%22%20text-anchor%3D%22middle%22%3Eeco%20tariff%3C%2Ftext%3E%3Ctext%20x%3D%22140%22%20y%3D%22480%22%20fill%3D%22%2394a3b8%22%20font-family%3D%22monospace%22%20font-size%3D%2211.5%22%20text-anchor%3D%22middle%22%3Echarges%20only%20below%2020%25%3C%2Ftext%3E%3Cpath%20d%3D%22M232%20270%20C%20330%20270%20360%20112%20516%20112%22%20stroke%3D%22%23fbbf24%22%20stroke-width%3D%223%22%20fill%3D%22none%22%20opacity%3D%220.9%22%2F%3E%3Ccircle%20cx%3D%22516%22%20cy%3D%22112%22%20r%3D%224.5%22%20fill%3D%22%23fbbf24%22%2F%3E%3Cpath%20d%3D%22M232%20276%20C%20340%20276%20380%20224%20516%20224%22%20stroke%3D%22%2322d3ee%22%20stroke-width%3D%223%22%20fill%3D%22none%22%20opacity%3D%220.9%22%2F%3E%3Ccircle%20cx%3D%22516%22%20cy%3D%22224%22%20r%3D%224.5%22%20fill%3D%22%2322d3ee%22%2F%3E%3Cpath%20d%3D%22M232%20282%20C%20340%20282%20380%20336%20516%20336%22%20stroke%3D%22%2322c55e%22%20stroke-width%3D%223%22%20fill%3D%22none%22%20opacity%3D%220.9%22%2F%3E%3Ccircle%20cx%3D%22516%22%20cy%3D%22336%22%20r%3D%224.5%22%20fill%3D%22%2322c55e%22%2F%3E%3Cpath%20d%3D%22M232%20288%20C%20330%20288%20360%20448%20516%20448%22%20stroke%3D%22%23a855f7%22%20stroke-width%3D%223%22%20fill%3D%22none%22%20opacity%3D%220.9%22%2F%3E%3Ccircle%20cx%3D%22516%22%20cy%3D%22448%22%20r%3D%224.5%22%20fill%3D%22%23a855f7%22%2F%3E%3Crect%20x%3D%22516%22%20y%3D%2262%22%20width%3D%22460%22%20height%3D%22100%22%20rx%3D%2210%22%20fill%3D%22%231c2538%22%20stroke%3D%22%23fbbf24%22%20stroke-width%3D%222%22%2F%3E%3Ctext%20x%3D%22536%22%20y%3D%2292%22%20fill%3D%22%23fcd34d%22%20font-family%3D%22Inter%2C%20sans-serif%22%20font-size%3D%2216%22%20font-weight%3D%22600%22%3ELane%201%20%26%23183%3B%20Shower%20%2F%20wash%3C%2Ftext%3E%3Ctext%20x%3D%22536%22%20y%3D%22120%22%20fill%3D%22%2394a3b8%22%20font-family%3D%22monospace%22%20font-size%3D%2212.5%22%3Eshower%20water%20heater%3C%2Ftext%3E%3Ctext%20x%3D%22956%22%20y%3D%22120%22%20fill%3D%22%23cbd5e1%22%20font-family%3D%22monospace%22%20font-size%3D%2212.5%22%20text-anchor%3D%22end%22%3E2000%20W%3C%2Ftext%3E%3Ctext%20x%3D%22536%22%20y%3D%22142%22%20fill%3D%22%2394a3b8%22%20font-family%3D%22monospace%22%20font-size%3D%2212.5%22%3Ewashing%20machine%3C%2Ftext%3E%3Ctext%20x%3D%22956%22%20y%3D%22142%22%20fill%3D%22%23cbd5e1%22%20font-family%3D%22monospace%22%20font-size%3D%2212.5%22%20text-anchor%3D%22end%22%3E2000%20W%20%26%23183%3B%20never%20both%3C%2Ftext%3E%3Crect%20x%3D%22516%22%20y%3D%22176%22%20width%3D%22460%22%20height%3D%22100%22%20rx%3D%2210%22%20fill%3D%22%231c2538%22%20stroke%3D%22%2322d3ee%22%20stroke-width%3D%222%22%2F%3E%3Ctext%20x%3D%22536%22%20y%3D%22206%22%20fill%3D%22%2367e8f9%22%20font-family%3D%22Inter%2C%20sans-serif%22%20font-size%3D%2216%22%20font-weight%3D%22600%22%3ELane%202%20%26%23183%3B%20Pavilion%3C%2Ftext%3E%3Ctext%20x%3D%22536%22%20y%3D%22234%22%20fill%3D%22%2394a3b8%22%20font-family%3D%22monospace%22%20font-size%3D%2212.5%22%3Ekettle%202200%20W%20%26%23183%3B%20IR%20heater%201500%20W%3C%2Ftext%3E%3Ctext%20x%3D%22536%22%20y%3D%22256%22%20fill%3D%22%2394a3b8%22%20font-family%3D%22monospace%22%20font-size%3D%2212.5%22%3Edrinks%20fridge%20%26%23183%3B%20turtle%20terrarium%20%26%23183%3B%20TV%3C%2Ftext%3E%3Crect%20x%3D%22516%22%20y%3D%22290%22%20width%3D%22460%22%20height%3D%22100%22%20rx%3D%2210%22%20fill%3D%22%231c2538%22%20stroke%3D%22%2322c55e%22%20stroke-width%3D%222%22%2F%3E%3Ctext%20x%3D%22536%22%20y%3D%22320%22%20fill%3D%22%2386efac%22%20font-family%3D%22Inter%2C%20sans-serif%22%20font-size%3D%2216%22%20font-weight%3D%22600%22%3ELane%203%20%26%23183%3B%20House%3C%2Ftext%3E%3Ctext%20x%3D%22536%22%20y%3D%22348%22%20fill%3D%22%2394a3b8%22%20font-family%3D%22monospace%22%20font-size%3D%2212.5%22%3EMidea%20A%2FC%20%2B%20heat%203500%20W%20%26%23183%3B%20fridge%20210%20W%3C%2Ftext%3E%3Ctext%20x%3D%22536%22%20y%3D%22370%22%20fill%3D%22%2394a3b8%22%20font-family%3D%22monospace%22%20font-size%3D%2212.5%22%3Erouter%20%26%23183%3B%20Fritz%21Box%20%26%23183%3B%20Home%20Assistant%3C%2Ftext%3E%3Crect%20x%3D%22516%22%20y%3D%22404%22%20width%3D%22460%22%20height%3D%22100%22%20rx%3D%2210%22%20fill%3D%22%231c2538%22%20stroke%3D%22%23a855f7%22%20stroke-width%3D%222%22%2F%3E%3Ctext%20x%3D%22536%22%20y%3D%22434%22%20fill%3D%22%23d8b4fe%22%20font-family%3D%22Inter%2C%20sans-serif%22%20font-size%3D%2216%22%20font-weight%3D%22600%22%3ELane%204%20%26%23183%3B%20Whirlpool%3C%2Ftext%3E%3Ctext%20x%3D%22536%22%20y%3D%22462%22%20fill%3D%22%2394a3b8%22%20font-family%3D%22monospace%22%20font-size%3D%2212.5%22%3EMSpa%20heater%201500%20W%20%2B%20pump%2060%20W%3C%2Ftext%3E%3Ctext%20x%3D%22536%22%20y%3D%22484%22%20fill%3D%22%2394a3b8%22%20font-family%3D%22monospace%22%20font-size%3D%2212.5%22%3Egarden%20LED%20~20%20W%3C%2Ftext%3E%3C%2Fsvg%3E"
+  alt="Distribution diagram: the Buletti Apex 300 (4x 16 A out, 2764.8 Wh) feeds four labelled lanes and takes one grid line in. Lane 1 Shower/wash - shower water heater 2000 W, washing machine 2000 W, never both. Lane 2 Pavilion - kettle 2200 W, IR heater 1500 W, drinks fridge, turtle terrarium, TV. Lane 3 House - Midea A/C and heat 3500 W, fridge 210 W, router, Fritz!Box, Home Assistant. Lane 4 Whirlpool - MSpa heater 1500 W plus pump 60 W, garden LED. A dashed City grid (eco tariff) line feeds the battery, charging only below 20 percent."
+/>
+
+The loads are lumpy. Lane 1 carries the two 2,000 W monsters - shower water heater and washing machine - which is exactly why they **never run together**; the Buletti's PowerLift rides out the surge when the drum spins up, but not both, continuously. The pavilion hides a 2,200 W kettle and the turtle terrarium's heat and UV lamps. The house lane keeps the Midea A/C-and-heat unit, the fridge-freezer, router, and Home Assistant alive. The whirlpool spends 1,500 W to heat and almost nothing to circulate. Steady-state, though, the whole garden idles at just **300–350 W** - mostly fridges cycling - which is what the dashboard reads on a normal afternoon.
+
+The fifth cable runs the other way: a fallback line back to the city grid on an **eco tariff**, feeding the Buletti rather than a lane. It only kicks in when the battery drops below **20 %** - so on a run of grey days the garden tops up from the wall instead of going flat, and the moment the sun's back the panels take over. Solar-first, grid-as-safety-net.
+
+Those "never both" rules aren't left to memory. Home Assistant watches the per-lane draw and enforces the ceilings itself: an automation that sees, say, the shower heater and the washing machine pulling on Lane 1 at once - or any lane creeping toward its 16 A limit - cuts power to the lower-priority device via its smart plug before the fuse ever has to. The house rules are real code, not sticky notes.
+
+One sharp edge the automations *don't* fully cover: the Buletti recharges from the garden's own 16 A circuit at up to 10 A. Start the lawnmower (~9 A) on that same circuit while it's charging and you're at **~19 A** - the 16 A fuse trips and the garden goes dark. So the human rule stands too: a glance at Home Assistant first, and if the Buletti is pulling grid, the mower waits.
+
+And a gift I didn't design for: the Buletti is a UPS. When the grid blips, it takes over instantly and seamlessly - the fridge never notices, Home Assistant never reboots, the router stays up. That one *Haus* lane means an indoor outage costs me neither the network nor the food.
+
+## The numbers, and a bug that lied
+
+Remember that prophetic misspelling? Home Assistant exposes the device under a `buletti_` prefix - one "t", *exactly my nickname*, straight from the integration. So when my "money saved" sensor referenced the *correct* Bluetti spelling, it quietly read nothing and froze at a fixed value - looking, for weeks, exactly like a hardware fault.
+
+One corrected string, and it came back to life.
+
+<Grid columns="2" gap="4">
+  <Image
+    src="/uploads/2026/energy-dashboard.png"
+    alt="Home Assistant energy dashboard on the phone app: 936 W photovoltaic in, battery 86%, 307 W AC output to the house."
+    className="h-80 w-full object-cover object-top"
+  />
+  <Image
+    src="/uploads/2026/tablet-energy-dashboard.jpg"
+    alt="The same Home Assistant Energie dashboard on the wall tablet: 765 W in, battery 56%, 436 W out, with autarky and savings tiles (Gespart Monat 14.20 EUR, gesamt 109.40 EUR)."
+    className="h-80 w-full object-cover"
+  />
+</Grid>
+
+*Two windows on the same numbers - the phone app (left) and the wall tablet (right). Battery filling, nothing drawn from the grid, and the month's savings ticking up on their own.*
+
+> The maths that makes it worth it: the panels were **free** - a friend and I carried them out of a Berlin doorway years ago from a stint installing for [Enpal](https://www.enpal.de), and they've come full circle to my own garden. So the whole spend was the Buletti plus ~€250 of cable for the runs - about **€1,800 all in** after discounts, saving roughly **€50 a summer month**. A few sunny years and it's paid for itself, then just keeps paying.
+
+
+## The point
+
+Building your own? Start from your battery's per-input limits, mark the one ceiling that *destroys* against the ones that merely *waste* - and spend the difference on purpose.
+
+It comes down to the same thing every business runs on: know your numbers. Then know what the future needs - or what you think it will - because that's what you're really sizing for. Only then do you work backwards: how many panels the space can take, and what specs the power station has to hold to match them. A bigger house wants a more robust system than this; but this is a garden, and after two months of measuring, arguing, and second-guessing, I think I've found the perfect fit for it.
