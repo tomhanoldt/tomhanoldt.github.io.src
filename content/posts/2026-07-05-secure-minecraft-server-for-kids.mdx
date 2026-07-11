@@ -42,6 +42,13 @@ The next real step wasn't a Minecraft feature - it was throwing out the manual s
 
 It's split into two roles - `common` (Docker, Tailscale, the firewall, SSH/sudo hardening) and `minecraft` (the server itself, plugins, whitelist) - with tags on the riskier tasks, so I can re-run just one piece (`--tags firewall`, say) without touching anything else. Every bug I found (several, more below) went into the playbook, not a one-off SSH session I'd forget by the next deploy.
 
+And I don't fly it blind: the same [Home Assistant setup](/blog/home-assistant-setup) that runs the rest of the house keeps a tile on this box too - players online, CPU, RAM and temperature - so I usually spot a problem before someone messages me that "Minecraft is broken."
+
+<Image
+  src="/uploads/2026/minecraft-dashboard.jpg"
+  alt="A Home Assistant dashboard for the Minecraft server: a 'players online' gauge, CPU, RAM and temperature tiles, and per-player stats (playtime, deaths, mob kills) for each kid."
+/>
+
 ## Locking down the network before anything else
 
 The single most important decision: **the server is never reachable from the public internet, period.** No port forwarding, no dynamic DNS, no exposed IP. Everyone connects over [Tailscale](https://tailscale.com), a WireGuard mesh VPN - UFW only accepts Minecraft traffic from the tailnet's own address range.
