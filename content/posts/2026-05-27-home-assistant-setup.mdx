@@ -1,0 +1,107 @@
+---
+excerpt: "How I run my house and garden on a self-hosted Home Assistant — a Raspberry Pi, a vendor-neutral Zigbee stack, a solar battery that rides through blackouts, fully-automated tortoises, and a solar array oversized on purpose. Local-first, no cloud."
+tags:
+  - code
+  - home-assistant
+  - self-hosted
+  - zigbee
+  - solar
+  - smart-home
+  - automation
+cover: data:image/svg+xml,%3Csvg%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%20width%3D%221000%22%20height%3D%22520%22%20viewBox%3D%220%200%201000%20520%22%3E%0A%20%3Cdefs%3E%0A%20%20%3ClinearGradient%20id%3D%22bg%22%20x1%3D%220%22%20x2%3D%221%22%20y1%3D%220%22%20y2%3D%221%22%3E%0A%20%20%20%3Cstop%20stop-color%3D%22%23111827%22%2F%3E%0A%20%20%20%3Cstop%20offset%3D%221%22%20stop-color%3D%22%230f172a%22%2F%3E%0A%20%20%3C%2FlinearGradient%3E%0A%20%20%3Cmarker%20id%3D%22ar%22%20markerWidth%3D%2210%22%20markerHeight%3D%2210%22%20refX%3D%228%22%20refY%3D%223%22%20orient%3D%22auto%22%3E%0A%20%20%20%3Cpath%20d%3D%22M0%2C0%20L0%2C6%20L9%2C3%20z%22%20fill%3D%22%2322c55e%22%2F%3E%0A%20%20%3C%2Fmarker%3E%0A%20%3C%2Fdefs%3E%0A%20%3Crect%20width%3D%221000%22%20height%3D%22520%22%20fill%3D%22url%28%23bg%29%22%2F%3E%0A%20%3Ccircle%20cx%3D%22130%22%20cy%3D%2286%22%20r%3D%2228%22%20fill%3D%22%23fbbf24%22%20opacity%3D%220.9%22%2F%3E%0A%20%3Cg%20stroke%3D%22%23fbbf24%22%20stroke-width%3D%223%22%20opacity%3D%220.65%22%3E%0A%20%20%3Cline%20x1%3D%22130%22%20y1%3D%2230%22%20x2%3D%22130%22%20y2%3D%2246%22%2F%3E%0A%20%20%3Cline%20x1%3D%22130%22%20y1%3D%22126%22%20x2%3D%22130%22%20y2%3D%22142%22%2F%3E%0A%20%20%3Cline%20x1%3D%2274%22%20y1%3D%2286%22%20x2%3D%2290%22%20y2%3D%2286%22%2F%3E%0A%20%20%3Cline%20x1%3D%22170%22%20y1%3D%2286%22%20x2%3D%22186%22%20y2%3D%2286%22%2F%3E%0A%20%20%3Cline%20x1%3D%2290%22%20y1%3D%2246%22%20x2%3D%22101%22%20y2%3D%2257%22%2F%3E%0A%20%20%3Cline%20x1%3D%22159%22%20y1%3D%22115%22%20x2%3D%22170%22%20y2%3D%22126%22%2F%3E%0A%20%20%3Cline%20x1%3D%22170%22%20y1%3D%2246%22%20x2%3D%22159%22%20y2%3D%2257%22%2F%3E%0A%20%20%3Cline%20x1%3D%22101%22%20y1%3D%22115%22%20x2%3D%2290%22%20y2%3D%22126%22%2F%3E%0A%20%3C%2Fg%3E%0A%20%3Cg%20transform%3D%22translate%2864%2C168%29%22%3E%0A%20%20%3Crect%20x%3D%220%22%20y%3D%220%22%20width%3D%22168%22%20height%3D%2294%22%20rx%3D%224%22%20fill%3D%22%231c2538%22%20stroke%3D%22%230ea5e9%22%20stroke-width%3D%222%22%2F%3E%0A%20%20%3Cline%20x1%3D%220%22%20y1%3D%2231%22%20x2%3D%22168%22%20y2%3D%2231%22%20stroke%3D%22%230ea5e9%22%20stroke-width%3D%221%22%20opacity%3D%220.5%22%2F%3E%0A%20%20%3Cline%20x1%3D%220%22%20y1%3D%2262%22%20x2%3D%22168%22%20y2%3D%2262%22%20stroke%3D%22%230ea5e9%22%20stroke-width%3D%221%22%20opacity%3D%220.5%22%2F%3E%0A%20%20%3Cline%20x1%3D%2256%22%20y1%3D%220%22%20x2%3D%2256%22%20y2%3D%2294%22%20stroke%3D%22%230ea5e9%22%20stroke-width%3D%221%22%20opacity%3D%220.5%22%2F%3E%0A%20%20%3Cline%20x1%3D%22112%22%20y1%3D%220%22%20x2%3D%22112%22%20y2%3D%2294%22%20stroke%3D%22%230ea5e9%22%20stroke-width%3D%221%22%20opacity%3D%220.5%22%2F%3E%0A%20%3C%2Fg%3E%0A%20%3Cpath%20d%3D%22M148%20268%20L148%20320%22%20stroke%3D%22%2322c55e%22%20stroke-width%3D%223%22%20marker-end%3D%22url%28%23ar%29%22%2F%3E%0A%20%3Crect%20x%3D%2290%22%20y%3D%22330%22%20width%3D%22120%22%20height%3D%2292%22%20rx%3D%2210%22%20fill%3D%22%230f172a%22%20stroke%3D%22%2322c55e%22%20stroke-width%3D%222%22%2F%3E%0A%20%3Crect%20x%3D%22100%22%20y%3D%22381%22%20width%3D%22100%22%20height%3D%2231%22%20rx%3D%224%22%20fill%3D%22%2322c55e%22%20opacity%3D%220.32%22%2F%3E%0A%20%3Ctext%20x%3D%22150%22%20y%3D%22366%22%20fill%3D%22%2386efac%22%20font-family%3D%22Inter%2C%20sans-serif%22%20font-size%3D%2214%22%20text-anchor%3D%22middle%22%3Ebattery%3C%2Ftext%3E%0A%20%3Cline%20x1%3D%22210%22%20y1%3D%22372%22%20x2%3D%22404%22%20y2%3D%22298%22%20stroke%3D%22%23334155%22%20stroke-width%3D%222%22%20stroke-dasharray%3D%224%206%22%20opacity%3D%220.7%22%2F%3E%0A%20%3Crect%20x%3D%22404%22%20y%3D%22204%22%20width%3D%22184%22%20height%3D%22126%22%20rx%3D%2216%22%20fill%3D%22%231c2538%22%20stroke%3D%22%230ea5e9%22%20stroke-width%3D%222%22%2F%3E%0A%20%3Cpath%20d%3D%22M496%20222%20L560%20258%20L560%20314%20L432%20314%20L432%20258%20Z%22%20fill%3D%22none%22%20stroke%3D%22%237dd3fc%22%20stroke-width%3D%223%22%2F%3E%0A%20%3Cpath%20d%3D%22M432%20260%20L496%20224%20L560%20260%22%20fill%3D%22none%22%20stroke%3D%22%237dd3fc%22%20stroke-width%3D%223%22%2F%3E%0A%20%3Ccircle%20cx%3D%22496%22%20cy%3D%22288%22%20r%3D%226%22%20fill%3D%22%237dd3fc%22%2F%3E%0A%20%3Ctext%20x%3D%22496%22%20y%3D%22356%22%20fill%3D%22%23e2e8f0%22%20font-family%3D%22Inter%2C%20sans-serif%22%20font-size%3D%2218%22%20text-anchor%3D%22middle%22%20opacity%3D%220.85%22%3EHome%20Assistant%3C%2Ftext%3E%0A%20%3Cline%20x1%3D%22586%22%20y1%3D%22250%22%20x2%3D%22770%22%20y2%3D%22120%22%20stroke%3D%22%23334155%22%20stroke-width%3D%222%22%20stroke-dasharray%3D%224%206%22%20opacity%3D%220.6%22%2F%3E%0A%20%3Cline%20x1%3D%22588%22%20y1%3D%22266%22%20x2%3D%22888%22%20y2%3D%22228%22%20stroke%3D%22%23334155%22%20stroke-width%3D%222%22%20stroke-dasharray%3D%224%206%22%20opacity%3D%220.6%22%2F%3E%0A%20%3Cline%20x1%3D%22586%22%20y1%3D%22292%22%20x2%3D%22848%22%20y2%3D%22382%22%20stroke%3D%22%23334155%22%20stroke-width%3D%222%22%20stroke-dasharray%3D%224%206%22%20opacity%3D%220.6%22%2F%3E%0A%20%3Cline%20x1%3D%22512%22%20y1%3D%22314%22%20x2%3D%22690%22%20y2%3D%22438%22%20stroke%3D%22%23334155%22%20stroke-width%3D%222%22%20stroke-dasharray%3D%224%206%22%20opacity%3D%220.6%22%2F%3E%0A%20%3Cg%20fill%3D%22%2364748b%22%3E%0A%20%20%3Ccircle%20cx%3D%22770%22%20cy%3D%22120%22%20r%3D%223%22%2F%3E%0A%20%20%3Ccircle%20cx%3D%22888%22%20cy%3D%22228%22%20r%3D%223%22%2F%3E%0A%20%20%3Ccircle%20cx%3D%22848%22%20cy%3D%22382%22%20r%3D%223%22%2F%3E%0A%20%20%3Ccircle%20cx%3D%22690%22%20cy%3D%22438%22%20r%3D%223%22%2F%3E%0A%20%3C%2Fg%3E%0A%20%3Cg%20fill%3D%22none%22%20stroke%3D%22%23a855f7%22%20stroke-width%3D%223%22%20opacity%3D%220.7%22%3E%0A%20%20%3Ccircle%20cx%3D%22770%22%20cy%3D%22120%22%20r%3D%2216%22%2F%3E%0A%20%20%3Ccircle%20cx%3D%22888%22%20cy%3D%22228%22%20r%3D%2216%22%2F%3E%0A%20%20%3Ccircle%20cx%3D%22848%22%20cy%3D%22382%22%20r%3D%2216%22%2F%3E%0A%20%20%3Ccircle%20cx%3D%22690%22%20cy%3D%22438%22%20r%3D%2216%22%2F%3E%0A%20%3C%2Fg%3E%0A%20%3Ctext%20x%3D%22812%22%20y%3D%22150%22%20fill%3D%22%2394a3b8%22%20font-family%3D%22Inter%2C%20sans-serif%22%20font-size%3D%2213%22%20text-anchor%3D%22middle%22%20opacity%3D%220.8%22%3Ezigbee%20mesh%3C%2Ftext%3E%0A%20%3Ctext%20x%3D%22500%22%20y%3D%22486%22%20fill%3D%22%23e2e8f0%22%20font-family%3D%22Inter%2C%20sans-serif%22%20font-size%3D%2222%22%20text-anchor%3D%22middle%22%20opacity%3D%220.75%22%3E42%20devices%20%26%23183%3B%20250%2B%20entities%20%26%23183%3B%20all%20local%3C%2Ftext%3E%0A%3C%2Fsvg%3E
+---
+
+# My Smart Garden Runs on Nobody's Cloud
+
+Regular readers know my problem: I can't leave a box manually configured. The [Raspberry tank](/blog/raspberry-pi-tank), the [docker-on-a-Pi setup](/blog/docker-on-raspberry-with-gui), the [Minecraft server for my kids](/blog/secure-minecraft-server-for-kids) — the hobby was never the tank or the game. It was making the whole thing reproducible and *mine*, not rented from someone's cloud.
+
+[Home Assistant](https://www.home-assistant.io) is the same itch at garden scale. Lights, heating, a solar battery, and — I'm not joking — the tortoises, all running locally on hardware I own, phoning home to nobody. This isn't a step-by-step; it's the decisions that actually shape a setup like this, and the interesting stuff I'd want someone to tell me before they started.
+
+<Image src="/uploads/2026/sun-junction-box-crop.jpg" alt="A weatherproof outdoor power junction box on the house wall, with a child's smiling sun drawn on it in yellow marker." className="post-img-narrow" />
+
+## Own it, don't rent it
+
+The whole thing rests on one choice: **local control**. No device I add is allowed to depend on a manufacturer's server to do its basic job. A light switch that needs the internet to turn on a lamp isn't smart, it's a liability — it dies when your Wi-Fi hiccups, when the vendor sunsets the product, or when they decide your data is the product.
+
+So every light also has a **physical remote that works even with the tablet asleep and the internet down** — the automation is a convenience layered on top, never the only way in. Day to day the house is run from a kitchen tablet in kiosk mode, or any browser on the network. The payoff isn't ideology, it's boredom: the house keeps working whether or not the internet does — and, because the whole thing rides on the Buletti solar battery (more on that below), whether or not the **grid** does either. Independent of the cloud *and* the mains.
+
+## The stack, and why each layer
+
+| Layer | What runs there |
+|---|---|
+| Host | **Home Assistant OS** on a **Raspberry Pi** + 500 GB SSD (HA 2026.5) |
+| Zigbee | **Sonoff CC2652P** coordinator → **Zigbee2MQTT** add-on |
+| Bus | local **Mosquitto** MQTT broker |
+| Scale | **~42 devices · 250+ entities** |
+| Energy | **Buletti Apex 300** + ~1.3 kW of solar |
+| Access | **Tailscale** only · key-based SSH · automated setup + backup/restore |
+
+<Image src="/uploads/2026/raspberry-pi-host.jpg" alt="The brain of the setup: a passively-cooled Raspberry Pi and a FRITZ! Wi-Fi repeater zip-tied to the wooden ceiling of a garden shed, cables neatly run along the beam." />
+
+The **Pi runs Home Assistant OS as an appliance** — add-ons install in a click, updates don't turn into a dependency dig. And the **Sonoff coordinator plus Zigbee2MQTT** keeps me vendor-neutral: I buy whatever switch or off-brand sensor is cheapest and it all speaks one protocol, no hub tax, no walled garden. At around 42 devices and 250+ entities this stopped being a toy a while ago — and that boring foundation, screwed to a shed beam next to the Wi-Fi repeater, is exactly why it holds.
+
+And it's run the way anyone in IT would want their own home run: nothing exposed to the public internet, all remote access over a [Tailscale](https://tailscale.com) mesh; SSH key-based only, no passwords; the server itself provisioned by an automated setup rather than hand-tweaked, and backup *and* restore both scripted and tested — because a backup you've never restored is just a hope. The same discipline I put into the [kids' Minecraft server](/blog/secure-minecraft-server-for-kids), turned on the house.
+
+## Automations that scale
+
+The difference between a demo and a setup you live with is whether adding the tenth device is as easy as the first. Three habits do most of that work.
+
+**Blueprints, not one-off automations.** Every light runs the *same* blueprint pointed at a different fixture — add a lamp, pick the blueprint, done, and one fix fixes them all at once.
+
+**Trigger off the source, not an abstraction.** The tempting way to wire a switch is Home Assistant's device picker; the robust way is to subscribe straight to the message the switch already publishes:
+
+```yaml
+trigger:
+  - platform: mqtt
+    topic: "zigbee2mqtt/Schalter LED Pavillon/action"
+```
+
+No device registry in the middle to resolve wrong and silently break the automation. It's a plain text field instead of a dropdown — fiddlier to set up, far harder to break, the right trade for something I want to forget about for years.
+
+**One source of truth.** Anything with a manual override is controlled through a single `input_boolean`, never the switch directly — so a human flick and an automation reacting can't fight over the same relay.
+
+## Even the tortoises are on it
+
+The clearest proof that "garden scale" isn't a figure of speech: the tortoise habitat runs itself. A heat lamp from 07:00 to 23:00, backing off automatically above 35 °C; a UV lamp from morning until 18:00, off above 38 °C; and an email straight to me the moment the enclosure passes 48 °C. Live temperature, humidity and a camera, all on their own dashboard. The turtles have better climate telemetry than most offices.
+
+But the one thing I *don't* trust to software is the one that matters most. Their sleeping house has a single hardwired thermostatic circuit — no Zigbee, no Home Assistant, nothing that can drop offline — that kicks in a heater if the temperature falls toward 10 °C overnight. If the Pi, the network and every automation vanished at once, the tortoises would still be warm by morning. The smart layer is for comfort and alerts; the dumb layer keeps them alive.
+
+<Image src="/uploads/2026/schildkroeten-dashboard.jpg" alt="Home Assistant 'Schildies' dashboard showing tortoise enclosure temperature and humidity graphs, toggle switches for a UV lamp and a heat lamp, and a live camera view of the tortoises." />
+
+## Sun, battery, and a house that rides through blackouts
+
+Panels on the shed roof feed a **Buletti Apex 300** — a 2,764.8 Wh battery with two solar inputs, and the quiet backbone of the whole setup. The solar build has enough quirks to earn [its own writeup](/blog/garden-solar-tuned-to-the-bluetti); what matters here is what Home Assistant does with the result.
+
+<Image src="/uploads/2026/panels-on-shed-roof.jpg" alt="Solar panels mounted on the flat roof of a garden shed under an overcast sky, grapevines climbing a wall in the foreground." />
+
+**The Buletti is a whole-home UPS.** On a power cut it takes over instantly and seamlessly. The house is wired to the Buletti, so in a blackout the things that matter — Wi-Fi, the Home Assistant Pi, the fridge, and the heat pump — all keep running on stored sun.
+
+
+Home Assistant watches the whole loop — it emails me if the grid drops (AC input under 10 V for 30 seconds) or the battery dips below 18% — and surfaces everything on the kitchen tablet: room temperatures and humidity, the heating, and the heat pump, all one tap away.
+
+<Image src="/uploads/2026/haus-dashboard.jpg" alt="Home Assistant 'Haus' dashboard on the kitchen tablet: living-room and loft-bed temperature and humidity graphs, and climate controls for the air-conditioning (Klimaanlage) and heating (Heizung)." />
+
+The heat pump on that *Haus* outlet is a **Midea Porta Split** — up to 3.5 kW, heats and cools, and keeps the room livable through an outage on nothing but battery.
+
+<Image src="/uploads/2026/midea-porta-split.jpg" alt="The outdoor unit of a Midea Porta Split air-conditioner / heat pump mounted on a pale-yellow garden-house wall, next to a hot tub and garden plants." />
+
+## Heating like an engineer
+
+For the smaller garden-room heater — a smart plug and a separate sensor — the control loop uses a **deadband**, the single most useful idea to steal for anything that switches a relay.
+
+<Image src="data:image/svg+xml,%3Csvg%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%20width%3D%221000%22%20height%3D%22360%22%20viewBox%3D%220%200%201000%20360%22%3E%0A%20%3Cdefs%3E%0A%20%20%3ClinearGradient%20id%3D%22bg3%22%20x1%3D%220%22%20x2%3D%221%22%20y1%3D%220%22%20y2%3D%221%22%3E%0A%20%20%20%3Cstop%20stop-color%3D%22%23111827%22%2F%3E%0A%20%20%20%3Cstop%20offset%3D%221%22%20stop-color%3D%22%230f172a%22%2F%3E%0A%20%20%3C%2FlinearGradient%3E%0A%20%3C%2Fdefs%3E%0A%20%3Crect%20width%3D%221000%22%20height%3D%22360%22%20fill%3D%22url%28%23bg3%29%22%2F%3E%0A%20%3Cg%20font-family%3D%22Inter%2C%20sans-serif%22%3E%0A%20%20%3Crect%20x%3D%2290%22%20y%3D%2290%22%20width%3D%22470%22%20height%3D%22150%22%20fill%3D%22%2322c55e%22%20opacity%3D%220.10%22%2F%3E%0A%20%20%3Crect%20x%3D%22560%22%20y%3D%2290%22%20width%3D%2290%22%20height%3D%22150%22%20fill%3D%22%2364748b%22%20opacity%3D%220.14%22%2F%3E%0A%20%20%3Crect%20x%3D%22650%22%20y%3D%2290%22%20width%3D%22270%22%20height%3D%22150%22%20fill%3D%22%230ea5e9%22%20opacity%3D%220.10%22%2F%3E%0A%0A%20%20%3Cline%20x1%3D%22560%22%20y1%3D%2270%22%20x2%3D%22560%22%20y2%3D%22270%22%20stroke%3D%22%2394a3b8%22%20stroke-width%3D%222%22%20stroke-dasharray%3D%225%205%22%20opacity%3D%220.7%22%2F%3E%0A%20%20%3Cline%20x1%3D%22650%22%20y1%3D%2270%22%20x2%3D%22650%22%20y2%3D%22270%22%20stroke%3D%22%23e2e8f0%22%20stroke-width%3D%222%22%20stroke-dasharray%3D%225%205%22%20opacity%3D%220.8%22%2F%3E%0A%0A%20%20%3Ctext%20x%3D%22325%22%20y%3D%22130%22%20fill%3D%22%2386efac%22%20font-size%3D%2217%22%20text-anchor%3D%22middle%22%3Eheat%20ON%3C%2Ftext%3E%0A%20%20%3Ctext%20x%3D%22325%22%20y%3D%22152%22%20fill%3D%22%2364748b%22%20font-size%3D%2212%22%20text-anchor%3D%22middle%22%3Etemp%20%26lt%3B%20target%20%26%238722%3B%20hysteresis%3C%2Ftext%3E%0A%20%20%3Ctext%20x%3D%22605%22%20y%3D%22130%22%20fill%3D%22%23cbd5e1%22%20font-size%3D%2214%22%20text-anchor%3D%22middle%22%3Ehold%3C%2Ftext%3E%0A%20%20%3Ctext%20x%3D%22605%22%20y%3D%22150%22%20fill%3D%22%2364748b%22%20font-size%3D%2211%22%20text-anchor%3D%22middle%22%3Edeadband%3C%2Ftext%3E%0A%20%20%3Ctext%20x%3D%22785%22%20y%3D%22130%22%20fill%3D%22%237dd3fc%22%20font-size%3D%2217%22%20text-anchor%3D%22middle%22%3Eheat%20OFF%3C%2Ftext%3E%0A%20%20%3Ctext%20x%3D%22785%22%20y%3D%22152%22%20fill%3D%22%2364748b%22%20font-size%3D%2212%22%20text-anchor%3D%22middle%22%3Etemp%20%26%238805%3B%20target%3C%2Ftext%3E%0A%0A%20%20%3Ctext%20x%3D%22560%22%20y%3D%22292%22%20fill%3D%22%2394a3b8%22%20font-size%3D%2213%22%20text-anchor%3D%22middle%22%3Etarget%20%26%238722%3B%200.5%26%23176%3BC%3C%2Ftext%3E%0A%20%20%3Ctext%20x%3D%22650%22%20y%3D%22292%22%20fill%3D%22%23e2e8f0%22%20font-size%3D%2213%22%20text-anchor%3D%22middle%22%3Etarget%3C%2Ftext%3E%0A%0A%20%20%3Cpolyline%20points%3D%22120%2C215%20200%2C175%20280%2C205%20360%2C168%20440%2C200%20520%2C170%20590%2C150%20650%2C120%20720%2C150%20800%2C120%20880%2C150%22%0A%20%20%20%20fill%3D%22none%22%20stroke%3D%22%23fbbf24%22%20stroke-width%3D%222.5%22%20opacity%3D%220.85%22%2F%3E%0A%0A%20%20%3Ctext%20x%3D%22500%22%20y%3D%22335%22%20fill%3D%22%2394a3b8%22%20font-size%3D%2214%22%20text-anchor%3D%22middle%22%3Ethe%20deadband%20is%20what%20keeps%20the%20relay%20from%20chattering%20on%20every%200.1%26%23176%3BC%20wobble%3C%2Ftext%3E%0A%20%3C%2Fg%3E%0A%3C%2Fsvg%3E" alt="Hysteresis control band: heat turns ON below target minus 0.5°C, OFF at target, and does nothing in the deadband between — which stops the relay chattering on every 0.1°C wobble." />
+
+## Boring on purpose
+
+HA writes to its database constantly, and that steady load is exactly what quietly kills the SD cards a Pi usually boots from — so this one runs off a **500 GB SSD** instead, which shrugs off the write churn and leaves room to spare. Belt and braces, backups run on top: automatic, local every day plus Google Drive on daily, weekly and monthly rotations. The day I need one, I want it to have been boring for months.
+
+## The through-line
+
+Strip away the panels and the tortoises and it's the same shape I've been building for a decade: a system I fully own, on hardware in my own house, reproducible from notes rather than memory — and stubborn enough to keep the lights, the fridge and the heat pump running through a blackout with the internet down. The solar readout is nice. Not needing anyone's cloud, or even the grid, to run my own home is the actual feature.
+
+Open source for ever and everyone.
+
+<p className="gh-links">
+  <a href="https://github.com/tomhanoldt"><svg viewBox="0 0 16 16" width="18" height="18" aria-hidden="true" fill="currentColor"><path d="M8 0C3.58 0 0 3.58 0 8c0 3.54 2.29 6.53 5.47 7.59.4.07.55-.17.55-.38 0-.19-.01-.82-.01-1.49-2.01.37-2.53-.49-2.69-.94-.09-.23-.48-.94-.82-1.13-.28-.15-.68-.52-.01-.53.63-.01 1.08.58 1.23.82.72 1.21 1.87.87 2.33.66.07-.52.28-.87.51-1.07-1.78-.2-3.64-.89-3.64-3.95 0-.87.31-1.59.82-2.15-.08-.2-.36-1.02.08-2.12 0 0 .67-.21 2.2.82.64-.18 1.32-.27 2-.27.68 0 1.36.09 2 .27 1.53-1.04 2.2-.82 2.2-.82.44 1.1.16 1.92.08 2.12.51.56.82 1.27.82 2.15 0 3.07-1.87 3.75-3.65 3.95.29.25.54.73.54 1.48 0 1.07-.01 1.93-.01 2.2 0 .21.15.46.55.38A8.013 8.013 0 0016 8c0-4.42-3.58-8-8-8z"/></svg>tomhanoldt</a>
+  <a href="https://github.com/creative-workflow"><svg viewBox="0 0 16 16" width="18" height="18" aria-hidden="true" fill="currentColor"><path d="M8 0C3.58 0 0 3.58 0 8c0 3.54 2.29 6.53 5.47 7.59.4.07.55-.17.55-.38 0-.19-.01-.82-.01-1.49-2.01.37-2.53-.49-2.69-.94-.09-.23-.48-.94-.82-1.13-.28-.15-.68-.52-.01-.53.63-.01 1.08.58 1.23.82.72 1.21 1.87.87 2.33.66.07-.52.28-.87.51-1.07-1.78-.2-3.64-.89-3.64-3.95 0-.87.31-1.59.82-2.15-.08-.2-.36-1.02.08-2.12 0 0 .67-.21 2.2.82.64-.18 1.32-.27 2-.27.68 0 1.36.09 2 .27 1.53-1.04 2.2-.82 2.2-.82.44 1.1.16 1.92.08 2.12.51.56.82 1.27.82 2.15 0 3.07-1.87 3.75-3.65 3.95.29.25.54.73.54 1.48 0 1.07-.01 1.93-.01 2.2 0 .21.15.46.55.38A8.013 8.013 0 0016 8c0-4.42-3.58-8-8-8z"/></svg>creative-workflow</a>
+</p>
